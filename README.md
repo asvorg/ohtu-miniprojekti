@@ -1,2 +1,1 @@
 # ohtu-miniprojekti
-test2
