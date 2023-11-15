@@ -2,6 +2,10 @@ import requests
 
 
 def crawl_acm(url):
+    '''''''''''
+    Crawl the abstract and references of a paper from ACM Digital Library
+    '''''''''''
+    #get the html text
     text = requests.get(url).text
     #keep only the text in div with class 'abstractSection abstractInFull'
     abstract = text[text.find('<div class="abstractSection abstractInFull">'):]
@@ -11,8 +15,6 @@ def crawl_acm(url):
     references = text[text.find('<ol class="rlist references__list references__numeric">'):]
     #get all span class= "references__note"
     references = references.split('<span class="references__note">')
-    for i in references:
-        print(i)
 
     return references
 
