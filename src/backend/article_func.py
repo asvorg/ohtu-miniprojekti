@@ -12,7 +12,6 @@ def read_user_input_article(author, title, journal, year, volume=0, number=0, pa
     if year < 0 or year > datetime.datetime.now().year:
         raise ValueError("Invalid year")
     author = author.title()
-    title = title.title()
     journal = journal.title()
     author = author.strip()
     title = title.strip()
