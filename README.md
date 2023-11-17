@@ -9,4 +9,5 @@ Definition of done = "Vaatimus on analysoitu, suunniteltu, ohjelmoitu, testattu,
 - Asenna riippuvuudet: poetry install
 - Luo Pythonin virtuaaliympäristö kansion sisään komennolla python3 -m venv venv
 - Aktivoi virtuaaliympäristö: source venv/bin/activate
+- Siirry kansioon frontend
 - Käynnistä sovellus: flask run
