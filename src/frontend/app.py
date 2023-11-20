@@ -11,3 +11,5 @@ def index():
 @app.route("/result", methods=["POST"])
 def result():
     return render_template("result.html", author=request.form["Kirjoittaja"], title=request.form["Otsikko"], year=request.form["Julkaisuvuosi"], article_name=request.form["Artikkelin nimi"])
+
+#tää poistuu
