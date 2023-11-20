@@ -1,26 +1,27 @@
 # pylint: disable=W0611
-from pymongo import MongoClient, errors, mongosh
+from pymongo import MongoClient, errors
+from pymongo.server_api import ServerApi
 
 
-def initialize_database_articles(password_collection):
+def init_db():
     """Initialize database connection for the create user function"""
-    client = MongoClient('mongodb://localhost:27017/')
+    client = MongoClient('mongodb+srv://kaariainenroope:<password>@ohtuminiprojekti-bibtex.19oezdh.mongodb.net/?retryWrites=true&w=majority')
     database = client['data']
     password_collection = database[password_collection]
     return password_collection
 
 
-#def initialize_database_users(user_name):
-#    """Initialize database connection for the add password function"""
-#    client = MongoClient('mongodb://localhost:27017/')
-#    database = client['data']
-#    users_collection = database[user_name]
-#    return users_collection
 
+#add a article to database
+uri = "mongodb+srv://kaariainenroope:<password>@ohtuminiprojekti-bibtex.19oezdh.mongodb.net/?retryWrites=true&w=majority"
 
-def delete_from_passwords(user_name):
-    """Initialize database connection for the deletions function"""
-    client = MongoClient('mongodb://localhost:27017/')
-    database = client['data']
-    collection = database[user_name]
-    return collection
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+
+# Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
+    
