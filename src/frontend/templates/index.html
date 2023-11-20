@@ -1,20 +1,45 @@
-<title>Lähdeviitteiden tallennussovellus</title>
-<h1>Lähdeviitteiden tallennussovellus</h1>
-<b>Tervetuloa</b> <i>lähdeviitteiden tallennussovellukseen</i>!!
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lähdeviitteiden tallennussovellus</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
 
-<form action="/result" method="POST">
-    Kirjoittaja:
-    <input type="text" name="Kirjoittaja">
-    <br>
-    Otsikko:
-    <input type="text" name="Otsikko">
-    <br>
-    Julkaisuvuosi:
-    <input type="text" name="Julkaisuvuosi">
-    <br>
-    Artikkelin nimi:
-    <input type="text" name="Artikkelin nimi">
-    <br>
-    <input type="submit" value="Lähetä">
-    <br>
+<div class="container mt-5">
+    <h1>Lähdeviitteiden tallennussovellus</h1>
+    <p class="font-weight-bold">Tervetuloa <i>lähdeviitteiden tallennussovellukseen</i>!!</p>
+
+    <form action="/result" method="POST">
+        <div class="form-group">
+            <label for="Kirjoittaja">Kirjoittaja:</label>
+            <input type="text" class="form-control" name="Kirjoittaja" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Otsikko">Otsikko:</label>
+            <input type="text" class="form-control" name="Otsikko" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Julkaisuvuosi">Julkaisuvuosi:</label>
+            <input type="text" class="form-control" name="Julkaisuvuosi" required>
+        </div>
+
+        <div class="form-group">
+            <label for="ArtikkelinNimi">Artikkelin nimi:</label>
+            <input type="text" class="form-control" name="ArtikkelinNimi" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Lähetä</button>
     </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
