@@ -3,7 +3,8 @@ from pymongo.server_api import ServerApi
 
 
 def test_connection():
-    uri = "mongodb+srv://kaariainenroope:<password>@ohtuminiprojekti-bibtex.19oezdh.mongodb.net/?retryWrites=true&w=majority"
+    uri = "mongodb+srv://testiuser:testisalasana123@ohtuminiprojekti-bibtex.19oezdh.mongodb.net/test?retryWrites=true&w=majority"
+
 
     # Create a new client and connect to the server
     client = MongoClient(uri, server_api=ServerApi('1'))
