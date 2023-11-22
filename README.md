@@ -11,5 +11,5 @@ Definition of done = "Vaatimus on analysoitu, suunniteltu, ohjelmoitu, testattu,
 - Luo Pythonin virtuaaliympäristö kansion sisään komennolla python3 -m venv venv
 - Aktivoi virtuaaliympäristö: source venv/bin/activate
 - Asenna riippuvuudet: poetry install
-- Siirry kansioon src/frontend
+- Siirry kansioon src
 - Käynnistä sovellus: flask run
