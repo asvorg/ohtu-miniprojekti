@@ -14,12 +14,17 @@ def result():
     try:
         author = request.form["Kirjoittaja"]
         title = request.form["Otsikko"]
-        article_name = request.form["ArtikkelinNimi"]
+        journal = request.form["Artikkeli"]
         year = request.form["Julkaisuvuosi"]
+        volume = request.form["Vuosikerta"]
+        number = request.form["Numero"]
+        pages = request.form["Sivumäärä"]
+        month = request.form["Kuukausi"]
+        note = request.form["Huomautus"]
 
-        bibtex_result = to_bibtex_article(author, title, article_name, year)
+        bibtex_result = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
 
-        return render_template("result.html", article_name=article_name, bibtex_result=bibtex_result)
+        return render_template("result.html", bibtex_result=bibtex_result)
 
     except ValueError as e:
         return render_template("error.html", error_message=str(e))
