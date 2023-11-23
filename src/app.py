@@ -15,10 +15,11 @@ def result():
         author = request.form["Kirjoittaja"]
         title = request.form["Otsikko"]
         journal = request.form["Artikkeli"]
-        year = request.form["Julkaisuvuosi"]
-        volume = request.form["Vuosikerta"]
-        number = request.form["Numero"]
-        pages = request.form["Sivumäärä"]
+        year = int(request.form["Julkaisuvuosi"])
+
+        volume = int(request.form["Vuosikerta"]) if request.form["Vuosikerta"] else 0
+        number = int(request.form["Numero"]) if request.form["Numero"] else 0
+        pages = int(request.form["Sivumäärä"]) if request.form["Sivumäärä"] else 0
         month = request.form["Kuukausi"]
         note = request.form["Huomautus"]
 
