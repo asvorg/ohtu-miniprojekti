@@ -3,7 +3,6 @@ from flask import render_template, request
 from backend.article_func import to_bibtex_article
 from backend.db.db_func import add_article_to_db
 
-
 app = Flask(__name__, template_folder='frontend/templates')
 
 @app.route("/")
