@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template, request
-from backend.article_func import read_user_input_article, to_bibtex_article
+from backend.article_func import to_bibtex_article
+from backend.db.db_func import add_article_to_db
 
 
 app = Flask(__name__, template_folder='frontend/templates')
@@ -24,7 +25,8 @@ def result():
         note = request.form["Huomautus"]
 
         bibtex_result = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
-
+        add_article_to_db("test123", bibtex_result)
+        
         return render_template("result.html", bibtex_result=bibtex_result)
 
     except ValueError as e:
