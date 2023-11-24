@@ -18,8 +18,8 @@
         <tr>
             <td>{{viite.author}}</td>
             <td>{{viite.title}}</td>
-            <td><button>Muokkaa</button></td>
-            <td><button>Poista</button></td>
+            <td><a href="/edit/{{ viite.id }}">Muokkaa</a</td>
+            <td><a href="/delete/{{ viite.id }}">Poista</a</td>
         </tr>
         {% endfor %}
     </table>

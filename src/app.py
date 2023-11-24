@@ -31,9 +31,17 @@ def result():
     except ValueError as e:
         return render_template("error.html", error_message=str(e))
 
-@app.route("/list")
+@app.route("/list/")
 def list():
     #kesken!
 
-    viitteet = [{"author": "ville.vallaton", "title": "Otsikkoinen"}, {"author": "ville.vallatonfdsfds", "title": "Otsikkoinen"}]
+    viitteet = [{"id": 123, "author": "ville.vallaton", "title": "Otsikkoinen"}, {"id": 321, "author": "ville.vallatonfdsfds", "title": "Otsikkoinen"}]
     return render_template("list.html", viitteet=viitteet)
+
+@app.route("/edit/<int:viite_id>/")
+def edit(viite_id):
+    return render_template("edit.html")
+
+@app.route("/delete/<int:viite_id>/")
+def delete(viite_id):
+    return render_template("delete.html")
