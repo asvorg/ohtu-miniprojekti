@@ -1,8 +1,8 @@
 import unittest
-import sys
-sys.path.append("..")
-import article_func
-from db import db_func
+#import sys
+#sys.path.append("..")
+from backend import article_func
+from backend.db import db_func
 
 class TestArticleFunc(unittest.TestCase):
     def setUp(self):
