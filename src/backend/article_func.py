@@ -68,4 +68,3 @@ month = 4
 note = "Tämä on huomautus"
 
 author, title, journal, year, volume, number, pages, month, note = read_user_input_article(author, title, journal, year, volume, number, pages)
-print(to_bibtex_article(author, title, journal, year, volume, number, pages, month, note))
