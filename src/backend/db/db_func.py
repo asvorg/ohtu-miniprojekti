@@ -2,7 +2,7 @@ import sys
 sys.path.append("..")
 from pymongo import MongoClient, errors
 from pymongo.server_api import ServerApi
-import article_func
+from backend.article_func import generate_cite_key, read_user_input_article, to_bibtex_article
 
 
 
@@ -14,7 +14,7 @@ def add_article_to_db(user, article):
     db = client["bibtex"]
     collection = db["articles"]
     article_dict = splice_article(article)
-    cite_key = article_func.generate_cite_key(article_dict["author"], article_dict["year"])
+    cite_key = generate_cite_key(article_dict["author"], article_dict["year"])
     #add to database
     article_dict["user"] = user
     article_dict["cite_key"] = cite_key
@@ -93,6 +93,6 @@ number = 2
 pages = 3
 month = 4
 note = "Tämä on huomautus"
-author, title, journal, year, volume, number, pages, month, note = article_func.read_user_input_article(author, title, journal, year, volume, number, pages)
-article = article_func.to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
+author, title, journal, year, volume, number, pages, month, note = read_user_input_article(author, title, journal, year, volume, number, pages)
+article = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
 add_article_to_db("testiuser", article)
