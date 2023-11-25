@@ -16,7 +16,7 @@ def connect_to_db():
 
 def add_article_to_db(user, article):
     '''Add an article to the database'''
-    collection, db, client = connect_to_db()
+    collection, db, client, uri = connect_to_db()
     article_dict = splice_article(article)
     cite_key = generate_cite_key(article_dict["author"], article_dict["year"])
     #add to database
