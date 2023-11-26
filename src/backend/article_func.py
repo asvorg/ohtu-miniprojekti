@@ -1,3 +1,4 @@
+'''Functions for handling article information'''
 import datetime
 
 
@@ -25,7 +26,7 @@ def generate_cite_key(author, year):
     return author.split(" ")[-1] + ":" + str(year)
 
 
-def to_bibtex_article(author, title, journal, year, volume=0, number=0, pages=0, month=0, note=""): #ei valmis, pitää handlata tyhjät kentät
+def to_bibtex_article(author, title, journal, year, volume=0, number=0, pages=0, month=0, note=""):
     '''Convert a paper's information to bibtex format'''
     cite_key = generate_cite_key(author, year)
     res = "@article{" + cite_key + ",\n"

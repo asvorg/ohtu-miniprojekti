@@ -52,7 +52,6 @@ def get_article_from_db_by_cite_key(user, cite_key):
     collection, db, client,uri = connect_to_db()
     for article in collection.find({"user": user, "cite_key": cite_key}):
         return article
-    
 def get_article_from_db_by_author(user, author):
     '''Get an article from the database by author'''
     collection, db, client,uri = connect_to_db()
@@ -68,7 +67,6 @@ def get_article_from_db_by_year(user, year):
 def delete_article_by_cite_key(user,cite_key):
     '''Delete an article from the database'''
     collection, db, client,uri = connect_to_db()
-    
     collection.delete_one({"user": user, "cite_key": cite_key})
 
 def edit_article_by_cite_key(user, cite_key, article): #ei mitää hajua toimiiko tää
@@ -77,8 +75,6 @@ def edit_article_by_cite_key(user, cite_key, article): #ei mitää hajua toimiik
     for key in article:
         if article[key]:
             old_article[key] = article[key]
-    
-
 #author = "Matti Meikäläinen"
 #title = "Tämä on otsikko2"
 #journal = "Journal of Journals"
