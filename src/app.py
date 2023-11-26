@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template, request, redirect
 from backend.article_func import to_bibtex_article
-from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key ##
+from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key
 
 app = Flask(__name__, template_folder='frontend/templates')
 
@@ -36,18 +36,39 @@ def result():
 
 @app.route("/list/")
 def list_without_user():
-    return "Kirjoita käyttäjän nimi osoitteen loppuun: .../list/user"
+    return "Kirjoita käyttäjän nimi osoitteen loppuun: .../list/<käyttäjän nimi>"
 
 @app.route("/list/<user>")
 def list(user):
     cites = get_article_from_db_by_user(user)
     return render_template("list.html", cites=cites, user=user)
 
-@app.route("/edit/<user>/<cite_key>/")
+@app.route("/edit/<user>/<cite_key>/", methods=["GET", "POST"])
 def edit(user, cite_key):
-    #cite = {'author': 'jokuauthor', 'title': 'jokutitle', 'journal': '2', 'year': '1234', 'volume': '2', 'number': '2', 'pages': '2', 'month': '2', 'note': '2', 'user': 'joku user', 'cite_key': 'eiole'}
-    cite = get_article_from_db_by_cite_key(user, cite_key)
-    return render_template("edit.html", cite=cite)
+    if request.method == "GET":
+        cite = get_article_from_db_by_cite_key(user, cite_key)
+        return render_template("edit.html", cite=cite)
+    if request.method == "POST":
+        # poisto
+        delete_article_by_cite_key(user, cite_key)
+
+        # lisäys
+        user = request.form["Käyttäjä"]
+        author = request.form["Kirjoittaja"]
+        title = request.form["Otsikko"]
+        journal = request.form["Artikkeli"]
+        year = int(request.form["Julkaisuvuosi"])
+        volume = int(request.form["Vuosikerta"]) if request.form["Vuosikerta"] else 0
+        number = int(request.form["Numero"]) if request.form["Numero"] else 0
+        pages = int(request.form["Sivumäärä"]) if request.form["Sivumäärä"] else 0
+        month = request.form["Kuukausi"]
+        note = request.form["Huomautus"]
+        bibtex_result = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
+        add_article_to_db(user, bibtex_result)
+    
+        cites = get_article_from_db_by_user(user)
+
+        return redirect("/list/"+user)
 
 @app.route("/delete/<user>/<cite_key>/")
 def delete(user, cite_key):

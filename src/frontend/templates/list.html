@@ -9,8 +9,8 @@
 <body>
 
 <div class="container mt-5">
-    <h1>Muokkaa tai poista viitteitä</h1>
-    <p>Käyttäjä: <b>{{ user }}</b><p></p>
+    <h2>Muokkaa tai poista viitteitä</h2>
+    <p>Käyttäjä: <b>{{ user }}</b><p>
         {% if not cites %}
         <p>Viitteitä ei löytynyt.</p>
         {% else %}
@@ -34,8 +34,6 @@
         </tr>
         {% endfor %}
     </table>
-    <hr>
-    <p>Muokkaus ei toimi vielä.</p
     {% endif %}
     <hr>
     <a a href="/">Etusivulle</a>

@@ -10,13 +10,10 @@
 
 <div class="container mt-5">
     <h2>Muokkaa viitettä</h2>
-    <p>Muokkaus ei toimi vielä.</p>
+    <p>Käyttäjä: <b>{{cite.user}}</b></p>
 
-    <form>
-        <div class="form-group">
-            <label for="Käyttäjä">Käyttäjä:</label>
-            <input type="text" class="form-control" name="Käyttäjä" required value="{{cite.user}}">
-        </div>
+    <form action="/edit/{{cite.user}}/{{cite.cite_key}}" method="post">
+        <input type="hidden" name="Käyttäjä" value="{{cite.user}}">
 
          <div class="form-group">
             <label for="Kirjoittaja">Kirjoittaja:</label>
@@ -66,6 +63,10 @@
 
         <button type="submit" class="btn btn-primary">Lähetä</button>
     </form>
+
+    <hr>
+    <a href="/">Etusivulle</a><br>
+    <a href="/list/{{cite.user}}">Viitelistaan</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
