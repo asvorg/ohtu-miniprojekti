@@ -25,9 +25,9 @@ def result():
         note = request.form["Huomautus"]
 
         bibtex_result = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
-        add_article_to_db("test123", bibtex_result)
+        add_article_to_db(user, bibtex_result)
         
-        return render_template("result.html", bibtex_result=bibtex_result)
+        return render_template("result.html", bibtex_result=bibtex_result, user = user)
 
     except ValueError as e:
         return render_template("error.html", error_message=str(e))
