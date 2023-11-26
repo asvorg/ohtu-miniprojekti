@@ -1,7 +1,7 @@
 from flask import Flask
-from flask import render_template, request
+from flask import render_template, request, redirect
 from backend.article_func import to_bibtex_article
-from backend.db.db_func import add_article_to_db
+from backend.db.db_func import add_article_to_db, get_article_from_db_by_user
 
 app = Flask(__name__, template_folder='frontend/templates')
 
@@ -26,12 +26,14 @@ def result():
 
         bibtex_result = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
         add_article_to_db(user, bibtex_result)
-        
-        return render_template("result.html", bibtex_result=bibtex_result, user = user)
 
+        article = get_article_from_db_by_user(user)
+
+        return render_template("result.html", user=user, article=article)
+            
     except ValueError as e:
         return render_template("error.html", error_message=str(e))
-
+    
 @app.route("/list/")
 def list():
     #kesken!

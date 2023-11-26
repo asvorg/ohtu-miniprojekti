@@ -44,8 +44,8 @@ def splice_article(article): #article in bibtex format
 def get_article_from_db_by_user(user):
     '''Get all articles from the database by user'''
     collection, db, client,uri = connect_to_db()
-    for article in collection.find({"user":user}):
-        return article
+    articles = list(collection.find({"user":user}))
+    return articles
 
 def get_article_from_db_by_cite_key(user, cite_key):
     '''Get an article from the database by cite key'''

@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Tulossivu</title>
+    <title>Articles</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
 <div class="container mt-5">
-    <h1>Tulossivu</h1>
+    <h1>Articles</h1>
 
-    <div class="card mb-5">
-        <div class="card-body">
-            <h2 class="card-title">Käyttäjän {{ user }} viite:</h2>
-            <br>
-            <pre>{{ bibtex_result }}</pre>
+        {% for a in article%}
+        <div class="card mb-5">
+            <div class="card-body">
+                <h2 class="card-title">Käyttäjän {{ user }} viite:</h2>
+                <br>
+                <pre>{{ a }}</pre>
+            </div>
         </div>
-    </div>
+        {% endfor %}
 
-    
-
-    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
