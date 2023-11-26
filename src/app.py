@@ -12,6 +12,7 @@ def index():
 @app.route("/result", methods=["POST"])
 def result():
     try:
+        user = request.form["Käyttäjä"]
         author = request.form["Kirjoittaja"]
         title = request.form["Otsikko"]
         journal = request.form["Artikkeli"]
