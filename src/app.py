@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template, request, redirect
 from backend.article_func import to_bibtex_article
-from backend.db.db_func import add_article_to_db, get_article_from_db_by_user
+from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key ##
 
 app = Flask(__name__, template_folder='frontend/templates')
 
@@ -33,18 +33,23 @@ def result():
             
     except ValueError as e:
         return render_template("error.html", error_message=str(e))
-    
+
 @app.route("/list/")
-def list():
-    #kesken!
+def list_without_user():
+    return "Kirjoita käyttäjän nimi osoitteen loppuun: .../list/user"
 
-    viitteet = [{"id": 123, "author": "ville.vallaton", "title": "Otsikkoinen"}, {"id": 321, "author": "ville.vallatonfdsfds", "title": "Otsikkoinen"}]
-    return render_template("list.html", viitteet=viitteet)
+@app.route("/list/<user>")
+def list(user):
+    cites = get_article_from_db_by_user(user)
+    return render_template("list.html", cites=cites, user=user)
 
-@app.route("/edit/<int:viite_id>/")
-def edit(viite_id):
-    return render_template("edit.html")
+@app.route("/edit/<user>/<cite_key>/")
+def edit(user, cite_key):
+    #cite = {'author': 'jokuauthor', 'title': 'jokutitle', 'journal': '2', 'year': '1234', 'volume': '2', 'number': '2', 'pages': '2', 'month': '2', 'note': '2', 'user': 'joku user', 'cite_key': 'eiole'}
+    cite = get_article_from_db_by_cite_key(user, cite_key)
+    return render_template("edit.html", cite=cite)
 
-@app.route("/delete/<int:viite_id>/")
-def delete(viite_id):
-    return render_template("delete.html")
+@app.route("/delete/<user>/<cite_key>/")
+def delete(user, cite_key):
+    delete_article_by_cite_key(user, cite_key)
+    return render_template("deleted.html", user=user, cite_key=cite_key)

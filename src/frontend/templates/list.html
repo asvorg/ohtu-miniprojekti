@@ -10,20 +10,35 @@
 
 <div class="container mt-5">
     <h1>Muokkaa tai poista viitteitä</h1>
-        {% if not viitteet %}
-        <p>Viitteitä ei löydy.</p>
+    <p>Käyttäjä: <b>{{ user }}</b><p></p>
+        {% if not cites %}
+        <p>Viitteitä ei löytynyt.</p>
         {% else %}
         <table>
-        {% for viite in viitteet %}
         <tr>
-            <td>{{viite.author}}</td>
-            <td>{{viite.title}}</td>
-            <td><a href="/edit/{{ viite.id }}">Muokkaa</a</td>
-            <td><a href="/delete/{{ viite.id }}">Poista</a</td>
+            <th>
+                Author
+            </th>
+            <th>
+                Title
+            </th>
+        </tr>
+        {% for cite in cites %}
+        <tr>
+            <td title="{{ cite }}">{{ cite.author }}</td>
+            <td>{{cite.title}}</td>
+            <td>
+                <a href="/edit/{{cite.user}}/{{cite.cite_key}}">Muokkaa</a>
+                <a href="/delete/{{cite.user}}/{{cite.cite_key}}">Poista</a>
+            </td>
         </tr>
         {% endfor %}
     </table>
+    <hr>
+    <p>Muokkaus ei toimi vielä.</p
     {% endif %}
+    <hr>
+    <a a href="/">Etusivulle</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

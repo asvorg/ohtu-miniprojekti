@@ -1,3 +1,76 @@
-<h2>Muokkaa viitettä</h2>
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Muokkaa viitettä</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
 
-Tulossa.
+<div class="container mt-5">
+    <h2>Muokkaa viitettä</h2>
+    <p>Muokkaus ei toimi vielä.</p>
+
+    <form>
+        <div class="form-group">
+            <label for="Käyttäjä">Käyttäjä:</label>
+            <input type="text" class="form-control" name="Käyttäjä" required value="{{cite.user}}">
+        </div>
+
+         <div class="form-group">
+            <label for="Kirjoittaja">Kirjoittaja:</label>
+            <input type="text" class="form-control" name="Kirjoittaja" value="{{cite.author}}">
+        </div>
+
+        <div class="form-group">
+            <label for="Otsikko">Otsikko:</label>
+            <input type="text" class="form-control" name="Otsikko" value="{{cite.title}}">
+        </div>
+
+        <div class="form-group">
+            <label for="Julkaisuvuosi">Julkaisuvuosi:</label>
+            <input type="text" class="form-control" name="Julkaisuvuosi" value="{{cite.year}}">
+        </div>
+
+        <div class="form-group">
+            <label for="Artikkeli">Artikkelin nimi:</label>
+            <input type="text" class="form-control" name="Artikkeli" value="{{cite.journal}}">
+        </div>
+
+        <div class="form-group">
+            <label for="Vuosikerta">Vuosikerta (valinnainen):</label>
+            <input type="text" class="form-control" name="Vuosikerta" value="{{cite.volume}}">
+        </div>
+
+        <div class="form-group">
+            <label for="Numero">Numero (valinnainen):</label>
+            <input type="text" class="form-control" name="Numero" value="{{cite.number}}">
+        </div>
+
+        <div class="form-group">
+            <label for="Sivumäärä">Sivumäärä (valinnainen):</label>
+            <input type="text" class="form-control" name="Sivumäärä" value="{{cite.pages}}">
+        </div>
+
+        <div class="form-group">
+            <label for="Kuukausi">Kuukausi (valinnainen):</label>
+            <input type="text" class="form-control" name="Kuukausi" value="{{cite.month}}">
+        </div>
+
+        <div class="form-group">
+            <label for="Huomautus">Huomautus: (valinnainen)</label>
+            <input type="text" class="form-control" name="Huomautus" value="{{cite.note}}">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Lähetä</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
