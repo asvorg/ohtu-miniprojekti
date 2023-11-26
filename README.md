@@ -4,7 +4,6 @@
 
 [Linkki Backlogiin](https://docs.google.com/spreadsheets/d/16oLOVjyAvzNTiq1DqT4437QIkMCs-a8WFKWrO-61xKg/edit?usp=sharing)
 
-(file:///home/anessina/ohtu-miniprojekti/htmlcov/index.html)
 
 Definition of done = "Vaatimus on analysoitu, suunniteltu, ohjelmoitu, testattu, testaus automatisoitu, dokumentoitu, integroitu muuhun ohjelmistoon ja viety tuotantoympäristöön."
 
@@ -14,3 +13,5 @@ Definition of done = "Vaatimus on analysoitu, suunniteltu, ohjelmoitu, testattu,
 - Aktivoi virtuaaliympäristö: poetry shell
 - Siirry kansioon src
 - Käynnistä sovellus: flask run
+
+
