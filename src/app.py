@@ -27,7 +27,20 @@ def result():
         bibtex_result = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
         add_article_to_db(user, bibtex_result)
 
-        article = get_article_from_db_by_user(user)
+        articles = get_article_from_db_by_user(user)
+        article = []
+        for a in articles:
+            author = a["author"]
+            title = a["title"]
+            journal = a["title"]
+            year = int(a["year"])
+            volume = int(a["volume"])
+            number = int(a["number"])
+            pages = int(a["pages"])
+            month = a["month"]
+            note = "huom"
+            bib_res = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
+            article.append(bib_res)
 
         return render_template("result.html", user=user, article=article)
             
