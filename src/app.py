@@ -34,6 +34,11 @@ def result():
     except ValueError as e:
         return render_template("error.html", error_message=str(e))
 
+@app.route("/result/<user>/")
+def result_by_user(user):
+    article = get_article_from_db_by_user(user)
+    return render_template("result.html", user=user, article=article)
+
 @app.route("/list/")
 def list_without_user():
     return "Kirjoita käyttäjän nimi osoitteen loppuun: .../list/<käyttäjän nimi>"
