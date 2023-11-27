@@ -50,7 +50,10 @@ def result():
                 month = a["month"]
             else:
                 month = ""
-            note = "huom"
+            if "note" in a:
+                note = a["note"]
+            else:
+                note = ""
             bib_res = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
             article.append(bib_res)
 
