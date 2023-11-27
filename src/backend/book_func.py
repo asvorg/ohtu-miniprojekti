@@ -2,7 +2,7 @@
 import datetime
 
 
-def read_user_input_book(author, editor, title, publisher,year, volume, number, pages, month, note, doi, issn, isbn): #https://www.bibtex.com/e/book-entry/
+def read_user_input_book(author, editor, title, publisher,year, volume, number, series, address, pages, month, note, doi, issn, isbn): #https://www.bibtex.com/e/book-entry/
     '''Read user input and return a tuple of the book's information'''
     if not author or not editor or not title or not publisher or not year:
         raise ValueError("Author, editor, title, publisher and year are required fields")
@@ -20,6 +20,8 @@ def read_user_input_book(author, editor, title, publisher,year, volume, number, 
     editor = editor.strip()
     title = title.strip()
     publisher = publisher.strip()
+
+    return author, editor, title, publisher, year, volume, number, series, address, pages, month, note, doi, issn, isbn
     
 def generate_cite_key(author, year):
     '''Generate a cite key for a book'''
@@ -68,3 +70,4 @@ def to_bibtex_book(author, editor, title, publisher, year, volume=0, number=0, s
     except NameError:
         pass
     return res
+
