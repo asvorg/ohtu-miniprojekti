@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template, request, redirect
 from backend.article_func import to_bibtex_article
-from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key
+from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key, from_db_form_to_bibtex, edit_article_by_cite_key
 
 app = Flask(__name__, template_folder='frontend/templates')
 
@@ -30,31 +30,7 @@ def result():
         articles = get_article_from_db_by_user(user)
         article = []
         for a in articles:
-            author = a["author"]
-            title = a["title"]
-            journal = a["journal"]
-            year = int(a["year"])
-            if "volume" in a:
-                volume = int(a["volume"])
-            else:
-                volume = 0
-            if "number" in a:
-                number = int(a["number"])
-            else:
-                number = 0
-            if "pages" in a:
-                pages = int(a["pages"])
-            else:
-                pages = 0
-            if "month" in a:
-                month = a["month"]
-            else:
-                month = ""
-            if "note" in a:
-                note = a["note"]
-            else:
-                note = ""
-            bib_res = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
+            bib_res = from_db_form_to_bibtex(a)
             article.append(bib_res)
 
         return render_template("result.html", user=user, article=article)
