@@ -6,6 +6,17 @@ from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, d
 app = Flask(__name__, template_folder='frontend/templates')
 
 @app.route("/")
+def start():
+    return redirect("/signin")
+
+@app.route("/signin", methods=["GET", "POST"])
+def signin():
+    if request.method == "POST":
+        username = request.form["username"]
+    return render_template("signin.html")
+
+
+@app.route("/")
 def index():
     return render_template("index.html")
 
