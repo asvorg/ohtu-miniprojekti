@@ -37,7 +37,7 @@ def result():
         return render_template("result.html", user=user, article=article)
             
     except ValueError as e:
-        return render_template("error.html", error_message=str(e))
+        return render_template("index.html", error_message=str(e))
 
 @app.route("/result/<user>/")
 def result_by_user(user):
