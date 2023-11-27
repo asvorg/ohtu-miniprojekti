@@ -85,7 +85,8 @@ def delete(user, cite_key):
     cite = get_article_from_db_by_cite_key(user, cite_key)
     # vahvistus
     if request.method == "GET":
-        return render_template("delete_confirmation.html", user=user, cite_key=cite_key, cite=cite)
+        bibtex = from_db_form_to_bibtex(cite)
+        return render_template("delete_confirmation.html", user=user, cite_key=cite_key, bibtex=bibtex)
     # poisto
     if request.method == "POST":
         delete_article_by_cite_key(user, cite_key)
