@@ -9,11 +9,17 @@
 
 Definition of done = "Vaatimus on analysoitu, suunniteltu, ohjelmoitu, testattu, testaus automatisoitu, dokumentoitu, integroitu muuhun ohjelmistoon ja viety tuotantoympäristöön."
 
-# Käynnistysohjeet
+## Käynnistysohjeet
 - Kloonaa repositorio koneellesi ja siirry sen juurikansioon
 - Asenna riippuvuudet: poetry install
 - Aktivoi virtuaaliympäristö: poetry shell
 - Siirry kansioon src
 - Käynnistä sovellus: flask run
 
+## Testit
 
+Komento virtuaaliympäristössä: pytest
+
+## Pylint-tarkistukset
+
+Komento juurihakemistosta: pylint src
