@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template, request, redirect
-from backend.article_func import to_bibtex_article
-from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key, from_db_form_to_bibtex, edit_article_by_cite_key
+from backend.article_func import to_bibtex_article,  from_db_form_to_bibtex
+from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key
 
 app = Flask(__name__, template_folder='frontend/templates')
 
