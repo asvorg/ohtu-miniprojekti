@@ -32,12 +32,24 @@ def result():
         for a in articles:
             author = a["author"]
             title = a["title"]
-            journal = a["title"]
+            journal = a["journal"]
             year = int(a["year"])
-            volume = int(a["volume"])
-            number = int(a["number"])
-            pages = int(a["pages"])
-            month = a["month"]
+            if "volume" in a:
+                volume = int(a["volume"])
+            else:
+                volume = 0
+            if "number" in a:
+                number = int(a["number"])
+            else:
+                number = 0
+            if "pages" in a:
+                pages = int(a["pages"])
+            else:
+                pages = 0
+            if "month" in a:
+                month = a["month"]
+            else:
+                month = ""
             note = "huom"
             bib_res = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
             article.append(bib_res)
