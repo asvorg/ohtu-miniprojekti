@@ -40,6 +40,21 @@ def splice_article(article): #article in bibtex format
         article_dict[i[0].strip()] = i[1].strip()
     return article_dict
 
+def splice_book(book): #book in bibtex format
+    '''Splice the book to a dictionary'''
+    book = book.split("\n")
+    book = book[1:-1]
+    #remove curly brackets
+    for i in range(len(book)):
+        book[i] = book[i].replace("{", "")
+        book[i] = book[i].replace("}", "")
+        book[i] = book[i].replace(",", "")
+    book_dict = {}
+    for i in book:
+        i = i.split(" = ")
+        book_dict[i[0].strip()] = i[1].strip()
+    return book_dict
+
 
 def get_article_from_db_by_user(user):
     '''Get all articles from the database by user'''
@@ -75,6 +90,24 @@ def edit_article_by_cite_key(user, cite_key, article): #ei mitää hajua toimiik
     for key in article:
         if article[key]:
             old_article[key] = article[key]
+
+def get_all_articles_from_db():
+    '''Get all articles from the database'''
+    collection, db, client,uri = connect_to_db()
+    articles = list(collection.find({}))
+    return articles
+
+def add_book_to_db(user, book):
+    '''Add a book to the database'''
+    collection, db, client, uri = connect_to_db()
+    book_dict = splice_book(book)
+    cite_key = generate_cite_key(book_dict["author"], book_dict["year"])
+    #add to database
+    book_dict["user"] = user
+    book_dict["cite_key"] = cite_key
+    collection.insert_one(book_dict)
+
+
 #author = "Matti Meikäläinen"
 #title = "Tämä on otsikko2"
 #journal = "Journal of Journals"

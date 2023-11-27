@@ -58,6 +58,34 @@ def to_bibtex_article(author, title, journal, year, volume=0, number=0, pages=0,
         pass
     return res
 
+def from_db_form_to_bibtex(article):
+    author = article["author"]
+    title = article["title"]
+    journal = article["journal"]
+    year = int(article["year"])
+    if "volume" in article:
+        volume = int(article["volume"])
+    else:
+        volume = 0
+    if "number" in article:
+        number = int(article["number"])
+    else:
+        number = 0
+    if "pages" in article:
+        pages = int(article["pages"])
+    else:
+        pages = 0
+    if "month" in article:
+        month = article["month"]
+    else:
+        month = ""
+    if "note" in article:
+        note = article["note"]
+    else:
+        note = ""
+    bibtex_result = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
+    return bibtex_result
+
 #author = "Matti Meikäläinen"
 #title = "Tämä on otsikko"
 #journal = "Journal of Journals"
