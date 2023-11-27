@@ -103,7 +103,13 @@ def edit(user, cite_key):
 
         return redirect("/list/"+user)
 
-@app.route("/delete/<user>/<cite_key>/")
+@app.route("/delete/<user>/<cite_key>/", methods=["GET", "POST"])
 def delete(user, cite_key):
-    delete_article_by_cite_key(user, cite_key)
-    return render_template("deleted.html", user=user, cite_key=cite_key)
+    cite = get_article_from_db_by_cite_key(user, cite_key)
+    # vahvistus
+    if request.method == "GET":
+        return render_template("delete_confirmation.html", user=user, cite_key=cite_key, cite=cite)
+    # poisto
+    if request.method == "POST":
+        delete_article_by_cite_key(user, cite_key)
+        return render_template("deleted.html", user=user)

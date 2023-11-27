@@ -1,0 +1,13 @@
+<h2>Vahvista poisto</h2>
+
+<p style="color: red">Haluatko varmasti poistaa tämän viitteen?</p>
+
+<p>{{ cite }}</p>
+
+<form method="post">
+    <input type="hidden" name="user" value="{{ cite_key }}>
+    <input type="hidden" name="cite_key value="{{ user }}">
+    <input type="submit" value="Poista">
+</form>
+
+<p></p><a href="/list/{{ user }}">Viitelistaan</a></p>
