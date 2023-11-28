@@ -6,7 +6,7 @@ from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, d
 app = Flask(__name__, template_folder='frontend/templates')
 
 
-@app.route("/index")
+@app.route("/")
 def index():
     return render_template("index.html")
 
