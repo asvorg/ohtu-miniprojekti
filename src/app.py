@@ -1,14 +1,27 @@
 from flask import Flask
-from flask import render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for, session
 from backend.article_func import to_bibtex_article,  from_db_form_to_bibtex
 from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key
 
+
 app = Flask(__name__, template_folder='frontend/templates')
+app.secret_key = '9876543dd' 
+
+@app.route("/", methods=["GET", "POST"])
+def signin():
+    if request.method == "POST":
+        username = request.form.get("username")
+        session["username"] = username
+
+        return redirect(url_for("index"))
+
+    return render_template("signin.html")
 
 
-@app.route("/")
+@app.route("/index")
 def index():
-    return render_template("index.html")
+    username = session.get("username", "Vieras") 
+    return render_template("index.html", username=username)
 
 @app.route("/result", methods=["POST"])
 def result():
@@ -31,14 +44,13 @@ def result():
         articles = get_article_from_db_by_user(user)
         article = []
         for a in articles:
-            print(a)
             bib_res = from_db_form_to_bibtex(a)
             article.append(bib_res)
 
         return render_template("result.html", user=user, article=article)
             
     except ValueError as e:
-        return render_template("index.html", error_message=str(e))
+        return render_template("error.html", error_message=str(e))
 
 @app.route("/result/<user>/")
 def result_by_user(user):

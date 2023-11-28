@@ -10,8 +10,8 @@
 
 <div class="container mt-5">
     <h1>Lähdeviitteiden tallennussovellus</h1>
-    <p class="font-weight-bold">Tervetuloa lähdeviitteiden tallennussovellukseen!</p>
-
+    <p class="font-weight-bold">Tervetuloa lähdeviitteiden tallennussovellukseen, {{ username }}!</p>
+    
     <form action="/result" method="POST">
         {% if error_message %}
             <div class="alert alert-danger" role="alert">
