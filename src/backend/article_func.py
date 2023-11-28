@@ -52,7 +52,6 @@ def to_bibtex_article(author, title, journal, year, volume=0, number=0, pages=0,
                 res += f" month = {{{value}}},\n"
             elif i == 8 and value:
                 res += f" note = {{{value}}},\n"
-
         res += "}"
     except NameError:
         pass

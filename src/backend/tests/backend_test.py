@@ -110,6 +110,22 @@ class TestDbFunc(unittest.TestCase):
         self.assertEqual(tulos["user"], "testiuser")
         db_func.delete_article_by_cite_key("testiuser", "pytest:2020")
 
+    def test_from_db_form_to_bibtex(self):
+        article = {'_id': ('6564593af148d54793d0ed7f'), 
+                   'author': 'Matti Meikäläinen', 
+                   'title': 'Tämä on otsikko', 
+                   'journal': 'Journal of Journals', 
+                   'year': '2020', 
+                   'volume': '1', 
+                   'number': '2', 
+                   'pages': '3', 
+                   'month': '4', 
+                   'user': 'Roope', 
+                   'note': 'Tämä on huomautus', 
+                   'cite_key': 'meikäläinen:2020'}
+        tulos = article_func.from_db_form_to_bibtex(article)
+        self.assertEqual(tulos, "@article{meikäläinen:2020,\n author = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n journal = {Journal Of Journals},\n year = {2020},\n volume = {1},\n number = {2},\n pages = {3},\n month = {4},\n note = {Tämä on huomautus},\n}")
+
 
     if __name__ == '__main__':
         unittest.main()

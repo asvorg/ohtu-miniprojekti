@@ -3,6 +3,7 @@ sys.path.append("..")
 from pymongo import MongoClient, errors
 from pymongo.server_api import ServerApi
 from backend.article_func import generate_cite_key, read_user_input_article, to_bibtex_article
+from backend.book_func import read_user_input_book, to_bibtex_book
 
 
 def connect_to_db():
@@ -105,6 +106,7 @@ def add_book_to_db(user, book):
     #add to database
     book_dict["user"] = user
     book_dict["cite_key"] = cite_key
+
     collection.insert_one(book_dict)
 
 
@@ -120,3 +122,22 @@ def add_book_to_db(user, book):
 #author, title, journal, year, volume, number, pages, month, note = read_user_input_article(author, title, journal, year, volume, number, pages)
 #article = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
 #add_article_to_db("testiuser", article)
+
+author = "Matti Meikäläinen"
+editor = "Matti Meikäläinen"
+title = "Tämä on otsikko"
+publisher = "TÄSSÄ BOOK"
+year = 2020
+volume = 1
+number = 2
+series = 3
+address = 4
+edition = 5
+month = 6
+note = "Tämä on huomautus"
+doi = 7
+issn = 8
+isbn = 9
+author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn = read_user_input_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
+
+get_article_from_db_by_user("Roope")
