@@ -139,3 +139,5 @@ doi = 7
 issn = 8
 isbn = 9
 author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn = read_user_input_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
+
+get_article_from_db_by_user("Roope")

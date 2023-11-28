@@ -31,6 +31,7 @@ def result():
         articles = get_article_from_db_by_user(user)
         article = []
         for a in articles:
+            print(a)
             bib_res = from_db_form_to_bibtex(a)
             article.append(bib_res)
 
