@@ -13,6 +13,12 @@ def crawl_acm(url):
     abstract = abstract.replace("\n","")
     abstract = abstract.replace("\t","")
 
+    journal = title.split("|")[1]
+    journal = journal.strip()
+
+    title = title.split("|")[0]
+    title = title.strip()
+
     authors = text.split("Authors:")[1].split("/></a></div>")[0]
     authors = authors.split("aria-hidden=\"true\"/>")[1:]
     
@@ -26,7 +32,7 @@ def crawl_acm(url):
     pages = pages.replace("Pages ", "")
     pages = pages.strip()
     
-    return title, abstract, authors, published, pages
+    return title, journal, abstract, authors, published, pages
 
 def get_by_doi(doi):
     '''Get a paper by doi'''
@@ -34,8 +40,9 @@ def get_by_doi(doi):
     return crawl_acm(url)
 
 
-title, abstract, authors, published, pages = crawl_acm("https://dl.acm.org/doi/10.1145/2380552.2380613")
+title,journal, abstract, authors, published, pages = crawl_acm("https://dl.acm.org/doi/10.1145/2380552.2380613")
 print("Title: ", title)
+print("Journal: ", journal)
 print("Abstract: ", abstract)
 print("Authors: ", authors)
 print("Published: ", published)
