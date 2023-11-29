@@ -28,8 +28,12 @@ def crawl_acm(url):
     
     return title, abstract, authors, published, pages
 
-print(crawl_acm("https://dl.acm.org/doi/10.1145/2380552.2380613"))
-
+title, abstract, authors, published, pages = crawl_acm("https://dl.acm.org/doi/10.1145/2380552.2380613")
+print("Title: ", title)
+print("Abstract: ", abstract)
+print("Authors: ", authors)
+print("Published: ", published)
+print("Pages: ", pages)
 
 #get references as a list
 #references = text.split("<li class=\"references__item\">")
