@@ -1,8 +1,8 @@
 from flask import Flask
 from flask import Flask, render_template, request, redirect, url_for, session
 from backend.article_func import to_bibtex_article,  from_db_form_to_bibtex
-from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key
-
+from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key, add_book_to_db
+from backend.book_func import to_bibtex_book
 
 app = Flask(__name__, template_folder='frontend/templates')
 app.secret_key = '9876543dd' 
@@ -48,6 +48,43 @@ def result():
             article.append(bib_res)
 
         return render_template("result.html", user=user, article=article)
+            
+    except ValueError as e:
+        return render_template("index.html", error_message=str(e))
+
+@app.route("/result", methods=["POST"])
+def book():
+    try:
+        user = request.form["Käyttäjä"]
+        author = request.form["Kirjoittaja"]
+        editor = request.form["Editori"]
+        title = request.form["Otsikko"]
+        publisher = request.form["Julkaisija"]
+        year = int(request.form["Julkaisuvuosi"])
+
+        volume = int(request.form["Vuosikerta"]) if request.form["Vuosikerta"] else 0
+        number = int(request.form["Numero"]) if request.form["Numero"] else 0
+        pages = int(request.form["Sivumäärä"]) if request.form["Sivumäärä"] else 0
+        month = request.form["Kuukausi"]
+        series = request.form["Sarja"]
+        address = request.form["Osoite"]
+        note = request.form["Huomautus"]
+        doi = request.form["Doi"]
+        issn = request.form["Issn"]
+        isbn = request.form["Isbn"]
+
+        bibtex_book = to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, pages, month, note, doi, issn, isbn)
+        
+        add_book_to_db(user, bibtex_book)
+
+
+        #books = get_article_from_db_by_user(user)
+        #book = []
+        #for b in books:
+            #bib_res = from_db_form_to_bibtex(b)
+            #book.append(bib_res)
+
+        return render_template("result.html", user=user, bibtex_book=bibtex_book)
             
     except ValueError as e:
         return render_template("index.html", error_message=str(e))
