@@ -23,6 +23,8 @@ def read_user_input_article(author, title, journal, year, volume=0, number=0, pa
 
 def generate_cite_key(author, year):
     '''Generate a cite key for a paper'''
+    if type(author) == list:
+        author = author[0]
     author = author.lower()
     return author.split(" ")[-1] + ":" + str(year)
 

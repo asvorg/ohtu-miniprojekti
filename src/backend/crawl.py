@@ -37,16 +37,52 @@ def crawl_acm(url):
     return title, journal, abstract, authors, published, pages, year
 
 def get_by_doi(doi):
-    '''Get a paper by doi'''
+    '''Get a paper by doi'''    
     url = "https://dl.acm.org/doi/" + doi
     return crawl_acm(url)
 
 
+def acm_to_bibtex(author, title, journal, year, volume=0, number=0, pages=0, month=0, note=""):
+    cite_key = article_func.generate_cite_key(author, year)
+    pages = pages.split("-")[0]
+    res = "@article{" + cite_key + ",\n"
+    author_cp = ""
+    if type(author) == list:
+        for i in author:
+            author_cp += i + " and "
+        #remove the last " and "
+        author_cp = author_cp[:-5]
+    input_str = author_cp, title, journal, year, volume, number, pages, month, note
+    #add to bibtext, handle empty fields with match case
+    try:
+        for i, value in enumerate(input_str):
+            if i == 0 and value:
+                res += f" author = {{{value}}},\n"
+            elif i == 1 and value:
+                res += f" title = {{{value}}},\n"
+            elif i == 2 and value:
+                res += f" journal = {{{value}}},\n"
+            elif i == 3 and value:
+                res += f" year = {{{value}}},\n"
+            elif i == 4 and value:
+                res += f" volume = {{{value}}},\n"
+            elif i == 5 and value:
+                res += f" number = {{{value}}},\n"
+            elif i == 6 and value:
+                res += f" pages = {{{value}}},\n"
+            elif i == 7 and value:
+                res += f" month = {{{value}}},\n"
+            elif i == 8 and value:
+                res += f" note = {{{value}}},\n"
+        res += "}"
+    except NameError:
+        pass
+    return res
+
 
 title,journal,abstract,authors,published,pages,year = crawl_acm("https://dl.acm.org/doi/10.1145/2380552.2380613")
+print(acm_to_bibtex(authors, title, journal, year, pages=pages))
 
-
-print(article_func.to_bibtex_article(authors, title, journal, year, pages=pages, note=abstract))
 
 #get references as a list
 #references = text.split("<li class=\"references__item\">")
