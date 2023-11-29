@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lähdeviitteiden tallennussovellus</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Lähdeviitteiden tallennussovellus</h1>
+    <p class="font-weight-bold">Tervetuloa lähdeviitteiden tallennussovellukseen, {{ username }}!</p>
+    
+    <form action="/result" method="POST">
+        {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+                {{ error_message }}
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label for="Käyttäjä">Käyttäjä: {{ username }} </label>
+            <input type="text" class="form-control" name="Käyttäjä">
+        </div>
+
+         <div class="form-group">
+            <label for="Kirjoittaja">Kirjoittaja:</label>
+            <input type="text" class="form-control" name="Kirjoittaja">
+        </div>
+
+        <div class="form-group">
+            <label for="Otsikko">Editori:</label>
+            <input type="text" class="form-control" name="Otsikko">
+        </div>
+
+        <div class="form-group">
+            <label for="Julkaisuvuosi">Otsikko:</label>
+            <input type="text" class="form-control" name="Julkaisuvuosi">
+        </div>
+
+        <div class="form-group">
+            <label for="Artikkeli">Julkasija:</label>
+            <input type="text" class="form-control" name="Artikkeli">
+        </div>
+
+        <div class="form-group">
+            <label for="Vuosikerta">Julkaisuvuosi:</label>
+            <input type="text" class="form-control" name="Vuosikerta">
+        </div>
+
+        <div class="form-group">
+            <label for="Numero">Vuosikerta:</label>
+            <input type="text" class="form-control" name="Numero">
+        </div>
+
+        <div class="form-group">
+            <label for="Sivumäärä">Numero:</label>
+            <input type="text" class="form-control" name="Sivumäärä">
+        </div>
+
+        <div class="form-group">
+            <label for="Kuukausi">Sivumäärä:</label>
+            <input type="text" class="form-control" name="Kuukausi">
+        </div>
+
+        <div class="form-group">
+            <label for="Huomautus">Kuukausi</label>
+            <input type="text" class="form-control" name="Huomautus">
+        </div>
+
+        <div class="form-group">
+            <label for="Artikkeli">Sarja:</label>
+            <input type="text" class="form-control" name="Artikkeli">
+        </div>
+
+        <div class="form-group">
+            <label for="Vuosikerta">Osoite:</label>
+            <input type="text" class="form-control" name="Vuosikerta">
+        </div>
+
+        <div class="form-group">
+            <label for="Numero">Huomautus:</label>
+            <input type="text" class="form-control" name="Numero">
+        </div>
+
+        <div class="form-group">
+            <label for="Sivumäärä">Doi:</label>
+            <input type="text" class="form-control" name="Sivumäärä">
+        </div>
+
+        <div class="form-group">
+            <label for="Kuukausi">Issn:</label>
+            <input type="text" class="form-control" name="Kuukausi">
+        </div>
+
+        <div class="form-group">
+            <label for="Huomautus">Isbn</label>
+            <input type="text" class="form-control" name="Huomautus">
+        </div>
+
+
+
+
+        <button type="submit" class="btn btn-primary">Lähetä</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
