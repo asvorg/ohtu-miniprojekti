@@ -69,7 +69,9 @@ def search_result_by_cite_key(user):
         articles = get_article_from_db_by_cite_key(user, cite_key)
         print(articles)
         article = []
-        article.append(from_db_form_to_bibtex(articles))
+        for a in articles:
+            bib_res = from_db_form_to_bibtex(a)
+            article.append(bib_res)
         print(article)
         return render_template("result.html", user=user, article=article)
     except Exception as e:
