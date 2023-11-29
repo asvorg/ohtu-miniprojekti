@@ -16,6 +16,14 @@
         <button type="submit" class="btn btn-primary">Etsi</button>
 </form>
 
+<a href="/lisaa_artikkeli">Lisää artikkeli</a>
+
+    
+    <a href="/lisaa_kirja">Lisää kirja</a>
+
+    
+    <a href="/lisaa_gradu">Lisää gradu</a>
+
     {% if error_message %}
     <div class="alert alert-danger" role="alert">
         {{ error_message }}
@@ -36,6 +44,7 @@
         {% endfor %}
         <a href="/list/{{ user }}">Muokkaa tai poista viitteitä</a>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
