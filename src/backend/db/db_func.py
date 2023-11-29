@@ -68,6 +68,7 @@ def get_article_from_db_by_cite_key(user, cite_key):
     collection, db, client,uri = connect_to_db()
     for article in collection.find({"user": user, "cite_key": cite_key}):
         return article
+    
 def get_article_from_db_by_author(user, author):
     '''Get an article from the database by author'''
     collection, db, client,uri = connect_to_db()
