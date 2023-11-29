@@ -28,6 +28,12 @@ def crawl_acm(url):
     
     return title, abstract, authors, published, pages
 
+def get_by_doi(doi):
+    '''Get a paper by doi'''
+    url = "https://dl.acm.org/doi/" + doi
+    return crawl_acm(url)
+
+
 title, abstract, authors, published, pages = crawl_acm("https://dl.acm.org/doi/10.1145/2380552.2380613")
 print("Title: ", title)
 print("Abstract: ", abstract)
