@@ -69,7 +69,8 @@ class TestDbFunc(unittest.TestCase):
         author, title, journal, year, volume, number, pages, month, note = article_func.read_user_input_article(author, title, journal, year, volume, number, pages, month, note)
         article = article_func.to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
         db_func.add_article_to_db("testiuser", article)
-        tulos = db_func.get_article_from_db_by_cite_key("testiuser", "pytest:2020")
+        lista = db_func.get_article_from_db_by_cite_key("testiuser", "pytest:2020")
+        tulos = lista[0]
         self.assertEqual(tulos["author"], "Matti Pytest")
         self.assertEqual(tulos["title"], "Tämä on otsikko")
         self.assertEqual(tulos["journal"], "Journal Of Journals")
@@ -96,7 +97,8 @@ class TestDbFunc(unittest.TestCase):
         author, title, journal, year, volume, number, pages, month, note = article_func.read_user_input_article(author, title, journal, year, volume, number, pages, month, note)
         article = article_func.to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
         db_func.add_article_to_db("testiuser", article)
-        tulos = db_func.get_article_from_db_by_cite_key("testiuser", "pytest:2020")
+        lista = db_func.get_article_from_db_by_cite_key("testiuser", "pytest:2020")
+        tulos = lista[0]
         self.assertEqual(tulos["author"], "Matti Pytest")
         self.assertEqual(tulos["title"], "Tämä on otsikko")
         self.assertEqual(tulos["journal"], "Journal Of Journals")
