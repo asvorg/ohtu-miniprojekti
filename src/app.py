@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import Flask, render_template, request, redirect, url_for, session
 from backend.article_func import to_bibtex_article,  from_db_form_to_bibtex
-from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key, add_book_to_db
+from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key, add_book_to_db, get_articles_from_db_by_cite_key
 from backend.book_func import to_bibtex_book
 
 app = Flask(__name__, template_folder='frontend/templates')
@@ -103,7 +103,7 @@ def result_by_user(user):
 def search_result_by_cite_key(user):
     try:
         cite_key = request.form["Avain"]
-        articles = get_article_from_db_by_cite_key(user, cite_key)
+        articles = get_articles_from_db_by_cite_key(user, cite_key)
         print(articles)
         article = []
         for a in articles:
