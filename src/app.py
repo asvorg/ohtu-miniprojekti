@@ -54,8 +54,23 @@ def result():
 
 @app.route("/result/<user>/")
 def result_by_user(user):
-    article = get_article_from_db_by_user(user)
+    #article = get_article_from_db_by_user(user)
+    articles = get_article_from_db_by_user(user)
+    article = []
+    for a in articles:
+        bib_res = from_db_form_to_bibtex(a)
+        article.append(bib_res)
     return render_template("result.html", user=user, article=article)
+
+@app.route("/search/<user>/", methods=["POST"])
+def search_result_by_cite_key(user, cite_key):
+    cite_key = request.form["Avain"]
+    articles = get_article_from_db_by_cite_key(cite_key)
+    article = []
+    for a in articles:
+        bib_res = from_db_form_to_bibtex(a)
+        article.append(bib_res)
+    return redirect("result.html", user=user, article=article)
 
 @app.route("/list/")
 def list_without_user():
