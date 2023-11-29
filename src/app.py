@@ -63,14 +63,18 @@ def result_by_user(user):
     return render_template("result.html", user=user, article=article)
 
 @app.route("/search/<user>/", methods=["POST"])
-def search_result_by_cite_key(user, cite_key):
-    cite_key = request.form["Avain"]
-    articles = get_article_from_db_by_cite_key(cite_key)
-    article = []
-    for a in articles:
-        bib_res = from_db_form_to_bibtex(a)
-        article.append(bib_res)
-    return redirect("result.html", user=user, article=article)
+def search_result_by_cite_key(user):
+    try:
+        cite_key = request.form["Avain"]
+        articles = get_article_from_db_by_cite_key(user, cite_key)
+        article = []
+        for a in articles:
+            bib_res = from_db_form_to_bibtex(a)
+            article.append(bib_res)
+        return render_template("result.html", user=user, article=article)
+    except Exception as e:
+        return render_template("result.html", user=user, error_message=str(e))
+
 
 @app.route("/list/")
 def list_without_user():
