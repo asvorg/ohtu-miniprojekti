@@ -1,0 +1,14 @@
+<div class="container mt-5">
+    <h1>Articles</h1>
+
+        {% for a in article%}
+        <div class="card mb-5">
+            <div class="card-body">
+                <h2 class="card-title">Käyttäjän {{ user }} viite:</h2>
+                <br>
+                <pre>{{ a }}</pre>
+            </div>
+        </div>
+        {% endfor %}
+        <a href="/list/{{ user }}">Muokkaa tai poista viitteitä</a>
+</div>

@@ -71,7 +71,7 @@ def search_result_by_cite_key(user):
         for a in articles:
             bib_res = from_db_form_to_bibtex(a)
             article.append(bib_res)
-        return render_template("result.html", user=user, article=article)
+        return render_template("search.html", user=user, article=article)
     except Exception as e:
         return render_template("result.html", user=user, error_message=str(e))
 
