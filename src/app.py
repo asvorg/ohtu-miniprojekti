@@ -128,7 +128,8 @@ def list(user):
 def edit(user, cite_key):
     if request.method == "GET":
         cite = get_article_from_db_by_cite_key(user, cite_key)
-        return render_template("edit.html", cite=cite)
+        tags = [] # TODO: backendiin funktio, joka palauttaa tagit
+        return render_template("edit.html", cite=cite, tags=tags)
     if request.method == "POST":
         # poisto
         delete_article_by_cite_key(user, cite_key)
@@ -146,8 +147,10 @@ def edit(user, cite_key):
         note = request.form["Huomautus"]
         bibtex_result = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
         add_article_to_db(user, bibtex_result)
-    
-        cites = get_article_from_db_by_user(user)
+
+        # lomakkeelta tagit pilkuin eroteltuina
+        tags = request.form["Tagit"]
+        # TODO: backendiin tagien päivitys tietokantaan tms.
 
         return redirect("/list/"+user)
 

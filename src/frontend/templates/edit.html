@@ -8,6 +8,8 @@
 </head>
 <body>
 
+    {{ tags }}
+
 <div class="container mt-5">
     <h2>Muokkaa viitettä</h2>
     <p>Käyttäjä: <b>{{cite.user}}</b></p>
@@ -60,6 +62,11 @@
             <input type="text" class="form-control" name="Huomautus" value="{{cite.note}}">
         </div>
 
+        <div class="form-group">
+            <label for="Tagit">Tagit, pilkuin eroteltuina: (valinnainen)</label>
+            <input type="text" class="form-control" name="Tagit" value="{% for tag in tags %}{{tag}}{% if not loop.last %},{% endif %}{% endfor %}">
+            <p>Tagien tallennus ei toimi vielä.</p>
+        </div>
 
         <button type="submit" class="btn btn-primary">Lähetä</button>
     </form>
