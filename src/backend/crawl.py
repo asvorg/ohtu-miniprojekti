@@ -1,5 +1,6 @@
 import requests
 from datetime import datetime
+import article_func
 
 
 def crawl_acm(url):
@@ -31,8 +32,9 @@ def crawl_acm(url):
     pages = text.split("<span class=\"epub-section__pagerange\">")[1].split("</span>")[0]
     pages = pages.replace("Pages ", "")
     pages = pages.strip()
+    year = published.split(" ")[-1]
     
-    return title, journal, abstract, authors, published, pages
+    return title, journal, abstract, authors, published, pages, year
 
 def get_by_doi(doi):
     '''Get a paper by doi'''
@@ -40,13 +42,11 @@ def get_by_doi(doi):
     return crawl_acm(url)
 
 
-title,journal, abstract, authors, published, pages = crawl_acm("https://dl.acm.org/doi/10.1145/2380552.2380613")
-print("Title: ", title)
-print("Journal: ", journal)
-print("Abstract: ", abstract)
-print("Authors: ", authors)
-print("Published: ", published)
-print("Pages: ", pages)
+
+title,journal,abstract,authors,published,pages,year = crawl_acm("https://dl.acm.org/doi/10.1145/2380552.2380613")
+
+
+print(article_func.to_bibtex_article(authors, title, journal, year, pages=pages, note=abstract))
 
 #get references as a list
 #references = text.split("<li class=\"references__item\">")

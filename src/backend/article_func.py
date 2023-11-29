@@ -2,6 +2,7 @@
 import datetime
 
 
+
 def read_user_input_article(author, title, journal, year, volume=0, number=0, pages=0, month=0, note=""):
     '''Read user input and return a tuple of the paper's information'''
     if not author or not title or not journal or not year:
