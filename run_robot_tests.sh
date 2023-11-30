@@ -4,7 +4,7 @@
 poetry run python3 src/app.py &
 
 # odetetaan, että palvelin on valmiina ottamaan vastaan pyyntöjä
-while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:5001/ping)" != "200" ]];
+while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:5000/ping)" != "200" ]];
   do sleep 1;
 done
 
@@ -13,7 +13,7 @@ poetry run robot src/backend/tests
 
 status=$?
 
-# pysäytetään Flask-palvelin portissa 5001
-kill $(lsof -t -i:5001)
+# pysäytetään Flask-palvelin portissa 5000
+kill $(lsof -t -i:5000)
 
 exit $status
