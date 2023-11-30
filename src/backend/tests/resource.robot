@@ -26,8 +26,8 @@ Starting Page Should Be Open
 Login Page Should Be Open
     Title Should Be  Login
 
-Main Page Should Be Open
-    Title Should Be  Ohtu Application main page
+Article Page Should Be Open
+    Title Should Be  Lähdeviitteiden tallennussovellus
 
 Go To Login Page
     Go To  ${LOGIN_URL}
