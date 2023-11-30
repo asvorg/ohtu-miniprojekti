@@ -11,6 +11,9 @@ flask = "^3.0.0"
 requests = "^2.31.0"
 pymongo = "^4.6.0"
 coverage = "^7.3.2"
+robotframework = "^6.1.1"
+selenium = "^4.15.2"
+robotframework-seleniumlibrary = "^6.2.0"
 
 
 [tool.poetry.group.dev.dependencies]
