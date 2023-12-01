@@ -153,8 +153,7 @@ def list(user):
 def edit(user, cite_key):
     if request.method == "GET":
         cite = get_article_from_db_by_cite_key(user, cite_key)
-        tags = [] # TODO: backendiin funktio, joka palauttaa tagit
-        return render_template("edit.html", cite=cite, tags=tags)
+        return render_template("edit.html", cite=cite) ##
     if request.method == "POST":
         # poisto
         delete_article_by_cite_key(user, cite_key)
@@ -171,11 +170,12 @@ def edit(user, cite_key):
         month = request.form["Kuukausi"]
         note = request.form["Huomautus"]
         bibtex_result = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
-        add_article_to_db(user, bibtex_result)
-
-        # lomakkeelta tagit pilkuin eroteltuina
         tags = request.form["Tagit"]
-        # TODO: backendiin tagien päivitys tietokantaan tms.
+        if len(tags) > 0:
+            tags = tags.replace(" ", "").split(",")
+        else:
+            tags = None
+        add_article_to_db(user, bibtex_result, tags)
 
         return redirect("/list/"+user)
     

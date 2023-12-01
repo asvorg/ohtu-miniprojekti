@@ -70,8 +70,7 @@
 
         <div class="form-group">
             <label for="Tagit">Tagit, pilkuin eroteltuina: (valinnainen)</label>
-            <input type="text" class="form-control" name="Tagit" value="{% for tag in tags %}{{tag}}{% if not loop.last %},{% endif %}{% endfor %}">
-            <p>Tagien tallennus ei toimi vielä.</p>
+            <input type="text" class="form-control" name="Tagit" value="{% for tag in cite.tags %}{{tag}}{% if not loop.last %},{% endif %}{% endfor %}">
         </div>
 
         <button type="submit" class="btn btn-primary">Tallenna</button>

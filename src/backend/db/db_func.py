@@ -15,7 +15,7 @@ def connect_to_db():
     collection = db["articles"]
     return collection, db, client, uri
 
-def add_article_to_db(user, article):
+def add_article_to_db(user, article, tags=None):
     '''Add an article to the database'''
     collection, db, client, uri = connect_to_db()
     article_dict = splice_article(article)
@@ -23,8 +23,9 @@ def add_article_to_db(user, article):
     #add to database
     article_dict["user"] = user
     article_dict["cite_key"] = cite_key
+    if tags:
+        article_dict["tags"] = tags
     collection.insert_one(article_dict)
-
 
 def splice_article(article): #article in bibtex format
     '''Splice the article to a dictionary'''
@@ -88,7 +89,7 @@ def get_articles_from_db_by_cite_key(user, cite_key):
     articles = list(collection.find({"user": user, "cite_key": cite_key}))
     return articles
 
-    
+
 def get_article_from_db_by_author(user, author):
     '''Get an article from the database by author'''
     collection, db, client,uri = connect_to_db()
