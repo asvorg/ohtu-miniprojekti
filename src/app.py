@@ -154,7 +154,7 @@ def edit(user, cite_key):
         return render_template("edit.html", cite=cite, tags=tags)
     if request.method == "POST":
         # poisto
-        delete_article_by_ciresult_bookte_key(user, cite_key)
+        delete_article_by_cite_key(user, cite_key)
 
         # lisäys
         user = request.form["Käyttäjä"]
