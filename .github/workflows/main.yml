@@ -26,8 +26,8 @@ jobs:
         run: poetry run coverage xml
       - name: Coverage report to Codecov
         run: bash <(curl -s https://codecov.io/bash)
-      - name: Setup chromedriver
-        uses: nanasess/setup-chromedriver@master
+      - uses: browser-actions/setup-geckodriver@latest
+      - run: geckodriver --version
       - run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
