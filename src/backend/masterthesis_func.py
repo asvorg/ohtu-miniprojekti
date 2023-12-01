@@ -17,6 +17,7 @@ def read_user_input_masterthesis(author, title, school, year, type, address, mon
     title = title.strip()
     school = school.strip()
     annote = annote.strip()
+    type = type.strip()
 
     return author, title, school, year, type, address, month, note, annote  
     

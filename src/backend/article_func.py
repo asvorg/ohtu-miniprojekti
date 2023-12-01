@@ -166,8 +166,12 @@ def from_db_form_to_bibtex(input_dict):
             note = input_dict["note"]
         else:
             note = ""
-        
-        return to_bibtex_masterthesis(author, title, school, year, type, address, month, note)
+        if "annote" in input_dict:
+            annote = input_dict["annote"]
+        else:
+            annote = ""
+
+        return to_bibtex_masterthesis(author, title, school, year, type, address, month, note, annote)
 
 
 
