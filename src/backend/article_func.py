@@ -79,10 +79,10 @@ def from_db_form_to_bibtex(input_dict):
         year = input_dict["year"]
         volume = input_dict["volume"]
         number = input_dict["number"]
-        pages = input_dict["pages"]
+        #pages = input_dict["pages"]
         month = input_dict["month"]
         note = input_dict["note"]
-        return to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
+        return to_bibtex_article(author, title, journal, year, volume, number, month, note)
     
 
 
