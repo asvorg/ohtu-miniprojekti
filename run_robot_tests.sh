@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # käynnistetään Flask-palvelin taustalle
-poetry run flask -A src/app run &
-#cd src
-#poetry run flask run &
+cd src && poetry run flask run &
+cd ..
+ls
 
 echo "Checking server status..."
 # odetetaan, että palvelin on valmiina ottamaan vastaan pyyntöjä
