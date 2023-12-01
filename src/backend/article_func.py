@@ -1,6 +1,6 @@
 '''Functions for handling article information'''
 import datetime
-
+from .book_func import to_bibtex_book
 
 
 def read_user_input_article(author, title, journal, year, volume=0, number=0, pages=0, month=0, note=""):
@@ -61,29 +61,26 @@ def to_bibtex_article(author, title, journal, year, volume=0, number=0, pages=0,
     return res
 
 def from_db_form_to_bibtex(input_dict):
-    book_switch = False
-    thesis_switch = False
-    article_switch = False
+    '''Convert from db form to bibtex, for article, book and mastersthesis'''
 
-    if "editor" in input_dict:
-        book_switch = True
-    if "school" in input_dict:
-        thesis_switch = True
+    type = detect_type(input_dict)
+
+    if type == "article":
+        return to_bibtex_article(input_dict["author"], input_dict["title"], input_dict["journal"], input_dict["year"], input_dict["volume"], input_dict["number"], input_dict["pages"], input_dict["month"], input_dict["note"])
+    elif type == "book":
+        return to_bibtex_book(input_dict["author"], input_dict["editor"], input_dict["title"], input_dict["publisher"], input_dict["year"], input_dict["volume"], input_dict["number"], input_dict["series"], input_dict["address"], input_dict["edition"], input_dict["month"], input_dict["note"], input_dict["doi"], input_dict["isbn"])
+    
+    
+def detect_type(input_dict):
+    '''Detect the type of the input'''
     if "journal" in input_dict:
-        article_switch = True
-    
-    if article_switch:
-        author = input_dict["author"]
-        title = input_dict["title"]
-        journal = input_dict["journal"]
-        year = input_dict["year"]
-        volume = input_dict["volume"]
-        number = input_dict["number"]
-        #pages = input_dict["pages"]
-        month = input_dict["month"]
-        note = input_dict["note"]
-        return to_bibtex_article(author, title, journal, year, volume, number, month, note)
-    
+        return "article"
+    elif "publisher" in input_dict:
+        return "book"
+    elif "school" in input_dict:
+        return "mastersthesis"
+    else:
+        return "misc"
 
 
 #author = "Matti Meikäläinen"
