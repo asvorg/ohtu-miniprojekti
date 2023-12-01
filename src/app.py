@@ -127,14 +127,13 @@ def result_masterthesis():
 def search_result_by_cite_key(user):
     try:
         cite_key = request.form["Avain"]
-        articles = get_articles_from_db_by_cite_key(user, cite_key)
-        print(articles)
-        article = []
-        for a in articles:
-            bib_res = from_db_form_to_bibtex(a)
-            article.append(bib_res)
-        print(article)
-        return render_template("result.html", user=user, article=article)
+        get_references = get_articles_from_db_by_cite_key(user, cite_key)
+        references = []
+        for reference in get_references:
+            bib_res = from_db_form_to_bibtex(reference)
+            references.append(bib_res)
+        print(references)
+        return render_template("search.html", user=user, references=references)
     except Exception as e:
         return render_template("result.html", user=user, error_message=str(e))
 
