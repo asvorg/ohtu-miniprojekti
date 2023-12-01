@@ -1,8 +1,9 @@
 from flask import Flask
 from flask import Flask, render_template, request, redirect, url_for, session
 from backend.article_func import to_bibtex_article, from_db_form_to_bibtex
-from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key, add_book_to_db, get_articles_from_db_by_cite_key
+from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, add_mastersthesis_to_db, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key, add_book_to_db, get_articles_from_db_by_cite_key
 from backend.book_func import to_bibtex_book
+from backend.masterthesis_func import to_bibtex_masterthesis
 
 app = Flask(__name__, template_folder='frontend/templates')
 app.secret_key = '9876543dd' 
@@ -91,6 +92,36 @@ def result_book():
             
     except ValueError as e:
         return render_template("book.html", error_message=str(e))
+    
+@app.route("/add_masterthesis")
+def add_masterthesis():
+    username = session.get("username", "Vieras") 
+    return render_template("masterthesis.html", username=username)
+    
+@app.route("/result_masterthesis", methods=["POST"])
+def result_masterthesis():
+    try:
+        user = request.form["Käyttäjä"]
+        author = request.form["Kirjoittaja"]
+        title = request.form["Otsikko"]
+        school = request.form["Koulu"]
+        year = int(request.form["Julkaisuvuosi"])
+
+        type = request.form["Tyyppi"]
+        address = request.form["Osoite"]
+        month = request.form["Kuukausi"]
+        note = request.form["Huomautus"]
+        annote = request.form["Kommentti"]
+
+        bibtex_masterthesis = to_bibtex_masterthesis(author, title, school, year, type, address, month, note, annote)
+        
+        add_mastersthesis_to_db(user, bibtex_masterthesis)
+
+        return redirect(url_for("result_by_user", user=user))
+            
+    except ValueError as e:
+        return render_template("masterthesis.html", error_message=str(e))
+    
 
 @app.route("/search/<user>/", methods=["POST"])
 def search_result_by_cite_key(user):
@@ -125,7 +156,7 @@ def edit(user, cite_key):
         return render_template("edit.html", cite=cite, tags=tags)
     if request.method == "POST":
         # poisto
-        delete_article_by_cite_key(user, cite_key)
+        delete_article_by_ciresult_bookte_key(user, cite_key)
 
         # lisäys
         user = request.form["Käyttäjä"]

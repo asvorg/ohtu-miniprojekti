@@ -9,10 +9,10 @@
 <body>
 
 <div class="container mt-5">
-    <h1>Tallenna uusi artikkeli</h1>
+    <h1>Tallenna uusi gradu</h1>
     <p class="font-weight-bold">Täytä lomake, {{ username }}!</p>
     
-    <form action="/result_article" method="POST">
+    <form action="/result_masterthesis" method="POST">
         {% if error_message %}
             <div class="alert alert-danger" role="alert">
                 {{ error_message }}
@@ -20,7 +20,7 @@
         {% endif %}
 
         <div class="form-group">
-            <label for="Käyttäjä">Käyttäjä: </label>
+            <label for="Käyttäjä">Käyttäjä:  </label>
             <input type="text" class="form-control" name="Käyttäjä">
         </div>
 
@@ -35,28 +35,23 @@
         </div>
 
         <div class="form-group">
+            <label for="Koulu">Koulu:</label>
+            <input type="text" class="form-control" name="Koulu">
+        </div>
+
+        <div class="form-group">
             <label for="Julkaisuvuosi">Julkaisuvuosi:</label>
             <input type="text" class="form-control" name="Julkaisuvuosi">
         </div>
 
         <div class="form-group">
-            <label for="Artikkeli">Artikkelin nimi:</label>
-            <input type="text" class="form-control" name="Artikkeli">
+            <label for="Tyyppi">Tyyppi (valinnainen):</label>
+            <input type="text" class="form-control" name="Tyyppi">
         </div>
 
         <div class="form-group">
-            <label for="Vuosikerta">Vuosikerta (valinnainen):</label>
-            <input type="text" class="form-control" name="Vuosikerta">
-        </div>
-
-        <div class="form-group">
-            <label for="Numero">Numero (valinnainen):</label>
-            <input type="text" class="form-control" name="Numero">
-        </div>
-
-        <div class="form-group">
-            <label for="Sivumäärä">Sivumäärä (valinnainen):</label>
-            <input type="text" class="form-control" name="Sivumäärä">
+            <label for="Osoite">Osoite (valinnainen):</label>
+            <input type="text" class="form-control" name="Osoite">
         </div>
 
         <div class="form-group">
@@ -64,9 +59,15 @@
             <input type="text" class="form-control" name="Kuukausi">
         </div>
 
+
         <div class="form-group">
-            <label for="Huomautus">Huomautus: (valinnainen)</label>
+            <label for="Huomautus">Huomautus (valinnainen):</label>
             <input type="text" class="form-control" name="Huomautus">
+        </div>
+
+        <div class="form-group">
+            <label for="Kommentti">Kommentti (valinnainen):</label>
+            <input type="text" class="form-control" name="Kommentti">
         </div>
 
 

@@ -20,7 +20,7 @@
     <div class="d-flex justify-content-end">
         <a href="/add_article">Lisää artikkeli</a>
         <a href="/add_book">Lisää kirja</a>
-        <button type="submit" class="btn btn-primary ml-2">Lisää gradu</button>
+        <a href="/add_masterthesis">Lisää gradu</a>
     </div>
 
     {% if error_message %}
@@ -30,10 +30,10 @@
     {% endif %}
 
     <h1>Artikkelit</h1>
+    <h2 class="card-title">Käyttäjän {{ user }} viitteet:</h2>
     {% for article in articles %}
         <div class="card mb-5">
             <div class="card-body">
-                <h2 class="card-title">Käyttäjän {{ user }} viite:</h2>
                 <br>
                 <pre>{{ article }}</pre>
             </div>
