@@ -60,33 +60,31 @@ def to_bibtex_article(author, title, journal, year, volume=0, number=0, pages=0,
         pass
     return res
 
-def from_db_form_to_bibtex(article):
-    author = article["author"]
-    title = article["title"]
-    journal = article["journal"]
-    year = int(article["year"])
-    if "volume" in article:
-        volume = int(article["volume"])
-    else:
-        volume = 0
-    if "number" in article:
-        number = int(article["number"])
-    else:
-        number = 0
-    if "pages" in article:
-        pages = int(article["pages"])
-    else:
-        pages = 0
-    if "month" in article:
-        month = article["month"]
-    else:
-        month = ""
-    if "note" in article:
-        note = article["note"]
-    else:
-        note = ""
-    bibtex_result = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
-    return bibtex_result
+def from_db_form_to_bibtex(input_dict):
+    book_switch = False
+    thesis_switch = False
+    article_switch = False
+
+    if "editor" in input_dict:
+        book_switch = True
+    if "school" in input_dict:
+        thesis_switch = True
+    if "journal" in input_dict:
+        article_switch = True
+    
+    if article_switch:
+        author = input_dict["author"]
+        title = input_dict["title"]
+        journal = input_dict["journal"]
+        year = input_dict["year"]
+        volume = input_dict["volume"]
+        number = input_dict["number"]
+        pages = input_dict["pages"]
+        month = input_dict["month"]
+        note = input_dict["note"]
+        return to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
+    
+
 
 #author = "Matti Meikäläinen"
 #title = "Tämä on otsikko"
