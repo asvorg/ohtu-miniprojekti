@@ -25,42 +25,42 @@
 
          <div class="form-group">
             <label for="Kirjoittaja">Kirjoittaja:</label>
-            <input type="text" class="form-control" name="Kirjoittaja" value="{{cite.author}}">
+            <input type="text" class="form-control" name="Kirjoittaja" value="{{cite.author}}" required>
         </div>
 
         <div class="form-group">
             <label for="Otsikko">Otsikko:</label>
-            <input type="text" class="form-control" name="Otsikko" value="{{cite.title}}">
+            <input type="text" class="form-control" name="Otsikko" value="{{cite.title}}" required>
         </div>
 
         <div class="form-group">
             <label for="Julkaisuvuosi">Julkaisuvuosi:</label>
-            <input type="text" class="form-control" name="Julkaisuvuosi" value="{{cite.year}}">
+            <input type="number" class="form-control" name="Julkaisuvuosi" value="{{cite.year}}" required>
         </div>
 
         <div class="form-group">
             <label for="Artikkeli">Artikkelin nimi:</label>
-            <input type="text" class="form-control" name="Artikkeli" value="{{cite.journal}}">
+            <input type="text" class="form-control" name="Artikkeli" value="{{cite.journal}}" required>
         </div>
 
         <div class="form-group">
             <label for="Vuosikerta">Vuosikerta (valinnainen):</label>
-            <input type="text" class="form-control" name="Vuosikerta" value="{{cite.volume}}">
+            <input type="number" class="form-control" name="Vuosikerta" value="{{cite.volume}}">
         </div>
 
         <div class="form-group">
             <label for="Numero">Numero (valinnainen):</label>
-            <input type="text" class="form-control" name="Numero" value="{{cite.number}}">
+            <input type="number" class="form-control" name="Numero" value="{{cite.number}}">
         </div>
 
         <div class="form-group">
             <label for="Sivumäärä">Sivumäärä (valinnainen):</label>
-            <input type="text" class="form-control" name="Sivumäärä" value="{{cite.pages}}">
+            <input type="number" class="form-control" name="Sivumäärä" value="{{cite.pages}}">
         </div>
 
         <div class="form-group">
             <label for="Kuukausi">Kuukausi (valinnainen):</label>
-            <input type="text" class="form-control" name="Kuukausi" value="{{cite.month}}">
+            <input type="number" class="form-control" name="Kuukausi" value="{{cite.month}}" min="1" max="12">
         </div>
 
         <div class="form-group">
@@ -74,12 +74,12 @@
             <p>Tagien tallennus ei toimi vielä.</p>
         </div>
 
-        <button type="submit" class="btn btn-primary">Lähetä</button>
+        <button type="submit" class="btn btn-primary">Tallenna</button>
     </form>
 
     <hr>
-    <a href="/" class="btn btn-primary">Etusivulle</a><br>
-    <a href="/list/{{cite.user}}" class="btn btn-primary">Viitelistaan</a>
+    <p><a href="/" class="btn btn-primary">Etusivulle</a></p>
+    <p><a href="/list/{{cite.user}}" class="btn btn-primary">Viitelistaan</a></p>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
