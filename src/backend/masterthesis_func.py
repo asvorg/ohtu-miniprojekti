@@ -13,7 +13,6 @@ def read_user_input_masterthesis(author, title, school, year, type, address, mon
     author = author.strip()
     title = title.strip()
     school = school.strip()
-    year = year.strip()
     type = type.strip()
     address = address.strip()
     month = month.strip()
