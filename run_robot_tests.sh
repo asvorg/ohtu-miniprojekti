@@ -11,7 +11,7 @@ while [[ "$(curl -s -o /dev/null -w '%{http_code}' localhost:5000/)" != "200" ]]
 done
 
 # suoritetaan testit
-poetry run robot src/backend/tests
+poetry run robot backend/tests
 
 status=$?
 
