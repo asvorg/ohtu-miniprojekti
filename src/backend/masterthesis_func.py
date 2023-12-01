@@ -10,14 +10,15 @@ def read_user_input_masterthesis(author, title, school, year, type, address, mon
     year = int(year)
     if year < 0 or year > datetime.datetime.now().year:
         raise ValueError("Invalid year")
-    author = author.title()
-    title = title.title()
-    school = school.title()
     author = author.strip()
     title = title.strip()
     school = school.strip()
-    annote = annote.strip()
+    year = year.strip()
     type = type.strip()
+    address = address.strip()
+    month = month.strip()
+    note = note.strip()
+    annote = annote.strip()
 
     return author, title, school, year, type, address, month, note, annote  
     
