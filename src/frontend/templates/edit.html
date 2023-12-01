@@ -8,6 +8,14 @@
 </head>
 <body>
 
+    <style>
+        body {
+            background-color: #d1d1e0;
+        }
+
+        
+    </style>
+
 <div class="container mt-5">
     <h2>Muokkaa viitettä</h2>
     <p>Käyttäjä: <b>{{cite.user}}</b></p>
@@ -70,8 +78,8 @@
     </form>
 
     <hr>
-    <a href="/">Etusivulle</a><br>
-    <a href="/list/{{cite.user}}">Viitelistaan</a>
+    <a href="/" class="btn btn-primary">Etusivulle</a><br>
+    <a href="/list/{{cite.user}}" class="btn btn-primary">Viitelistaan</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

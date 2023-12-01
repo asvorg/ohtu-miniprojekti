@@ -1,13 +1,38 @@
-<h2>Vahvista poisto</h2>
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Poista viite</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
 
-<p style="color: red">Haluatko varmasti poistaa tämän viitteen?</p>
+    <style>
+        body {
+            background-color: #d1d1e0;
+        }
+    </style>
+    
+<div class="container mt-5">
+    <h2 class="text-danger">Vahvista poisto</h2>
 
-<p><pre>{{ bibtex }}</pre></p>
+    <p class="text-danger">Haluatko varmasti poistaa tämän viitteen?</p>
 
-<form method="post">
-    <input type="hidden" name="user" value="{{ cite_key }}>
-    <input type="hidden" name="cite_key value="{{ user }}">
-    <input type="submit" value="Poista">
-</form>
+    <p><pre>{{ bibtex }}</pre></p>
 
-<p></p><a href="/list/{{ user }}">Viitelistaan</a></p>
+    <form method="post">
+        <input type="hidden" name="user" value="{{ user }}">
+        <input type="hidden" name="cite_key" value="{{ cite_key }}">
+        <input type="submit" class="btn btn-danger" value="Poista">
+    </form>
+
+    <p class="mt-3"><a href="/list/{{ user }}" class="btn btn-primary">Viitelistaan</a></p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
