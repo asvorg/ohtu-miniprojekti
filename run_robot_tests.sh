@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # käynnistetään Flask-palvelin taustalle
-cd src && poetry run flask run &
+cd src
+ls
+poetry run flask run &
 cd ..
 ls
 
@@ -12,7 +14,7 @@ while [[ "$(curl -s -o /dev/null -w '%{http_code}' localhost:5000/)" != "200" ]]
 done
 
 # suoritetaan testit
-poetry run robot backend/tests
+poetry run robot src/backend/tests
 
 status=$?
 
