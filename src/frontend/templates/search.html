@@ -9,9 +9,8 @@
 <body>
 
 <div class="container mt-5">
-    <h1>Articles</h1>
-
-    <h2 class="card-title">Käyttäjän {{ user }} viite:</h2>
+    <a href="/result/{{ user }}/">Takaisin</a>
+    <h2 class="card-title">Viitteet hakusanalla: '{{ cite_key }}'</h2>
 
         {% for reference in references%}
         <div class="card mb-5">
@@ -21,7 +20,6 @@
             </div>
         </div>
         {% endfor %}
-        <a href="/result/{{ user }}/">Takaisin</a>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
