@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Muokkaa graduviitettä</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <style>
+        body {
+            background-color: #d1d1e0;
+        }
+    </style>
+    
+<div class="container mt-5">
+    <h2>Muokkaa graduviitettä</h2>
+    <p>Käyttäjä: <b>{{ cite.user }}</b></p>
+    
+    <form method="POST">
+         <div class="form-group">
+            <label for="Kirjoittaja">Kirjoittaja:</label>
+            <input type="text" class="form-control" name="Kirjoittaja" value="{{ cite.author }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Otsikko">Otsikko:</label>
+            <input type="text" class="form-control" name="Otsikko" value="{{ cite.title }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Koulu">Koulu:</label>
+            <input type="text" class="form-control" name="Koulu" value="{{ cite.school }}" equired>
+        </div>
+
+        <div class="form-group">
+            <label for="Julkaisuvuosi">Julkaisuvuosi:</label>
+            <input type="number" class="form-control" name="Julkaisuvuosi" value="{{ cite.year }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Tyyppi">Tyyppi (valinnainen):</label>
+            <input type="text" class="form-control" name="Tyyppi" value="{{ cite.type }}">
+        </div>
+
+        <div class="form-group">
+            <label for="Osoite">Osoite (valinnainen):</label>
+            <input type="text" class="form-control" name="Osoite" value="{{ cite.address }}">
+        </div>
+
+        <div class="form-group">
+            <label for="Kuukausi">Kuukausi (valinnainen):</label>
+            <input type="number" class="form-control" name="Kuukausi" min="1" max="12" value="{{ cite.month }}">
+        </div>
+
+        <div class="form-group">
+            <label for="Huomautus">Huomautus (valinnainen):</label>
+            <input type="text" class="form-control" name="Huomautus" value="{{ cite.note }}">
+        </div>
+
+        <div class="form-group">
+            <label for="Kommentti">Kommentti (valinnainen):</label>
+            <input type="text" class="form-control" name="Kommentti" value="{{ cite.annote }}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Tallenna</button>
+    </form>
+
+    <hr>
+
+    <p><a href="/" class="btn btn-primary">Etusivulle</a></p>
+    <p><a href="/list/{{cite.user}}" class="btn btn-primary">Viitelistaan</a></p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

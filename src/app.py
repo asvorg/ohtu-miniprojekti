@@ -182,7 +182,7 @@ def edit(user, cite_key):
 @app.route("/edit_book/<user>/<cite_key>/", methods=["GET", "POST"])
 def edit_book(user, cite_key):
     if request.method == "GET":
-        cite = get_article_from_db_by_cite_key(user, cite_key) # PITÄISI SAADA BOOK!
+        cite = get_article_from_db_by_cite_key(user, cite_key)
         return render_template("edit_book.html", cite=cite, user=user)
     if request.method == "POST":
         # poisto
@@ -196,8 +196,7 @@ def edit_book(user, cite_key):
         year = int(request.form["Julkaisuvuosi"])
         volume = int(request.form["Vuosikerta"]) if request.form["Vuosikerta"] else 0
         number = int(request.form["Numero"]) if request.form["Numero"] else 0
-        pages = int(request.form["Sivumäärä"]) if request.form["Sivumäärä"] else 0
-        # pages ei tallennu tietokantaan!?
+        pages = int(request.form["Sivumäärä"]) if request.form["Sivumäärä"] else 0 # pages ei tallennu tietokantaan!?
         month = request.form["Kuukausi"]
         series = request.form["Sarja"]
         address = request.form["Osoite"]
@@ -208,6 +207,28 @@ def edit_book(user, cite_key):
         edition = "" # halutaanko edition myös lomakkeelle?!
         bibtex_book = to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
         add_book_to_db(user, bibtex_book)
+
+        return redirect("/list/"+user)
+    
+@app.route("/edit_mastersthesis/<user>/<cite_key>/", methods=["GET", "POST"])
+def edit_mastersthesis(user, cite_key):
+    if request.method == "GET":
+        cite = get_article_from_db_by_cite_key(user, cite_key)
+        return render_template("edit_mastersthesis.html", cite=cite)
+    if request.method == "POST":
+        # poisto ja lisäys
+        delete_article_by_cite_key(user, cite_key)
+        author = request.form["Kirjoittaja"]
+        title = request.form["Otsikko"]
+        school = request.form["Koulu"]
+        year = int(request.form["Julkaisuvuosi"])
+        type = request.form["Tyyppi"]
+        address = request.form["Osoite"]
+        month = request.form["Kuukausi"]
+        note = request.form["Huomautus"]
+        annote = request.form["Kommentti"]
+        bibtex_masterthesis = to_bibtex_masterthesis(author, title, school, year, type, address, month, note, annote)
+        add_mastersthesis_to_db(user, bibtex_masterthesis)
 
         return redirect("/list/"+user)
 
