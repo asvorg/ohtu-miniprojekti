@@ -3,7 +3,7 @@
 # käynnistetään Flask-palvelin taustalle
 cd src
 ls
-poetry run flask run &
+poetry run flask run --host="0.0.0.0" &
 cd ..
 ls
 
