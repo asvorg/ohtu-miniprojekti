@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.1.1 (Python 3.10.12 on linux)" generated="20231130 13:58:04.667" rpa="false" schemaversion="4">
+<robot generator="Robot 6.1.1 (Python 3.10.12 on linux)" generated="20231130 14:14:47.651" rpa="false" schemaversion="4">
 <suite id="s1" name="Tests" source="/home/kaariroo/ohtu-miniprojekti/src/backend/tests">
 <suite id="s1-s1" name="Home" source="/home/kaariroo/ohtu-miniprojekti/src/backend/tests/home.robot">
 <kw name="Open And Configure Browser" library="resource" type="SETUP">
@@ -8,112 +8,193 @@
 <arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
 <arg>sys</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20231130 13:58:04.762" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7f7f6eb34490&gt;</msg>
-<status status="PASS" starttime="20231130 13:58:04.762" endtime="20231130 13:58:04.762"/>
+<msg timestamp="20231130 14:14:47.741" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x7f787c78c430&gt;</msg>
+<status status="PASS" starttime="20231130 14:14:47.741" endtime="20231130 14:14:47.741"/>
 </kw>
 <kw name="Call Method" library="BuiltIn">
 <arg>${options}</arg>
 <arg>add_argument</arg>
 <arg>--no-sandbox</arg>
 <doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="PASS" starttime="20231130 13:58:04.762" endtime="20231130 13:58:04.762"/>
+<status status="PASS" starttime="20231130 14:14:47.741" endtime="20231130 14:14:47.741"/>
 </kw>
 <kw name="Open Browser" library="SeleniumLibrary">
 <arg>browser=chrome</arg>
 <arg>options=${options}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20231130 13:58:04.763" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
-<status status="PASS" starttime="20231130 13:58:04.762" endtime="20231130 13:58:05.622"/>
+<msg timestamp="20231130 14:14:47.742" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
+<status status="PASS" starttime="20231130 14:14:47.742" endtime="20231130 14:14:48.596"/>
 </kw>
 <kw name="Set Selenium Speed" library="SeleniumLibrary">
 <arg>${DELAY}</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" starttime="20231130 13:58:05.623" endtime="20231130 13:58:05.623"/>
+<status status="PASS" starttime="20231130 14:14:48.596" endtime="20231130 14:14:48.596"/>
 </kw>
-<status status="PASS" starttime="20231130 13:58:04.762" endtime="20231130 13:58:05.623"/>
+<status status="PASS" starttime="20231130 14:14:47.741" endtime="20231130 14:14:48.596"/>
 </kw>
 <test id="s1-s1-t1" name="Go To Starting Page" line="8">
 <kw name="Go To Starting Page" library="resource" type="SETUP">
 <kw name="Go To" library="SeleniumLibrary">
 <arg>${HOME_URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20231130 13:58:05.624" level="INFO">Opening url 'http://localhost:5000'</msg>
-<status status="PASS" starttime="20231130 13:58:05.624" endtime="20231130 13:58:06.432"/>
+<msg timestamp="20231130 14:14:48.597" level="INFO">Opening url 'http://localhost:5000'</msg>
+<msg timestamp="20231130 14:14:49.307" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-7.png"&gt;&lt;img src="selenium-screenshot-7.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20231130 14:14:49.308" level="FAIL">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=119.0.6045.199)
+Stacktrace:
+#0 0x55e656aad943 &lt;unknown&gt;
+#1 0x55e65677c247 &lt;unknown&gt;
+#2 0x55e656773efa &lt;unknown&gt;
+#3 0x55e656763349 &lt;unknown&gt;
+#4 0x55e656764a26 &lt;unknown&gt;
+#5 0x55e656763717 &lt;unknown&gt;
+#6 0x55e6567623d6 &lt;unknown&gt;
+#7 0x55e656762353 &lt;unknown&gt;
+#8 0x55e656760849 &lt;unknown&gt;
+#9 0x55e65676101a &lt;unknown&gt;
+#10 0x55e65677efce &lt;unknown&gt;
+#11 0x55e65680c245 &lt;unknown&gt;
+#12 0x55e6567f00b2 &lt;unknown&gt;
+#13 0x55e65680bc40 &lt;unknown&gt;
+#14 0x55e6567efe83 &lt;unknown&gt;
+#15 0x55e6567bb733 &lt;unknown&gt;
+#16 0x55e6567bc6de &lt;unknown&gt;
+#17 0x55e656a770ea &lt;unknown&gt;
+#18 0x55e656a7baa4 &lt;unknown&gt;
+#19 0x55e656a65f22 &lt;unknown&gt;
+#20 0x55e656a7c4c0 &lt;unknown&gt;
+#21 0x55e656a4c2be &lt;unknown&gt;
+#22 0x55e656a9ca48 &lt;unknown&gt;
+#23 0x55e656a9cc3a &lt;unknown&gt;
+#24 0x55e656aaca69 &lt;unknown&gt;
+#25 0x7fdb5be94ac3 &lt;unknown&gt;
+</msg>
+<status status="FAIL" starttime="20231130 14:14:48.597" endtime="20231130 14:14:49.309"/>
 </kw>
-<status status="PASS" starttime="20231130 13:58:05.624" endtime="20231130 13:58:06.432"/>
+<status status="FAIL" starttime="20231130 14:14:48.597" endtime="20231130 14:14:49.310"/>
 </kw>
-<kw name="Starting Page Should Be Open" library="resource">
-<kw name="Title Should Be" library="SeleniumLibrary">
-<arg>Kirjautuminen</arg>
-<doc>Verifies that the current page title equals ``title``.</doc>
-<msg timestamp="20231130 13:58:06.938" level="INFO">Page title is 'Kirjautuminen'.</msg>
-<status status="PASS" starttime="20231130 13:58:06.433" endtime="20231130 13:58:06.938"/>
-</kw>
-<status status="PASS" starttime="20231130 13:58:06.432" endtime="20231130 13:58:06.938"/>
-</kw>
-<status status="PASS" starttime="20231130 13:58:05.623" endtime="20231130 13:58:06.938"/>
+<status status="FAIL" starttime="20231130 14:14:48.596" endtime="20231130 14:14:49.310">Setup failed:
+WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=119.0.6045.199)
+Stacktrace:
+#0 0x55e656aad943 &lt;unknown&gt;
+#1 0x55e65677c247 &lt;unknown&gt;
+#2 0x55e656773efa &lt;unknown&gt;
+#3 0x55e656763349 &lt;unknown&gt;
+#4 0x55e656764a26 &lt;unknown&gt;
+#5 0x55e656763717 &lt;unknown&gt;
+#6 0x55e6567623d6 &lt;unknown&gt;
+#7 0x55e656762353 &lt;unknown&gt;
+#8 0x55e656760849 &lt;unknown&gt;
+#9 0x55e65676101a &lt;unknown&gt;
+#10 0x55e65677efce &lt;unknown&gt;
+#11 0x55e65680c245 &lt;unknown&gt;
+#12 0x55e6567f00b2 &lt;unknown&gt;
+#13 0x55e65680bc40 &lt;unknown&gt;
+#14 0x55e6567efe83 &lt;unknown&gt;
+#15 0x55e6567bb733 &lt;unknown&gt;
+#16 0x55e6567bc6de &lt;unknown&gt;
+#17 0x55e656a770ea &lt;unknown&gt;
+#18 0x55e656a7baa4 &lt;unknown&gt;
+#19 0x55e656a65f22 &lt;unknown&gt;
+#20 0x55e656a7c4c0 &lt;unknown&gt;
+#21 0x55e656a4c2be &lt;unknown&gt;
+#22 0x55e656a9ca48 &lt;unknown&gt;
+#23 0x55e656a9cc3a &lt;unknown&gt;
+#24 0x55e656aaca69 &lt;unknown&gt;
+#25 0x7fdb5be94ac3 &lt;unknown&gt;
+</status>
 </test>
 <test id="s1-s1-t2" name="Login With Correct Credentials" line="11">
 <kw name="Go To Starting Page" library="resource" type="SETUP">
 <kw name="Go To" library="SeleniumLibrary">
 <arg>${HOME_URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20231130 13:58:06.941" level="INFO">Opening url 'http://localhost:5000'</msg>
-<status status="PASS" starttime="20231130 13:58:06.941" endtime="20231130 13:58:07.471"/>
+<msg timestamp="20231130 14:14:49.313" level="INFO">Opening url 'http://localhost:5000'</msg>
+<msg timestamp="20231130 14:14:49.991" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-8.png"&gt;&lt;img src="selenium-screenshot-8.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20231130 14:14:49.992" level="FAIL">WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=119.0.6045.199)
+Stacktrace:
+#0 0x55e656aad943 &lt;unknown&gt;
+#1 0x55e65677c247 &lt;unknown&gt;
+#2 0x55e656773efa &lt;unknown&gt;
+#3 0x55e656763349 &lt;unknown&gt;
+#4 0x55e656764a26 &lt;unknown&gt;
+#5 0x55e656763717 &lt;unknown&gt;
+#6 0x55e6567623d6 &lt;unknown&gt;
+#7 0x55e656762353 &lt;unknown&gt;
+#8 0x55e656760849 &lt;unknown&gt;
+#9 0x55e65676101a &lt;unknown&gt;
+#10 0x55e65677efce &lt;unknown&gt;
+#11 0x55e65680c245 &lt;unknown&gt;
+#12 0x55e6567f00b2 &lt;unknown&gt;
+#13 0x55e65680bc40 &lt;unknown&gt;
+#14 0x55e6567efe83 &lt;unknown&gt;
+#15 0x55e6567bb733 &lt;unknown&gt;
+#16 0x55e6567bc6de &lt;unknown&gt;
+#17 0x55e656a770ea &lt;unknown&gt;
+#18 0x55e656a7baa4 &lt;unknown&gt;
+#19 0x55e656a65f22 &lt;unknown&gt;
+#20 0x55e656a7c4c0 &lt;unknown&gt;
+#21 0x55e656a4c2be &lt;unknown&gt;
+#22 0x55e656a9ca48 &lt;unknown&gt;
+#23 0x55e656a9cc3a &lt;unknown&gt;
+#24 0x55e656aaca69 &lt;unknown&gt;
+#25 0x7fdb5be94ac3 &lt;unknown&gt;
+</msg>
+<status status="FAIL" starttime="20231130 14:14:49.313" endtime="20231130 14:14:49.992"/>
 </kw>
-<status status="PASS" starttime="20231130 13:58:06.940" endtime="20231130 13:58:07.472"/>
+<status status="FAIL" starttime="20231130 14:14:49.312" endtime="20231130 14:14:49.992"/>
 </kw>
-<kw name="Set Username">
-<arg>kalle</arg>
-<kw name="Input Text" library="SeleniumLibrary">
-<arg>username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<msg timestamp="20231130 13:58:07.474" level="INFO">Typing text 'kalle' into text field 'username'.</msg>
-<status status="PASS" starttime="20231130 13:58:07.473" endtime="20231130 13:58:09.077"/>
-</kw>
-<status status="PASS" starttime="20231130 13:58:07.472" endtime="20231130 13:58:09.078"/>
-</kw>
-<kw name="Submit Credentials">
-<kw name="Click Button" library="SeleniumLibrary">
-<arg>Kirjaudu sisään</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<msg timestamp="20231130 13:58:09.079" level="INFO">Clicking button 'Kirjaudu sisään'.</msg>
-<status status="PASS" starttime="20231130 13:58:09.079" endtime="20231130 13:58:11.171"/>
-</kw>
-<status status="PASS" starttime="20231130 13:58:09.078" endtime="20231130 13:58:11.172"/>
-</kw>
-<kw name="Login Should Succeed">
-<kw name="Article Page Should Be Open" library="resource">
-<kw name="Title Should Be" library="SeleniumLibrary">
-<arg>Lähdeviitteiden tallennussovellus</arg>
-<doc>Verifies that the current page title equals ``title``.</doc>
-<msg timestamp="20231130 13:58:11.678" level="INFO">Page title is 'Lähdeviitteiden tallennussovellus'.</msg>
-<status status="PASS" starttime="20231130 13:58:11.173" endtime="20231130 13:58:11.678"/>
-</kw>
-<status status="PASS" starttime="20231130 13:58:11.172" endtime="20231130 13:58:11.678"/>
-</kw>
-<status status="PASS" starttime="20231130 13:58:11.172" endtime="20231130 13:58:11.679"/>
-</kw>
-<status status="PASS" starttime="20231130 13:58:06.939" endtime="20231130 13:58:11.679"/>
+<status status="FAIL" starttime="20231130 14:14:49.311" endtime="20231130 14:14:49.993">Setup failed:
+WebDriverException: Message: unknown error: net::ERR_CONNECTION_REFUSED
+  (Session info: chrome=119.0.6045.199)
+Stacktrace:
+#0 0x55e656aad943 &lt;unknown&gt;
+#1 0x55e65677c247 &lt;unknown&gt;
+#2 0x55e656773efa &lt;unknown&gt;
+#3 0x55e656763349 &lt;unknown&gt;
+#4 0x55e656764a26 &lt;unknown&gt;
+#5 0x55e656763717 &lt;unknown&gt;
+#6 0x55e6567623d6 &lt;unknown&gt;
+#7 0x55e656762353 &lt;unknown&gt;
+#8 0x55e656760849 &lt;unknown&gt;
+#9 0x55e65676101a &lt;unknown&gt;
+#10 0x55e65677efce &lt;unknown&gt;
+#11 0x55e65680c245 &lt;unknown&gt;
+#12 0x55e6567f00b2 &lt;unknown&gt;
+#13 0x55e65680bc40 &lt;unknown&gt;
+#14 0x55e6567efe83 &lt;unknown&gt;
+#15 0x55e6567bb733 &lt;unknown&gt;
+#16 0x55e6567bc6de &lt;unknown&gt;
+#17 0x55e656a770ea &lt;unknown&gt;
+#18 0x55e656a7baa4 &lt;unknown&gt;
+#19 0x55e656a65f22 &lt;unknown&gt;
+#20 0x55e656a7c4c0 &lt;unknown&gt;
+#21 0x55e656a4c2be &lt;unknown&gt;
+#22 0x55e656a9ca48 &lt;unknown&gt;
+#23 0x55e656a9cc3a &lt;unknown&gt;
+#24 0x55e656aaca69 &lt;unknown&gt;
+#25 0x7fdb5be94ac3 &lt;unknown&gt;
+</status>
 </test>
 <kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
 <doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20231130 13:58:11.680" endtime="20231130 13:58:12.240"/>
+<status status="PASS" starttime="20231130 14:14:49.994" endtime="20231130 14:14:50.554"/>
 </kw>
-<status status="PASS" starttime="20231130 13:58:04.679" endtime="20231130 13:58:12.240"/>
+<status status="FAIL" starttime="20231130 14:14:47.663" endtime="20231130 14:14:50.554"/>
 </suite>
-<status status="PASS" starttime="20231130 13:58:04.668" endtime="20231130 13:58:12.241"/>
+<status status="FAIL" starttime="20231130 14:14:47.652" endtime="20231130 14:14:50.556"/>
 </suite>
 <statistics>
 <total>
-<stat pass="2" fail="0" skip="0">All Tests</stat>
+<stat pass="0" fail="2" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="2" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
-<stat pass="2" fail="0" skip="0" id="s1-s1" name="Home">Tests.Home</stat>
+<stat pass="0" fail="2" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="0" fail="2" skip="0" id="s1-s1" name="Home">Tests.Home</stat>
 </suite>
 </statistics>
 <errors>
