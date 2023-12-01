@@ -15,7 +15,7 @@
 
         
     </style>
-    
+
 <div class="container mt-5">
     <h2>Muokkaa tai poista viitteitä</h2>
     <p>Käyttäjä: <b>{{ user }}</b><p>
@@ -36,16 +36,16 @@
             <td title="{{ cite }}">{{ cite.author }}</td>
             <td>{{cite.title}}</td>
             <td>
-                <a href="/edit/{{cite.user}}/{{cite.cite_key}}">Muokkaa</a>
-                <a href="/delete/{{cite.user}}/{{cite.cite_key}}">Poista</a>
+                <a href="/edit/{{cite.user}}/{{cite.cite_key}}" class="btn btn-primary">Muokkaa</a>
+                <a href="/delete/{{cite.user}}/{{cite.cite_key}}" class="btn btn-primary">Poista</a>
             </td>
         </tr>
         {% endfor %}
     </table>
     {% endif %}
     <hr>
-    <p><a a href="/result/{{user}}">Result</a></p>
-    <p><a a href="/">Etusivulle</a></p>
+    <p><a href="/result/{{user}}" class="btn btn-primary">Result</a></p>
+    <p><a href="/" class="btn btn-primary">Etusivulle</a></p>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
