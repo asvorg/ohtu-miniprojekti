@@ -56,6 +56,20 @@ def splice_book(book): #book in bibtex format
         book_dict[i[0].strip()] = i[1].strip()
     return book_dict
 
+def splice_mastersthesis(mastersthesis): #mastersthesis in bibtex format
+    '''Splice the master's thesis to a dictionary'''
+    mastersthesis = mastersthesis.split("\n")
+    mastersthesis = mastersthesis[1:-1]
+    #remove curly brackets
+    for i in range(len(mastersthesis)):
+        mastersthesis[i] = mastersthesis[i].replace("{", "")
+        mastersthesis[i] = mastersthesis[i].replace("}", "")
+        mastersthesis[i] = mastersthesis[i].replace(",", "")
+    mastersthesis_dict = {}
+    for i in mastersthesis:
+        i = i.split(" = ")
+        mastersthesis_dict[i[0].strip()] = i[1].strip()
+    return mastersthesis_dict
 
 def get_article_from_db_by_user(user):
     '''Get all articles from the database by user'''
@@ -115,6 +129,17 @@ def add_book_to_db(user, book):
     book_dict["cite_key"] = cite_key
 
     collection.insert_one(book_dict)
+
+def add_mastersthesis_to_db(user, mastersthesis):
+    '''Add a master's thesis to the database'''
+    collection, db, client, uri = connect_to_db()
+    mastersthesis_dict = splice_mastersthesis(mastersthesis)
+    cite_key = generate_cite_key(mastersthesis_dict["author"], mastersthesis_dict["year"])
+    #add to database
+    mastersthesis_dict["user"] = user
+    mastersthesis_dict["cite_key"] = cite_key
+
+    collection.insert_one(mastersthesis_dict)
 
 
 #author = "Matti Meikäläinen"
