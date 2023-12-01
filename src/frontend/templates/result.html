@@ -8,20 +8,29 @@
 </head>
 <body>
 
+    <style>
+        body {
+            background-color: #d1d1e0;
+        }
+
+        
+    </style>
+
 <div class="container mt-4">
     <form action="/search/{{ user }}/" method="post" class="mb-4 d-flex justify-content-end">
         <div class="form-group ml-auto">
-            <label for="citeKey">Etsi käyttäen Avainta:</label>
+            <label for="citeKey">Etsi viitteitä käyttäen Avainta:</label>
             <input type="text" name="Avain" class="form-control" id="citeKey" placeholder="Laita Avain">
         </div>
         <button type="submit" class="btn btn-primary ml-2">Etsi</button>
     </form>
 
     <div class="d-flex justify-content-end">
-        <a href="/add_article">Lisää artikkeli</a>
-        <a href="/add_book">Lisää kirja</a>
-        <a href="/add_masterthesis">Lisää gradu</a>
+        <button type="button" class="btn btn-primary ml-2" onclick="window.location.href='/add_article'">Lisää artikkeli</button>
+        <button type="button" class="btn btn-primary ml-2" onclick="window.location.href='/add_book'">Lisää kirja</button>
+        <button type="button" class="btn btn-primary ml-2" onclick="window.location.href='/add_masterthesis'">Lisää gradu</button>
     </div>
+    
 
     {% if error_message %}
     <div class="alert alert-danger" role="alert">
@@ -29,7 +38,7 @@
     </div>
     {% endif %}
 
-    <h1>Artikkelit</h1>
+    <h1>Tervetuloa viitteiden tallennussovellusovellukseen!</h1>
     <h2 class="card-title">Käyttäjän {{ user }} viitteet:</h2>
     {% for article in articles %}
         <div class="card mb-5">
@@ -40,7 +49,8 @@
         </div>
     {% endfor %}
     
-    <a href="/list/{{ user }}">Muokkaa tai poista viitteitä</a>
+    <a href="/list/{{ user }}" class="btn btn-primary mt-3">Muokkaa tai poista viitteitä</a>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
