@@ -1,7 +1,7 @@
 '''Functions for handling article information'''
 import datetime
 from .book_func import to_bibtex_book
-
+from .masterthesis_func import to_bibtex_masterthesis
 
 def read_user_input_article(author, title, journal, year, volume=0, number=0, pages=0, month=0, note=""):
     '''Read user input and return a tuple of the paper's information'''
@@ -145,7 +145,29 @@ def from_db_form_to_bibtex(input_dict):
         return to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
     
     elif type == "mastersthesis":
-        pass #todo
+        author = input_dict["author"]
+        title = input_dict["title"]
+        school = input_dict["school"]
+        year = input_dict["year"]
+
+        if "type" in input_dict:
+            type = input_dict["type"]
+        else:
+            type = ""
+        if "address" in input_dict:
+            address = input_dict["address"]
+        else:
+            address = ""
+        if "month" in input_dict:
+            month = input_dict["month"]
+        else:
+            month = ""
+        if "note" in input_dict:
+            note = input_dict["note"]
+        else:
+            note = ""
+        
+        return to_bibtex_masterthesis(author, title, school, year, type, address, month, note)
 
 
 
