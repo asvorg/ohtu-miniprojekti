@@ -18,8 +18,8 @@
     </form>
 
     <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary ml-2">Lisää artikkeli</button>
-        <button type="submit" class="btn btn-primary ml-2">Lisää kirja</button>
+        <a href="/add_article">Lisää artikkeli</a>
+        <a href="/add_book">Lisää kirja</a>
         <button type="submit" class="btn btn-primary ml-2">Lisää gradu</button>
     </div>
 
@@ -30,16 +30,16 @@
     {% endif %}
 
     <h1>Artikkelit</h1>
-
-    {% for a in article %}
-    <div class="card mb-5">
-        <div class="card-body">
-            <h2 class="card-title">Käyttäjän {{ user }} viite:</h2>
-            <br>
-            <pre>{{ a }}</pre>
+    {% for article in articles %}
+        <div class="card mb-5">
+            <div class="card-body">
+                <h2 class="card-title">Käyttäjän {{ user }} viite:</h2>
+                <br>
+                <pre>{{ article }}</pre>
+            </div>
         </div>
-    </div>
     {% endfor %}
+    
     <a href="/list/{{ user }}">Muokkaa tai poista viitteitä</a>
 </div>
 

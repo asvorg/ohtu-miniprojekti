@@ -9,10 +9,10 @@
 <body>
 
 <div class="container mt-5">
-    <h1>Lähdeviitteiden tallennussovellus</h1>
-    <p class="font-weight-bold">Tervetuloa lähdeviitteiden tallennussovellukseen, {{ username }}!</p>
+    <h1>Tallenna uusi kirja</h1>
+    <p class="font-weight-bold">Täytä lomake, {{ username }}!</p>
     
-    <form action="/result" method="POST">
+    <form action="/result_book" method="POST">
         {% if error_message %}
             <div class="alert alert-danger" role="alert">
                 {{ error_message }}
@@ -30,77 +30,74 @@
         </div>
 
         <div class="form-group">
-            <label for="Otsikko">Editori:</label>
+            <label for="Editori">Editori:</label>
+            <input type="text" class="form-control" name="Editori">
+        </div>
+
+        <div class="form-group">
+            <label for="Otsikko">Otsikko:</label>
             <input type="text" class="form-control" name="Otsikko">
         </div>
 
         <div class="form-group">
-            <label for="Julkaisuvuosi">Otsikko:</label>
+            <label for="Julkaisija">Julkaisija:</label>
+            <input type="text" class="form-control" name="Julkaisija">
+        </div>
+
+        <div class="form-group">
+            <label for="Julkaisuvuosi">Julkaisuvuosi:</label>
             <input type="text" class="form-control" name="Julkaisuvuosi">
         </div>
 
         <div class="form-group">
-            <label for="Artikkeli">Julkasija:</label>
-            <input type="text" class="form-control" name="Artikkeli">
-        </div>
-
-        <div class="form-group">
-            <label for="Vuosikerta">Julkaisuvuosi:</label>
+            <label for="Vuosikerta">Vuosikerta (valinnainen):</label>
             <input type="text" class="form-control" name="Vuosikerta">
         </div>
 
         <div class="form-group">
-            <label for="Numero">Vuosikerta:</label>
+            <label for="Numero">Numero (valinnainen):</label>
             <input type="text" class="form-control" name="Numero">
         </div>
 
         <div class="form-group">
-            <label for="Sivumäärä">Numero:</label>
+            <label for="Sivumäärä">Sivumäärä (valinnainen):</label>
             <input type="text" class="form-control" name="Sivumäärä">
         </div>
 
         <div class="form-group">
-            <label for="Kuukausi">Sivumäärä:</label>
+            <label for="Kuukausi">Kuukausi (valinnainen):</label>
             <input type="text" class="form-control" name="Kuukausi">
         </div>
 
         <div class="form-group">
-            <label for="Huomautus">Kuukausi</label>
+            <label for="Sarja">Sarja (valinnainen):</label>
+            <input type="text" class="form-control" name="Sarja">
+        </div>
+
+        <div class="form-group">
+            <label for="Osoite">Osoite (valinnainen):</label>
+            <input type="text" class="form-control" name="Osoite">
+        </div>
+
+        <div class="form-group">
+            <label for="Huomautus">Huomautus (valinnainen):</label>
             <input type="text" class="form-control" name="Huomautus">
         </div>
 
         <div class="form-group">
-            <label for="Artikkeli">Sarja:</label>
-            <input type="text" class="form-control" name="Artikkeli">
+            <label for="Doi">Doi (valinnainen):</label>
+            <input type="text" class="form-control" name="Doi">
         </div>
 
         <div class="form-group">
-            <label for="Vuosikerta">Osoite:</label>
-            <input type="text" class="form-control" name="Vuosikerta">
+            <label for="Issn">Issn (valinnainen):</label>
+            <input type="text" class="form-control" name="Issn">
         </div>
 
         <div class="form-group">
-            <label for="Numero">Huomautus:</label>
-            <input type="text" class="form-control" name="Numero">
+            <label for="Isbn">Isbn (valinnainen):</label>
+            <input type="text" class="form-control" name="Isbn">
         </div>
-
-        <div class="form-group">
-            <label for="Sivumäärä">Doi:</label>
-            <input type="text" class="form-control" name="Sivumäärä">
-        </div>
-
-        <div class="form-group">
-            <label for="Kuukausi">Issn:</label>
-            <input type="text" class="form-control" name="Kuukausi">
-        </div>
-
-        <div class="form-group">
-            <label for="Huomautus">Isbn</label>
-            <input type="text" class="form-control" name="Huomautus">
-        </div>
-
-
-
 
         <button type="submit" class="btn btn-primary">Lähetä</button>
     </form>

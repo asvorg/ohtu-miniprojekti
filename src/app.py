@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import Flask, render_template, request, redirect, url_for, session
-from backend.article_func import to_bibtex_article,  from_db_form_to_bibtex
+from backend.article_func import to_bibtex_article, from_db_form_to_bibtex
 from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key, add_book_to_db, get_articles_from_db_by_cite_key
 from backend.book_func import to_bibtex_book
 
@@ -13,18 +13,28 @@ def signin():
         username = request.form.get("username")
         session["username"] = username
 
-        return redirect(url_for("index"))
+        return redirect(url_for("result_by_user", user = username))
 
     return render_template("signin.html")
 
+@app.route("/result/<user>/")
+def result_by_user(user):
+    articles = get_article_from_db_by_user(user)
+    
+    article = []
+    for a in articles:
+        bib_res = from_db_form_to_bibtex(a)
+        article.append(bib_res)
+    
+    return render_template("result.html", user=user, articles=article)
 
-@app.route("/index")
-def index():
+@app.route("/add_article")
+def add_article():
     username = session.get("username", "Vieras") 
     return render_template("index.html", username=username)
 
-@app.route("/result", methods=["POST"])
-def result():
+@app.route("/result_article", methods=["POST"])
+def result_article():
     try:
         user = request.form["Käyttäjä"]
         author = request.form["Kirjoittaja"]
@@ -41,19 +51,19 @@ def result():
         bibtex_result = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
         add_article_to_db(user, bibtex_result)
 
-        articles = get_article_from_db_by_user(user)
-        article = []
-        for a in articles:
-            bib_res = from_db_form_to_bibtex(a)
-            article.append(bib_res)
-
-        return render_template("result.html", user=user, article=article)
+        return redirect(url_for("result_by_user", user=user))
             
     except ValueError as e:
         return render_template("index.html", error_message=str(e))
 
-@app.route("/result", methods=["POST"])
-def book():
+
+@app.route("/add_book")
+def add_book():
+    username = session.get("username", "Vieras") 
+    return render_template("book.html", username=username)
+
+@app.route("/result_book", methods=["POST"])
+def result_book():
     try:
         user = request.form["Käyttäjä"]
         author = request.form["Kirjoittaja"]
@@ -77,27 +87,10 @@ def book():
         
         add_book_to_db(user, bibtex_book)
 
-
-        #books = get_article_from_db_by_user(user)
-        #book = []
-        #for b in books:
-            #bib_res = from_db_form_to_bibtex(b)
-            #book.append(bib_res)
-
-        return render_template("result.html", user=user, bibtex_book=bibtex_book)
+        return redirect(url_for("result_by_user", user=user))
             
     except ValueError as e:
-        return render_template("index.html", error_message=str(e))
-
-@app.route("/result/<user>/")
-def result_by_user(user):
-    #article = get_article_from_db_by_user(user)
-    articles = get_article_from_db_by_user(user)
-    article = []
-    for a in articles:
-        bib_res = from_db_form_to_bibtex(a)
-        article.append(bib_res)
-    return render_template("result.html", user=user, article=article)
+        return render_template("book.html", error_message=str(e))
 
 @app.route("/search/<user>/", methods=["POST"])
 def search_result_by_cite_key(user):
