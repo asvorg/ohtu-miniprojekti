@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Muokkaa kirjaviitettä</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <style>
+        body {
+            background-color: #d1d1e0;
+        }
+
+        
+    </style>
+    
+<div class="container mt-5">
+    <h2>Muokkaa kirjaviitettä</h2>
+    <p>Käyttäjä: <b>{{ user }}</b></p>
+    
+    <form method="POST">
+         <div class="form-group">
+            <label for="Kirjoittaja">Kirjoittaja:</label>
+            <input type="text" class="form-control" name="Kirjoittaja" value="{{ cite.author }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Editori">Editori:</label>
+            <input type="text" class="form-control" name="Editori" value="{{ cite.editor }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Otsikko">Otsikko:</label>
+            <input type="text" class="form-control" name="Otsikko" value="{{ cite.title }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Julkaisija">Julkaisija:</label>
+            <input type="text" class="form-control" name="Julkaisija" value="{{ cite.publisher }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Julkaisuvuosi">Julkaisuvuosi:</label>
+            <input type="number" class="form-control" name="Julkaisuvuosi" value="{{ cite.year }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Vuosikerta">Vuosikerta (valinnainen):</label>
+            <input type="number" class="form-control" name="Vuosikerta" value="{{ cite.volume }}">
+        </div>
+
+        <div class="form-group">
+            <label for="Numero">Numero (valinnainen):</label>
+            <input type="number" class="form-control" name="Numero" value="{{ cite.number }}">
+        </div>
+
+        <!-- 
+
+        pages ei tallennu tietokantaan
+
+        <div class="form-group">
+            <label for="Sivumäärä">Sivumäärä (valinnainen):</label>
+            <input type="number" class="form-control" name="Sivumäärä" value="{{ cite.pages }}">
+        </div>
+
+        -->
+
+        <div class="form-group">
+            <label for="Kuukausi">Kuukausi (valinnainen):</label>
+            <input type="number" class="form-control" name="Kuukausi" value="{{ cite.month }}" min="1" max="12">
+        </div>
+
+        <div class="form-group">
+            <label for="Sarja">Sarja (valinnainen):</label>
+            <input type="text" class="form-control" name="Sarja" value="{{ cite.series }}">
+        </div>
+
+        <div class="form-group">
+            <label for="Osoite">Osoite (valinnainen):</label>
+            <input type="text" class="form-control" name="Osoite" value="{{ cite.address }}">
+        </div>
+
+        <div class="form-group">
+            <label for="Huomautus">Huomautus (valinnainen):</label>
+            <input type="text" class="form-control" name="Huomautus" value="{{ cite.note }}">
+        </div>
+
+        <div class="form-group">
+            <label for="Doi">Doi (valinnainen):</label>
+            <input type="text" class="form-control" name="Doi" value="{{ cite.doi }}">
+        </div>
+
+        <div class="form-group">
+            <label for="Issn">Issn (valinnainen):</label>
+            <input type="text" class="form-control" name="Issn" value="{{ cite.issn }}">
+        </div>
+
+        <div class="form-group">
+            <label for="Isbn">Isbn (valinnainen):</label>
+            <input type="text" class="form-control" name="Isbn" value="{{ cite.isbn }}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Tallenna</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

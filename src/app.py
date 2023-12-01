@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import Flask, render_template, request, redirect, url_for, session
-from backend.article_func import to_bibtex_article, from_db_form_to_bibtex
+from backend.article_func import to_bibtex_article, from_db_form_to_bibtex, detect_type
 from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, add_mastersthesis_to_db, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key, add_book_to_db, get_articles_from_db_by_cite_key
 from backend.book_func import to_bibtex_book
 from backend.masterthesis_func import to_bibtex_masterthesis
@@ -144,7 +144,10 @@ def list_without_user():
 @app.route("/list/<user>")
 def list(user):
     cites = get_article_from_db_by_user(user)
-    return render_template("list.html", cites=cites, user=user)
+    cite_types = {}
+    for cite in cites:
+        cite_types[cite["cite_key"]] = detect_type(cite)
+    return render_template("list.html", cites=cites, user=user, cite_types=cite_types)
 
 @app.route("/edit/<user>/<cite_key>/", methods=["GET", "POST"])
 def edit(user, cite_key):
@@ -175,11 +178,43 @@ def edit(user, cite_key):
         # TODO: backendiin tagien päivitys tietokantaan tms.
 
         return redirect("/list/"+user)
+    
+@app.route("/edit_book/<user>/<cite_key>/", methods=["GET", "POST"])
+def edit_book(user, cite_key):
+    if request.method == "GET":
+        cite = get_article_from_db_by_cite_key(user, cite_key) # PITÄISI SAADA BOOK!
+        return render_template("edit_book.html", cite=cite, user=user)
+    if request.method == "POST":
+        # poisto
+        delete_article_by_cite_key(user, cite_key)
+
+        # kirjaviitteen lisäys
+        author = request.form["Kirjoittaja"]
+        editor = request.form["Editori"]
+        title = request.form["Otsikko"]
+        publisher = request.form["Julkaisija"]
+        year = int(request.form["Julkaisuvuosi"])
+        volume = int(request.form["Vuosikerta"]) if request.form["Vuosikerta"] else 0
+        number = int(request.form["Numero"]) if request.form["Numero"] else 0
+        pages = int(request.form["Sivumäärä"]) if request.form["Sivumäärä"] else 0
+        # pages ei tallennu tietokantaan!?
+        month = request.form["Kuukausi"]
+        series = request.form["Sarja"]
+        address = request.form["Osoite"]
+        note = request.form["Huomautus"]
+        doi = request.form["Doi"]
+        issn = request.form["Issn"]
+        isbn = request.form["Isbn"]
+        edition = "" # halutaanko edition myös lomakkeelle?!
+        bibtex_book = to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
+        add_book_to_db(user, bibtex_book)
+
+        return redirect("/list/"+user)
 
 @app.route("/delete/<user>/<cite_key>/", methods=["GET", "POST"])
 def delete(user, cite_key):
     cite = get_article_from_db_by_cite_key(user, cite_key)
-    # vahvistus
+    # varmistuskysymys
     if request.method == "GET":
         bibtex = from_db_form_to_bibtex(cite)
         return render_template("delete_confirmation.html", user=user, cite_key=cite_key, bibtex=bibtex)

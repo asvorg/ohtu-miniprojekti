@@ -36,7 +36,11 @@
             <td title="{{ cite }}">{{ cite.author }}</td>
             <td>{{cite.title}}</td>
             <td>
+                {% if cite_types[cite.cite_key] == "book" %}
+                <a href="/edit_book/{{cite.user}}/{{cite.cite_key}}" class="btn btn-primary">Muokkaa</a>
+                {% else %}
                 <a href="/edit/{{cite.user}}/{{cite.cite_key}}" class="btn btn-primary">Muokkaa</a>
+                {% endif %}
                 <a href="/delete/{{cite.user}}/{{cite.cite_key}}" class="btn btn-primary">Poista</a>
             </td>
         </tr>
