@@ -2,6 +2,9 @@ import unittest
 #import sys
 #sys.path.append("..")
 from backend import article_func
+from backend import book_func
+from backend import crawl
+from backend import mastersthesis_func
 from backend.db import db_func
 
 class TestArticleFunc(unittest.TestCase):
@@ -137,6 +140,47 @@ class TestDbFunc(unittest.TestCase):
         self.assertEqual(tulos["cite_key"], "pytest:2020")
         self.assertEqual(tulos["user"], "testiuser")
         db_func.delete_article_by_cite_key("testiuser", "pytest:2020")
+
+class TestBookFunc(unittest.TestCase):
+    def setUp(self):
+        pass
+        #print("Set up goes here")
+
+    def test_generate_cite_key(self):
+        author = "Matti Meikäläinen"
+        year = 2020
+        tulos = book_func.generate_cite_key(author, year)
+        self.assertEqual(tulos, "meikäläinen:2020")
+    
+    def test_to_bibtex_book(self):
+        author = "Matti Meikäläinen"
+        editor = "Matti Meikäläinen"
+        title = "Tämä on otsikko"
+        publisher = "Publisher of Publishers"
+        year = 2020
+        volume = 1
+        number = 2
+        series = 3
+        address = 4
+        edition = 5
+        month = 6
+        note = "Tämä on huomautus"
+        doi = 7
+        issn = 8
+        isbn = 9
+        author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn = book_func.read_user_input_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
+        tulos = book_func.to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
+        self.assertEqual(tulos, "@book{meikäläinen:2020,\n author = {Matti Meikäläinen},\n editor = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n publisher = {Publisher Of Publishers},\n year = {2020},\n volume = {1},\n number = {2},\n series = {3},\n address = {4},\n edition = {5},\n month = {6},\n note = {Tämä on huomautus},\n doi = {7},\n issn = {8},\n isbn = {9},\n}")
+
+class TestCrawl(unittest.TestCase):
+    def setUp(self):
+        pass
+        #print("Set up goes here")
+
+class TestMastersthesisFunc(unittest.TestCase):
+    def setUp(self):
+        pass
+        #print("Set up goes here")
 
 
     #def test_from_db_form_to_bibtex(self):
