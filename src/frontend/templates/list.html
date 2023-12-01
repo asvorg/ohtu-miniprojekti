@@ -25,7 +25,10 @@
         <table>
         <tr>
             <th>
-                Author
+                Viitetyyppi
+            </th>
+            <th>
+                Author 
             </th>
             <th>
                 Title
@@ -33,6 +36,9 @@
         </tr>
         {% for cite in cites %}
         <tr>
+            <td>
+                {{ cite_types[cite.cite_key] }}
+            </td>
             <td title="{{ cite }}">{{ cite.author }}</td>
             <td>{{cite.title}}</td>
             <td>
