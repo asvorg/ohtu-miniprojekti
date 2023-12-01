@@ -66,11 +66,89 @@ def from_db_form_to_bibtex(input_dict):
     type = detect_type(input_dict)
 
     if type == "article":
-        return to_bibtex_article(input_dict["author"], input_dict["title"], input_dict["journal"], input_dict["year"], input_dict["volume"], input_dict["number"], input_dict["pages"], input_dict["month"], input_dict["note"])
+        author = input_dict["author"]
+        title = input_dict["title"]
+        journal = input_dict["journal"]
+        year = input_dict["year"]
+
+        if "volume" in input_dict:
+            volume = input_dict["volume"]
+        else:
+            volume = 0
+        if "number" in input_dict:
+            number = input_dict["number"]
+        else:
+            number = 0
+        if "pages" in input_dict:
+            pages = input_dict["pages"]
+        else:
+            pages = 0
+        if "month" in input_dict:
+            month = input_dict["month"]
+        else:
+            month = ""
+        if "note" in input_dict:
+            note = input_dict["note"]
+        else:
+            note = ""
+        
+        return to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
+    
     elif type == "book":
-        return to_bibtex_book(input_dict["author"], input_dict["editor"], input_dict["title"], input_dict["publisher"], input_dict["year"], input_dict["volume"], input_dict["number"], input_dict["series"], input_dict["address"], input_dict["edition"], input_dict["month"], input_dict["note"], input_dict["doi"], input_dict["isbn"])
+        author = input_dict["author"]
+        editor = input_dict["editor"]
+        title = input_dict["title"]
+        publisher = input_dict["publisher"]
+        year = input_dict["year"]
+
+        if "volume" in input_dict:
+            volume = input_dict["volume"]
+        else:
+            volume = 0
+        if "number" in input_dict:
+            number = input_dict["number"]
+        else:
+            number = 0
+        if "series" in input_dict:
+            series = input_dict["series"]
+        else:
+            series = ""
+        if "address" in input_dict:
+            address = input_dict["address"]
+        else:
+            address = ""
+        if "edition" in input_dict:
+            edition = input_dict["edition"]
+        else:
+            edition = ""
+        if "month" in input_dict:
+            month = input_dict["month"]
+        else:
+            month = ""
+        if "note" in input_dict:
+            note = input_dict["note"]
+        else:
+            note = ""
+        if "doi" in input_dict:
+            doi = input_dict["doi"]
+        else:
+            doi = ""
+        if "issn" in input_dict:
+            issn = input_dict["issn"]
+        else:
+            issn = ""
+        if "isbn" in input_dict:
+            isbn = input_dict["isbn"]
+        else:
+            isbn = ""
+        
+        return to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
     
-    
+    elif type == "mastersthesis":
+        pass #todo
+
+
+
 def detect_type(input_dict):
     '''Detect the type of the input'''
     if "journal" in input_dict:
