@@ -12,8 +12,8 @@ ${HOME_URL}  http://${SERVER}
 *** Keywords ***
 Open And Configure Browser
     # jos käytät Firefoxia ja Geckodriveriä käytä seuraavaa riviä sitä alemman sijaan
-    ${options}  Evaluate  sys.modules['selenium.webdriver'].FirefoxOptions()  sys
-    # ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
+    # ${options}  Evaluate  sys.modules['selenium.webdriver'].FirefoxOptions()  sys
+    ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
     Call Method    ${options}    add_argument    --no-sandbox
     # seuraava rivi on kommentoitu pois tässä vaiheessa
     # Call Method  ${options}  add_argument  --headless
