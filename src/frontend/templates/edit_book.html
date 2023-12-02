@@ -56,16 +56,11 @@
             <input type="number" class="form-control" name="Numero" value="{{ cite.number }}">
         </div>
 
-        <!-- 
-
-        pages ei tallennu tietokantaan
-
+        <!-- pages ei tallennu tietokantaan -->
         <div class="form-group">
             <label for="Sivumäärä">Sivumäärä (valinnainen):</label>
             <input type="number" class="form-control" name="Sivumäärä" value="{{ cite.pages }}">
         </div>
-
-        -->
 
         <div class="form-group">
             <label for="Kuukausi">Kuukausi (valinnainen):</label>
@@ -100,6 +95,11 @@
         <div class="form-group">
             <label for="Isbn">Isbn (valinnainen):</label>
             <input type="text" class="form-control" name="Isbn" value="{{ cite.isbn }}">
+        </div>
+
+        <div class="form-group">
+            <label for="Tagit">Tagit, pilkuin eroteltuina (valinnainen):</label>
+            <input type="text" class="form-control" name="Tagit" value="{% for tag in cite.tags %}{{tag}}{% if not loop.last %},{% endif %}{% endfor %}">
         </div>
 
         <button type="submit" class="btn btn-primary">Tallenna</button>

@@ -224,8 +224,13 @@ def edit_book(user, cite_key):
         issn = request.form["Issn"]
         isbn = request.form["Isbn"]
         edition = "" # halutaanko edition myös lomakkeelle?!
+        tags = request.form["Tagit"]
+        if len(tags) > 0:
+            tags = tags.replace(" ", "").split(",")
+        else:
+            tags = None
         bibtex_book = to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
-        add_book_to_db(user, bibtex_book)
+        add_book_to_db(user, bibtex_book, tags)
 
         return redirect("/list/"+user)
     

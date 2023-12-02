@@ -125,7 +125,7 @@ def get_all_articles_from_db():
     articles = list(collection.find({}))
     return articles
 
-def add_book_to_db(user, book):
+def add_book_to_db(user, book, tags=None):
     '''Add a book to the database'''
     collection, db, client, uri = connect_to_db()
     book_dict = splice_book(book)
@@ -133,6 +133,8 @@ def add_book_to_db(user, book):
     #add to database
     book_dict["user"] = user
     book_dict["cite_key"] = cite_key
+    if tags:
+        book_dict["tags"] = tags
 
     collection.insert_one(book_dict)
 
