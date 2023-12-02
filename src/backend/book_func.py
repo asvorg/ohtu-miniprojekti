@@ -38,7 +38,8 @@ def to_bibtex_book(author, editor, title, publisher, year, volume=0, number=0, s
             "doi", "issn", "isbn")
     try:
         for i, value in enumerate(input_str):
-            res+=f" {attr_text[i]} = {{{value}}},\n"
+            if value:
+                res+=f" {attr_text[i]} = {{{value}}},\n"
         res += "}"
     except NameError:
         pass
