@@ -36,6 +36,7 @@
     <a href="/add_article/{{ user }}" class="btn btn-primary mt-3">Lisää artikkeli</a>
     <a href="/add_book/{{ user }}" class="btn btn-primary mt-3">Lisää kirja</a>
     <a href="/add_mastersthesis/{{ user }}" class="btn btn-primary mt-3">Lisää gradu</a>
+    <a href="/list/{{ user }}" class="btn btn-primary mt-3">Muokkaa tai poista viitteitä</a>
 
     {% if error_message %}
     <div class="alert alert-danger" role="alert">
@@ -53,8 +54,6 @@
             </div>
         </div>
     {% endfor %}
-    
-    <a href="/list/{{ user }}" class="btn btn-primary mt-3">Muokkaa tai poista viitteitä</a>
 
 </div>
 
