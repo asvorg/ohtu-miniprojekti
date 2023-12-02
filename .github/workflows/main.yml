@@ -18,6 +18,14 @@ jobs:
           python-version: '3.10'
       - name: Install Poetry
         run: pip install poetry
+      - name: Install dependencies
+        run: poetry install
+      - name: Run tests
+        run: poetry run coverage run --branch -m pytest
+      - name: Coverage report
+        run: poetry run coverage xml
+      - name: Coverage report to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
       - name: Setup chromedriver
         uses: nanasess/setup-chromedriver@master
       - run: |
@@ -28,9 +36,3 @@ jobs:
         run: poetry install
       - name: Run robot tests
         run: bash run_robot_tests.sh
-      - name: Run tests
-        run: poetry run coverage run --branch -m pytest
-      - name: Coverage report
-        run: poetry run coverage xml
-      - name: Coverage report to Codecov
-        run: bash <(curl -s https://codecov.io/bash)
