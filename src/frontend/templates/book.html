@@ -17,20 +17,16 @@
     </style>
     
 <div class="container mt-5">
-    <h1>Tallenna uusi kirja</h1>
-    <p class="font-weight-bold">Täytä lomake, {{ username }}!</p>
-    
-    <form action="/result_book" method="POST">
+    <form action="/result_book/{{ user }}" method="POST">
+
         {% if error_message %}
             <div class="alert alert-danger" role="alert">
                 {{ error_message }}
             </div>
         {% endif %}
 
-        <div class="form-group">
-            <label for="Käyttäjä">Käyttäjä:  </label>
-            <input type="text" class="form-control" name="Käyttäjä">
-        </div>
+        <h1>Tallenna uusi kirja</h1>
+        <p class="font-weight-bold">Täytä lomake, {{ user }}!</p>    
 
          <div class="form-group">
             <label for="Kirjoittaja">Kirjoittaja:</label>

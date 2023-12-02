@@ -29,15 +29,15 @@ def result_by_user(user):
 
     return render_template("result.html", user=user, articles=article)
 
-@app.route("/add_article")
-def add_article():
-    username = session.get("username", "Vieras")
-    return render_template("index.html", username=username)
+@app.route("/add_article/<user>/")
+def add_article(user):
+    user = session.get("username")
+    return render_template("index.html", user=user)
 
-@app.route("/result_article", methods=["POST"])
-def result_article():
+@app.route("/result_article/<user>/", methods=["POST"])
+def result_article(user):
     try:
-        user = request.form["Käyttäjä"]
+        user = session.get("username")
         author = request.form["Kirjoittaja"]
         title = request.form["Otsikko"]
         journal = request.form["Artikkeli"]
@@ -55,18 +55,17 @@ def result_article():
         return redirect(url_for("result_by_user", user=user))
 
     except ValueError as e:
-        return render_template("index.html", error_message=str(e))
+        return render_template("index.html", error_message=str(e), user=user)
 
+@app.route("/add_book/<user>/")
+def add_book(user):
+    user = session.get("username")
+    return render_template("book.html", user=user)
 
-@app.route("/add_book")
-def add_book():
-    username = session.get("username", "Vieras")
-    return render_template("book.html", username=username)
-
-@app.route("/result_book", methods=["POST"])
-def result_book():
+@app.route("/result_book/<user>/", methods=["POST"])
+def result_book(user):
     try:
-        user = request.form["Käyttäjä"]
+        user = session.get("username")
         author = request.form["Kirjoittaja"]
         editor = request.form["Editori"]
         title = request.form["Otsikko"]
@@ -91,17 +90,17 @@ def result_book():
         return redirect(url_for("result_by_user", user=user))
 
     except ValueError as e:
-        return render_template("book.html", error_message=str(e))
+        return render_template("book.html", error_message=str(e), user=user)
 
-@app.route("/add_mastersthesis")
-def add_mastersthesis():
-    username = session.get("username", "Vieras")
-    return render_template("mastersthesis.html", username=username)
+@app.route("/add_mastersthesis/<user>/")
+def add_mastersthesis(user):
+    user = session.get("username")
+    return render_template("mastersthesis.html", user=user)
 
-@app.route("/result_mastersthesis", methods=["POST"])
-def result_mastersthesis():
+@app.route("/result_mastersthesis/<user>/", methods=["POST"])
+def result_mastersthesis(user):
     try:
-        user = request.form["Käyttäjä"]
+        user = session.get("username")
         author = request.form["Kirjoittaja"]
         title = request.form["Otsikko"]
         school = request.form["Koulu"]
@@ -120,7 +119,7 @@ def result_mastersthesis():
         return redirect(url_for("result_by_user", user=user))
 
     except ValueError as e:
-        return render_template("mastersthesis.html", error_message=str(e))
+        return render_template("mastersthesis.html", error_message=str(e), user=user)
 
 @app.route("/search/<user>/", methods=["POST"])
 def search_result_by_cite_key(user):
@@ -178,7 +177,7 @@ def edit(user, cite_key):
         delete_article_by_cite_key(user, cite_key)
 
         # lisäys
-        user = request.form["Käyttäjä"]
+        user = session.get("username")
         author = request.form["Kirjoittaja"]
         title = request.form["Otsikko"]
         journal = request.form["Artikkeli"]
