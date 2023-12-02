@@ -1,6 +1,5 @@
 import requests
 from datetime import datetime
-# import article_func
 from backend import article_func
 
 def crawl_acm(url):

@@ -14,7 +14,6 @@ def read_user_input_book(author, editor, title, publisher,year, volume, number, 
         raise ValueError("Invalid year")
     author = author.title()
     editor = editor.title()
-    #title = title.title()
     publisher = publisher.title()
     author = author.strip()
     editor = editor.strip()
