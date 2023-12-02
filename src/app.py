@@ -251,8 +251,13 @@ def edit_mastersthesis(user, cite_key):
         month = request.form["Kuukausi"]
         note = request.form["Huomautus"]
         annote = request.form["Kommentti"]
+        tags = request.form["Tagit"]
+        if len(tags) > 0:
+            tags = tags.replace(" ", "").split(",")
+        else:
+            tags = None
         bibtex_masterthesis = to_bibtex_masterthesis(author, title, school, year, type, address, month, note, annote)
-        add_mastersthesis_to_db(user, bibtex_masterthesis)
+        add_mastersthesis_to_db(user, bibtex_masterthesis, tags)
 
         return redirect("/list/"+user)
 

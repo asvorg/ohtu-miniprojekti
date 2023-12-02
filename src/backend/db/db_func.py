@@ -138,7 +138,7 @@ def add_book_to_db(user, book, tags=None):
 
     collection.insert_one(book_dict)
 
-def add_mastersthesis_to_db(user, mastersthesis):
+def add_mastersthesis_to_db(user, mastersthesis, tags=None):
     '''Add a master's thesis to the database'''
     collection, db, client, uri = connect_to_db()
     mastersthesis_dict = splice_mastersthesis(mastersthesis)
@@ -146,6 +146,8 @@ def add_mastersthesis_to_db(user, mastersthesis):
     #add to database
     mastersthesis_dict["user"] = user
     mastersthesis_dict["cite_key"] = cite_key
+    if tags:
+        mastersthesis_dict["tags"] = tags
 
     collection.insert_one(mastersthesis_dict)
 
