@@ -25,6 +25,14 @@
         <button type="submit" class="btn btn-primary ml-2">Etsi</button>
     </form>
 
+    <form action="/search/{{ user }}/tag/" method="post" class="mb-4 d-flex justify-content-end">
+        <div class="form-group ml-auto">
+            <label for="tag">Hae tagilla:</label>
+            <input type="text" name="Tagi" class="form-control" id="tag" placeholder="tagi">
+        </div>
+        <button type="submit" class="btn btn-primary ml-2">Etsi</button>
+    </form>
+
     <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-primary ml-2" onclick="window.location.href='/add_article'">Lisää artikkeli</button>
         <button type="button" class="btn btn-primary ml-2" onclick="window.location.href='/add_book'">Lisää kirja</button>

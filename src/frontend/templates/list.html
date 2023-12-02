@@ -33,6 +33,12 @@
             <th>
                 Title
             </th>
+            <td>
+
+            </td>
+            <td>
+                Tagit
+            </td>
         </tr>
         {% for cite in cites %}
         <tr>
@@ -50,6 +56,11 @@
                 <a href="/edit/{{cite.user}}/{{cite.cite_key}}" class="btn btn-primary">Muokkaa</a>
                 {% endif %}
                 <a href="/delete/{{cite.user}}/{{cite.cite_key}}" class="btn btn-primary">Poista</a>
+            </td>
+            <td>
+                {% for tag in cite.tags %}
+                <a href="/list/{{cite.user}}/tag/{{tag}}">{{tag}}</a>{% if not loop.last %}, {% endif %}
+                {% endfor %}
             </td>
         </tr>
         {% endfor %}

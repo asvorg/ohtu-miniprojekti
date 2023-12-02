@@ -102,6 +102,11 @@ def get_article_from_db_by_year(user, year):
     for article in collection.find({"user": user, "year": year}):
         return article
 
+def get_articles_from_db_by_tag(user=None, tag=None):
+    collection, db, client,uri = connect_to_db()
+    articles = list(collection.find({"user": user, "tags": {"$in": [tag]}}))
+    return articles
+
 def delete_article_by_cite_key(user,cite_key):
     '''Delete an article from the database'''
     collection, db, client,uri = connect_to_db()

@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import Flask, render_template, request, redirect, url_for, session
 from backend.article_func import to_bibtex_article, from_db_form_to_bibtex, detect_type
-from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, add_mastersthesis_to_db, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key, add_book_to_db, get_articles_from_db_by_cite_key
+from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, add_mastersthesis_to_db, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key, add_book_to_db, get_articles_from_db_by_cite_key, get_articles_from_db_by_tag
 from backend.book_func import to_bibtex_book
 from backend.masterthesis_func import to_bibtex_masterthesis
 
@@ -121,7 +121,6 @@ def result_masterthesis():
             
     except ValueError as e:
         return render_template("masterthesis.html", error_message=str(e))
-    
 
 @app.route("/search/<user>/", methods=["POST"])
 def search_result_by_cite_key(user):
@@ -136,6 +135,18 @@ def search_result_by_cite_key(user):
     except Exception as e:
         return render_template("result.html", user=user, error_message=str(e))
 
+@app.route("/search/<user>/tag/", methods=["POST"])
+def search_result_by_tag(user):
+    try:
+        tag = request.form["Tagi"]
+        get_references = get_articles_from_db_by_tag(user, tag)
+        references = []
+        for reference in get_references:
+            bib_res = from_db_form_to_bibtex(reference)
+            references.append(bib_res)
+        return render_template("search.html", user=user, tag=tag, references=references)
+    except Exception as e:
+        return render_template("result.html", user=user, error_message=str(e))
 
 @app.route("/list/")
 def list_without_user():
@@ -144,6 +155,14 @@ def list_without_user():
 @app.route("/list/<user>")
 def list(user):
     cites = get_article_from_db_by_user(user)
+    cite_types = {}
+    for cite in cites:
+        cite_types[cite["cite_key"]] = detect_type(cite)
+    return render_template("list.html", cites=cites, user=user, cite_types=cite_types)
+
+@app.route("/list/<user>/tag/<tag>/")
+def list_by_tag(user, tag):
+    cites = get_articles_from_db_by_tag(user, tag=tag)
     cite_types = {}
     for cite in cites:
         cite_types[cite["cite_key"]] = detect_type(cite)
