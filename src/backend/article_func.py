@@ -1,7 +1,7 @@
 '''Functions for handling article information'''
 import datetime
 from .book_func import to_bibtex_book
-from .masterthesis_func import to_bibtex_masterthesis
+from .mastersthesis_func import to_bibtex_mastersthesis
 
 def read_user_input_article(author, title, journal, year, volume=0, number=0, pages=0, month=0, note=""):
     '''Read user input and return a tuple of the paper's information'''
@@ -171,7 +171,7 @@ def from_db_form_to_bibtex(input_dict):
         else:
             annote = ""
 
-        return to_bibtex_masterthesis(author, title, school, year, type, address, month, note, annote)
+        return to_bibtex_mastersthesis(author, title, school, year, type, address, month, note, annote)
 
 
 

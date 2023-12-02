@@ -3,7 +3,7 @@ from flask import render_template, request, redirect, url_for, session
 from backend.article_func import to_bibtex_article, from_db_form_to_bibtex, detect_type
 from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, add_mastersthesis_to_db, delete_article_by_cite_key, get_article_from_db_by_cite_key, add_book_to_db, get_articles_from_db_by_cite_key, get_articles_from_db_by_tag
 from backend.book_func import to_bibtex_book
-from backend.masterthesis_func import to_bibtex_masterthesis
+from backend.mastersthesis_func import to_bibtex_mastersthesis
 
 app = Flask(__name__, template_folder='frontend/templates')
 app.secret_key = '9876543dd'
@@ -93,13 +93,13 @@ def result_book():
     except ValueError as e:
         return render_template("book.html", error_message=str(e))
 
-@app.route("/add_masterthesis")
-def add_masterthesis():
+@app.route("/add_mastersthesis")
+def add_mastersthesis():
     username = session.get("username", "Vieras")
-    return render_template("masterthesis.html", username=username)
+    return render_template("mastersthesis.html", username=username)
 
-@app.route("/result_masterthesis", methods=["POST"])
-def result_masterthesis():
+@app.route("/result_mastersthesis", methods=["POST"])
+def result_mastersthesis():
     try:
         user = request.form["Käyttäjä"]
         author = request.form["Kirjoittaja"]
@@ -113,14 +113,14 @@ def result_masterthesis():
         note = request.form["Huomautus"]
         annote = request.form["Kommentti"]
 
-        bibtex_masterthesis = to_bibtex_masterthesis(author, title, school, year, type, address, month, note, annote)
+        bibtex_mastersthesis = to_bibtex_mastersthesis(author, title, school, year, type, address, month, note, annote)
 
-        add_mastersthesis_to_db(user, bibtex_masterthesis)
+        add_mastersthesis_to_db(user, bibtex_mastersthesis)
 
         return redirect(url_for("result_by_user", user=user))
 
     except ValueError as e:
-        return render_template("masterthesis.html", error_message=str(e))
+        return render_template("mastersthesis.html", error_message=str(e))
 
 @app.route("/search/<user>/", methods=["POST"])
 def search_result_by_cite_key(user):
@@ -152,7 +152,7 @@ def search_result_by_tag(user):
 def list_without_user():
     return "Kirjoita käyttäjän nimi osoitteen loppuun: .../list/<käyttäjän nimi>"
 
-@app.route("/list/<user>")
+@app.route("/list/<user>/")
 def list(user):
     cites = get_article_from_db_by_user(user)
     cite_types = {}
@@ -172,7 +172,7 @@ def list_by_tag(user, tag):
 def edit(user, cite_key):
     if request.method == "GET":
         cite = get_article_from_db_by_cite_key(user, cite_key)
-        return render_template("edit.html", cite=cite) ##
+        return render_template("edit.html", cite=cite)
     if request.method == "POST":
         # poisto
         delete_article_by_cite_key(user, cite_key)
@@ -256,8 +256,8 @@ def edit_mastersthesis(user, cite_key):
             tags = tags.replace(" ", "").split(",")
         else:
             tags = None
-        bibtex_masterthesis = to_bibtex_masterthesis(author, title, school, year, type, address, month, note, annote)
-        add_mastersthesis_to_db(user, bibtex_masterthesis, tags)
+        bibtex_mastersthesis = to_bibtex_mastersthesis(author, title, school, year, type, address, month, note, annote)
+        add_mastersthesis_to_db(user, bibtex_mastersthesis, tags)
 
         return redirect("/list/"+user)
 

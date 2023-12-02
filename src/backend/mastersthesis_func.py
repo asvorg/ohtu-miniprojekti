@@ -3,7 +3,7 @@ import datetime
 
 
 
-def read_user_input_masterthesis(author, title, school, year, type, address, month, note, annote):
+def read_user_input_mastersthesis(author, title, school, year, type, address, month, note, annote):
     '''Read user input and return a tuple of the book's information'''
     if not author or not title or not school or not year:
         raise ValueError("Author, title, school and year are required fields")
@@ -26,11 +26,11 @@ def generate_cite_key(author, year):
     author = author.lower()
     return author.split(" ")[-1] + ":" + str(year)
 
-def to_bibtex_masterthesis(author, title, school, year, type, address, month, note, annote):
+def to_bibtex_mastersthesis(author, title, school, year, type, address, month, note, annote):
     '''Convert a book's information to bibtex format'''
     cite_key = generate_cite_key(author, year)
-    res = "@masterthesis{" + cite_key + ",\n"
-    input_str = read_user_input_masterthesis(author, title, school, year, type, address, month, note, annote)
+    res = "@mastersthesis{" + cite_key + ",\n"
+    input_str = read_user_input_mastersthesis(author, title, school, year, type, address, month, note, annote)
     #add to bibtext, handle empty fields with match case
     try:
         for i, value in enumerate(input_str):
