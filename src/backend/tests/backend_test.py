@@ -13,12 +13,12 @@ class TestArticleFunc(unittest.TestCase):
         #print("Set up goes here")
 
     def test_generate_cite_key(self):
-        
+
         author = "Matti Meikäläinen"
         year = 2020
         tulos = article_func.generate_cite_key(author, year)
         self.assertEqual(tulos, "meikäläinen:2020")
-    
+
     def test_to_bibtex_article(self):
         author = "Matti Meikäläinen"
         title = "Tämä on otsikko"
@@ -58,7 +58,7 @@ class TestDbFunc(unittest.TestCase):
     def setUp(self):
         pass
         #print("Set up goes here")
-    
+
     def test_add_article_to_db(self):
         author = "Matti Pytest"
         title = "Tämä on otsikko"
@@ -112,7 +112,7 @@ class TestDbFunc(unittest.TestCase):
         self.assertEqual(tulos["cite_key"], "pytest:2020")
         self.assertEqual(tulos["user"], "testiuser")
         db_func.delete_article_by_cite_key("testiuser", "pytest:2020")
-    
+
     def test_get_articles_from_db_by_cite_key(self):
         author = "Matti Pytest"
         title = "Tämä on otsikko"
@@ -151,7 +151,7 @@ class TestBookFunc(unittest.TestCase):
         year = 2020
         tulos = book_func.generate_cite_key(author, year)
         self.assertEqual(tulos, "meikäläinen:2020")
-    
+
     def test_to_bibtex_book(self):
         author = "Matti Meikäläinen"
         editor = "Matti Meikäläinen"

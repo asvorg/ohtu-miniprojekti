@@ -91,9 +91,9 @@ def from_db_form_to_bibtex(input_dict):
             note = input_dict["note"]
         else:
             note = ""
-        
+
         return to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
-    
+
     elif type == "book":
         author = input_dict["author"]
         editor = input_dict["editor"]
@@ -141,9 +141,9 @@ def from_db_form_to_bibtex(input_dict):
             isbn = input_dict["isbn"]
         else:
             isbn = ""
-        
+
         return to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
-    
+
     elif type == "mastersthesis":
         author = input_dict["author"]
         title = input_dict["title"]
@@ -179,12 +179,11 @@ def detect_type(input_dict):
     '''Detect the type of the input'''
     if "journal" in input_dict:
         return "article"
-    elif "publisher" in input_dict:
+    if "publisher" in input_dict:
         return "book"
-    elif "school" in input_dict:
+    if "school" in input_dict:
         return "mastersthesis"
-    else:
-        return "misc"
+    return "misc"
 
 
 #author = "Matti Meikäläinen"

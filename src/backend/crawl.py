@@ -22,18 +22,18 @@ def crawl_acm(url):
 
     authors = text.split("Authors:")[1].split("/></a></div>")[0]
     authors = authors.split("aria-hidden=\"true\"/>")[1:]
-    
+
     for i in range(len(authors)):
         authors[i] = authors[i].split("</span>")[0]
         authors[i] = authors[i].strip()
-    
+
     published = text.split("<span class=\"CitationCoverDate\">")[1].split("</span>")[0]
 
     pages = text.split("<span class=\"epub-section__pagerange\">")[1].split("</span>")[0]
     pages = pages.replace("Pages ", "")
     pages = pages.strip()
     year = published.split(" ")[-1]
-    
+
     return title, journal, abstract, authors, published, pages, year
 
 def get_by_doi(doi):

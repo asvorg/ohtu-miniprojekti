@@ -1,12 +1,12 @@
 from flask import Flask
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import render_template, request, redirect, url_for, session
 from backend.article_func import to_bibtex_article, from_db_form_to_bibtex, detect_type
-from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, add_mastersthesis_to_db, delete_article_by_cite_key, get_article_from_db_by_cite_key, edit_article_by_cite_key, add_book_to_db, get_articles_from_db_by_cite_key, get_articles_from_db_by_tag
+from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, add_mastersthesis_to_db, delete_article_by_cite_key, get_article_from_db_by_cite_key, add_book_to_db, get_articles_from_db_by_cite_key, get_articles_from_db_by_tag
 from backend.book_func import to_bibtex_book
 from backend.masterthesis_func import to_bibtex_masterthesis
 
 app = Flask(__name__, template_folder='frontend/templates')
-app.secret_key = '9876543dd' 
+app.secret_key = '9876543dd'
 
 @app.route("/", methods=["GET", "POST"])
 def signin():
@@ -21,17 +21,17 @@ def signin():
 @app.route("/result/<user>/")
 def result_by_user(user):
     articles = get_article_from_db_by_user(user)
-    
+
     article = []
     for a in articles:
         bib_res = from_db_form_to_bibtex(a)
         article.append(bib_res)
-    
+
     return render_template("result.html", user=user, articles=article)
 
 @app.route("/add_article")
 def add_article():
-    username = session.get("username", "Vieras") 
+    username = session.get("username", "Vieras")
     return render_template("index.html", username=username)
 
 @app.route("/result_article", methods=["POST"])
@@ -53,14 +53,14 @@ def result_article():
         add_article_to_db(user, bibtex_result)
 
         return redirect(url_for("result_by_user", user=user))
-            
+
     except ValueError as e:
         return render_template("index.html", error_message=str(e))
 
 
 @app.route("/add_book")
 def add_book():
-    username = session.get("username", "Vieras") 
+    username = session.get("username", "Vieras")
     return render_template("book.html", username=username)
 
 @app.route("/result_book", methods=["POST"])
@@ -85,19 +85,19 @@ def result_book():
         isbn = request.form["Isbn"]
 
         bibtex_book = to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, pages, month, note, doi, issn, isbn)
-        
+
         add_book_to_db(user, bibtex_book)
 
         return redirect(url_for("result_by_user", user=user))
-            
+
     except ValueError as e:
         return render_template("book.html", error_message=str(e))
-    
+
 @app.route("/add_masterthesis")
 def add_masterthesis():
-    username = session.get("username", "Vieras") 
+    username = session.get("username", "Vieras")
     return render_template("masterthesis.html", username=username)
-    
+
 @app.route("/result_masterthesis", methods=["POST"])
 def result_masterthesis():
     try:
@@ -114,11 +114,11 @@ def result_masterthesis():
         annote = request.form["Kommentti"]
 
         bibtex_masterthesis = to_bibtex_masterthesis(author, title, school, year, type, address, month, note, annote)
-        
+
         add_mastersthesis_to_db(user, bibtex_masterthesis)
 
         return redirect(url_for("result_by_user", user=user))
-            
+
     except ValueError as e:
         return render_template("masterthesis.html", error_message=str(e))
 
@@ -197,7 +197,7 @@ def edit(user, cite_key):
         add_article_to_db(user, bibtex_result, tags)
 
         return redirect("/list/"+user)
-    
+
 @app.route("/edit_book/<user>/<cite_key>/", methods=["GET", "POST"])
 def edit_book(user, cite_key):
     if request.method == "GET":
@@ -215,7 +215,7 @@ def edit_book(user, cite_key):
         year = int(request.form["Julkaisuvuosi"])
         volume = int(request.form["Vuosikerta"]) if request.form["Vuosikerta"] else 0
         number = int(request.form["Numero"]) if request.form["Numero"] else 0
-        pages = int(request.form["Sivumäärä"]) if request.form["Sivumäärä"] else 0 # pages ei tallennu tietokantaan!?
+        #pages = int(request.form["Sivumäärä"]) if request.form["Sivumäärä"] else 0 # pages ei tallennu tietokantaan!?
         month = request.form["Kuukausi"]
         series = request.form["Sarja"]
         address = request.form["Osoite"]
@@ -233,7 +233,7 @@ def edit_book(user, cite_key):
         add_book_to_db(user, bibtex_book, tags)
 
         return redirect("/list/"+user)
-    
+
 @app.route("/edit_mastersthesis/<user>/<cite_key>/", methods=["GET", "POST"])
 def edit_mastersthesis(user, cite_key):
     if request.method == "GET":

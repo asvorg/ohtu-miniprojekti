@@ -19,8 +19,8 @@ def read_user_input_masterthesis(author, title, school, year, type, address, mon
     note = note.strip()
     annote = annote.strip()
 
-    return author, title, school, year, type, address, month, note, annote  
-    
+    return author, title, school, year, type, address, month, note, annote
+
 def generate_cite_key(author, year):
     '''Generate a cite key for a book'''
     author = author.lower()
@@ -56,4 +56,3 @@ def to_bibtex_masterthesis(author, title, school, year, type, address, month, no
     except NameError:
         pass
     return res
-

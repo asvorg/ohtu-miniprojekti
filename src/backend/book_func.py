@@ -9,7 +9,7 @@ def read_user_input_book(author, editor, title, publisher,year, volume, number, 
     year = int(year)
     volume = int(volume)
     number = int(number)
-    
+
     if year < 0 or year > datetime.datetime.now().year:
         raise ValueError("Invalid year")
     author = author.title()
@@ -22,7 +22,7 @@ def read_user_input_book(author, editor, title, publisher,year, volume, number, 
     publisher = publisher.strip()
 
     return author, editor, title, publisher, year, volume, number, series, address, pages, month, note, doi, issn, isbn
-    
+
 def generate_cite_key(author, year):
     '''Generate a cite key for a book'''
     author = author.lower()
