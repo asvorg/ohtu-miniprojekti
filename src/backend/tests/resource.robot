@@ -4,7 +4,7 @@ Library  SeleniumLibrary
 
 *** Variables ***
 ${SERVER}  localhost:5000
-${DELAY}  0.5 seconds
+${DELAY}  0
 ${HOME_URL}  http://${SERVER}
 # ${LOGIN_URL}  http://${SERVER}/login
 # ${REGISTER_URL}  http://${SERVER}/register
@@ -15,8 +15,7 @@ Open And Configure Browser
     # ${options}  Evaluate  sys.modules['selenium.webdriver'].FirefoxOptions()  sys
     ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
     Call Method    ${options}    add_argument    --no-sandbox
-    # seuraava rivi on kommentoitu pois tässä vaiheessa
-    # Call Method  ${options}  add_argument  --headless
+    Call Method  ${options}  add_argument  --headless
     Open Browser  browser=chrome  options=${options}
     Set Selenium Speed  ${DELAY}
 
