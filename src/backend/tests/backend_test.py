@@ -6,6 +6,8 @@ from backend import book_func
 from backend import crawl
 from backend import mastersthesis_func
 from backend.db import db_func
+import pytest
+
 
 class TestArticleFunc(unittest.TestCase):
     def setUp(self):
@@ -201,23 +203,31 @@ class TestMastersthesisFunc(unittest.TestCase):
         pass
         #print("Set up goes here")
 
+    def test_read_user_input_mastersthesis(self):
+        with pytest.raises(ValueError):
+            mastersthesis_func.read_user_input_mastersthesis("", "Title", "School", "2022", "", "", "", "", "")
+
+        with pytest.raises(ValueError):
+            mastersthesis_func.read_user_input_mastersthesis("Author", "Title", "School", "-1", "", "", "", "", "")
+
+        input_data = mastersthesis_func.read_user_input_mastersthesis("Author", "Title", "School", "2022", "", "", "", "", "")
+        assert input_data == ("Author", "Title", "School", 2022, "", "", "", "", "")
+
     def test_generate_cite_key(self):
-        author = "Matti Meikäläinen"
-        year = 2020
-        tulos = mastersthesis_func.generate_cite_key(author, year)
-        self.assertEqual(tulos, "meikäläinen:2020")
+        cite_key = mastersthesis_func.generate_cite_key("John Doe", 2022)
+        assert cite_key == "doe:2022"
 
     def test_to_bibtex_mastersthesis(self):
-        author = "Matti Meikäläinen"
-        title = "Tämä on otsikko"
-        school = "School of Schools"
-        year = 2020
-        address = 1
-        month = 2
-        note = "Tämä on huomautus"
-        author, title, school, year, address, month, note = mastersthesis_func.read_user_input_mastersthesis(author, title, school, year, address, month, note)
-        tulos = mastersthesis_func.to_bibtex_mastersthesis(author, title, school, year, address, month, note)
-        self.assertEqual(tulos, "@mastersthesis{meikäläinen:2020,\n author = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n school = {School Of Schools},\n year = {2020},\n address = {1},\n month = {2},\n note = {Tämä on huomautus},\n}")
+        bibtex_entry = mastersthesis_func.to_bibtex_mastersthesis("John Doe", "Thesis Title", "University", "2022", "", "", "", "", "")
+        expected_entry = (
+            "@mastersthesis{doe:2022,\n"
+            " author = {John Doe},\n"
+            " title = {Thesis Title},\n"
+            " school = {University},\n"
+            " year = {2022},\n"
+            "}"
+        )
+        assert bibtex_entry.strip() == expected_entry.strip()        
 
     if __name__ == '__main__':
         unittest.main()
