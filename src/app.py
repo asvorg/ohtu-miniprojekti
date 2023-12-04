@@ -4,6 +4,7 @@ from backend.article_func import to_bibtex_article, from_db_form_to_bibtex, dete
 from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, add_mastersthesis_to_db, delete_article_by_cite_key, get_article_from_db_by_cite_key, add_book_to_db, get_articles_from_db_by_cite_key, get_articles_from_db_by_tag
 from backend.book_func import to_bibtex_book
 from backend.mastersthesis_func import to_bibtex_mastersthesis
+from backend.crawl import crawl_acm, from_link_to_bibtex
 
 app = Flask(__name__, template_folder='frontend/templates')
 app.secret_key = '9876543dd'
@@ -120,6 +121,28 @@ def result_mastersthesis(user):
 
     except ValueError as e:
         return render_template("mastersthesis.html", error_message=str(e), user=user)
+
+@app.route("/add_acm/<user>/")
+def add_acm(user):
+    user = session.get("username")
+    return render_template("acm.html", user=user)
+
+@app.route("/result_acm/<user>/", methods=["POST"])
+def result_acm(user):
+    try:
+        user = session.get("username")
+        add_link = request.form["Linkki"]
+
+        acm_link = crawl_acm(add_link)
+
+        bibtex_acm_link = from_link_to_bibtex(acm_link)
+
+        return render_template("testi.html", bibtex_acm_link=bibtex_acm_link, user=user)
+
+        #return redirect(url_for("result_by_user", user=user))
+    
+    except ValueError as e:
+        return render_template("testi.html", e=str(e))
 
 @app.route("/search/<user>/", methods=["POST"])
 def search_result_by_cite_key(user):
