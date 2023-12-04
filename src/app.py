@@ -299,6 +299,9 @@ def delete(user, cite_key):
 
 @app.route("/download_bibtex/")
 def download_bibtex_file():
+    if not session.get("username"):
+        return "Et ole kirjautunut."
+    
     user = session["username"]
 
     articles = get_article_from_db_by_user(user)
