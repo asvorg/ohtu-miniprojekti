@@ -299,7 +299,7 @@ def delete(user, cite_key):
 
 @app.route("/download_bibtex/")
 def download_bibtex_file():
-    user = "Paava Lappanen" #session["username"]
+    user = session["username"]
 
     articles = get_article_from_db_by_user(user)
     article = []
