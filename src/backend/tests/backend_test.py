@@ -191,29 +191,33 @@ class TestCrawl(unittest.TestCase):
 
         title,journal,abstract,authors,published,pages,year = crawl.crawl_acm("https://dl.acm.org/doi/10.4230/LIPIcs.CCC.2023.1")
         self.assertEqual(title, "Separation of the Factorization Norm and Randomized Communication Complexity")
+        self.assertEqual(journal, "Proceedings of the conference on Proceedings of the 38th Computational Complexity Conference")
+        self.assertEqual(authors,["Tsun-Ming Cheung","Hamed Hatami","Kaave Hosseini","Morgan Shirley"])
+
+
 
 class TestMastersthesisFunc(unittest.TestCase):
     def setUp(self):
         pass
         #print("Set up goes here")
 
+    def test_generate_cite_key(self):
+        author = "Matti Meikäläinen"
+        year = 2020
+        tulos = mastersthesis_func.generate_cite_key(author, year)
+        self.assertEqual(tulos, "meikäläinen:2020")
 
-    #def test_from_db_form_to_bibtex(self):
-    #    article = {'_id': ('6564593af148d54793d0ed7f'), 
-    #               'author': 'Matti Meikäläinen', 
-    #               'title': 'Tämä on otsikko', 
-    #               'journal': 'Journal of Journals', 
-    #               'year': '2020', 
-    #               'volume': '1', 
-    #               'number': '2', 
-    #               'pages': '3', 
-    #               'month': '4', 
-    #               'user': 'Roope', 
-    #               'note': 'Tämä on huomautus', 
-    #               'cite_key': 'meikäläinen:2020'}
-    #    tulos = article_func.from_db_form_to_bibtex(article)
-    #    self.assertEqual(tulos, "@article{meikäläinen:2020,\n author = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n journal = {Journal Of Journals},\n year = {2020},\n volume = {1},\n number = {2},\n pages = {3},\n month = {4},\n note = {Tämä on huomautus},\n}")
-
+    def test_to_bibtex_mastersthesis(self):
+        author = "Matti Meikäläinen"
+        title = "Tämä on otsikko"
+        school = "School of Schools"
+        year = 2020
+        address = 1
+        month = 2
+        note = "Tämä on huomautus"
+        author, title, school, year, address, month, note = mastersthesis_func.read_user_input_mastersthesis(author, title, school, year, address, month, note)
+        tulos = mastersthesis_func.to_bibtex_mastersthesis(author, title, school, year, address, month, note)
+        self.assertEqual(tulos, "@mastersthesis{meikäläinen:2020,\n author = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n school = {School Of Schools},\n year = {2020},\n address = {1},\n month = {2},\n note = {Tämä on huomautus},\n}")
 
     if __name__ == '__main__':
         unittest.main()

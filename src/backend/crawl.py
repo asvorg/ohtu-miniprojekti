@@ -78,6 +78,12 @@ def acm_to_bibtex(author, title, journal, year, volume=0, number=0, pages=0, mon
         pass
     return res
 
+def from_link_to_bibtex(link):
+    '''Get a paper from a link and return a bibtex'''
+
+    title, journal, abstract, authors, published, pages, year = crawl_acm(link)
+    return acm_to_bibtex(authors, title, journal, year, pages=pages)
+
 
 title,journal,abstract,authors,published,pages,year = crawl_acm("https://dl.acm.org/doi/10.1145/2380552.2380613")
 print(acm_to_bibtex(authors, title, journal, year, pages=pages))
