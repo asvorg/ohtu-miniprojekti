@@ -16,7 +16,7 @@
     </style>
 
 <div class="container mt-5">
-    <form action="/result_article/{{ user }}" method="POST">
+    <form action="/result_acm/{{ user }}" method="POST">
     
         {% if error_message %}
             <div class="alert alert-danger" role="alert">
@@ -29,8 +29,8 @@
         <p class="font-weight-bold">Täytä lomake, {{ user }}!</p>
         
          <div class="form-group">
-            <label for="Kirjoittaja">Linkki:</label>
-            <input type="text" class="form-control" name="Kirjoittaja" required>
+            <label for="Linkki">Linkki:</label>
+            <input type="text" class="form-control" name="Linkki" required>
         </div>
 
         
