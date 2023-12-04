@@ -9,11 +9,9 @@ Go To Starting Page
     Starting Page Should Be Open
 
 Login With Correct Credentials
-    Set Username  kalle
+    Set Username  Roope
     Submit Credentials
     Login Should Succeed
-
-
 
 *** Keywords ***
 

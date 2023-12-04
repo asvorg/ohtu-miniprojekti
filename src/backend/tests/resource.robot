@@ -6,7 +6,7 @@ Library  SeleniumLibrary
 ${SERVER}  localhost:5000
 ${DELAY}  0
 ${HOME_URL}  http://${SERVER}
-# ${LOGIN_URL}  http://${SERVER}/login
+# ${article_URL}  http://${SERVER}/login
 # ${REGISTER_URL}  http://${SERVER}/register
 
 *** Keywords ***
@@ -28,8 +28,25 @@ Login Page Should Be Open
 Article Page Should Be Open
     Title Should Be  Artikkelit
 
+Result Page Should Be Open
+    Title Should Be  Lähdeviitteiden tallennussovellus
+
 Go To Login Page
     Go To  ${LOGIN_URL}
 
 Go To Starting Page
     Go To  ${HOME_URL}
+
+Login Should Succeed
+    Article Page Should Be Open
+
+Login With Correct Credentials
+    Set Username  Roope
+    Submit Credentials
+    Login Should Succeed
+
+List Page Should Be Open
+    Title Should Be  Viitelista
+
+Confirm Page Should Be Open
+    Title Should Be  Viite poistettu
