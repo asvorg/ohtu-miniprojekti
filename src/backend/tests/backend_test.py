@@ -177,6 +177,21 @@ class TestCrawl(unittest.TestCase):
         pass
         #print("Set up goes here")
 
+    def test_crawl_acm(self):
+
+        title,journal,abstract,authors,published,pages,year = crawl.crawl_acm("https://dl.acm.org/doi/10.1145/2380552.2380613")
+        self.assertEqual(title, "Three years of design-based research to reform a software engineering curriculum")
+        self.assertEqual(journal, "Proceedings of the 13th annual conference on Information technology education")
+        self.assertEqual(abstract, "Most of the research-oriented computer science departments provide software engineering education. Providing up-to-date software engineering education can be problematic, as practises used in modern software development companies have been developed in the industry and as such do not often reach teachers in university contexts. The danger, and often the unfortunate reality, is that institutions giving education in software engineering end up teaching the subject using outdated practices with technologies no longer in use. In this article we describe a three-year design-based research where the goal has been to design and reform a software engineering subtrack within our bachelor curriculum that would make it possible for the students to have strong up-to-date theoretical and practical skills in software engineering without a need to remove any of the existing theoretical aspects.")
+        self.assertEqual(authors, ['Matti Luukkainen', 'Arto Vihavainen', 'Thomas Vikberg'])
+        self.assertEqual(published, "11 October 2012")
+        self.assertEqual(pages, "209–214")
+        self.assertEqual(year, "2012")
+
+
+        title,journal,abstract,authors,published,pages,year = crawl.crawl_acm("https://dl.acm.org/doi/10.4230/LIPIcs.CCC.2023.1")
+        self.assertEqual(title, "Separation of the Factorization Norm and Randomized Communication Complexity")
+
 class TestMastersthesisFunc(unittest.TestCase):
     def setUp(self):
         pass
