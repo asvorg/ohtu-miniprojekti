@@ -127,6 +127,8 @@ def add_acm(user):
     user = session.get("username")
     return render_template("acm.html", user=user)
 
+
+# AAPO TÄÄLLLÄÄ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 @app.route("/result_acm/<user>/", methods=["POST"])
 def result_acm(user):
     try:
