@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, request, redirect, url_for, session
+from flask import render_template, request, redirect, url_for, session, send_file
 from backend.article_func import to_bibtex_article, from_db_form_to_bibtex, detect_type
 from backend.db.db_func import add_article_to_db, get_article_from_db_by_user, add_mastersthesis_to_db, delete_article_by_cite_key, get_article_from_db_by_cite_key, add_book_to_db, get_articles_from_db_by_cite_key, get_articles_from_db_by_tag
 from backend.book_func import to_bibtex_book
@@ -296,3 +296,21 @@ def delete(user, cite_key):
     if request.method == "POST":
         delete_article_by_cite_key(user, cite_key)
         return render_template("deleted.html", user=user)
+
+@app.route("/download_bibtex/")
+def download_bibtex_file():
+    user = "Paava Lappanen" #session["username"]
+
+    articles = get_article_from_db_by_user(user)
+    article = []
+    for a in articles:
+        bib_res = from_db_form_to_bibtex(a)
+        article.append(bib_res)
+
+    filename = "bibtex.bib"
+    file = open(filename, "w") # tiedosto src-kansioon, jos ei vielä ole
+    file.write("\n\n".join(article))
+    file.close()
+
+    return send_file(filename, as_attachment=True)
+ 
