@@ -1,4 +1,5 @@
 ![GHA workflow badge](https://github.com/asvorg/ohtu-miniprojekti/workflows/CI/badge.svg)
+[![codecov](https://codecov.io/gh/asvorg/ohtu-miniprojekti/graph/badge.svg?token=TDI48PGLLQ)](https://codecov.io/gh/asvorg/ohtu-miniprojekti)
 
 # ohtu-miniprojekti
 
