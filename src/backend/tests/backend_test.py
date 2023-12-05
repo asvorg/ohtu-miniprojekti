@@ -55,6 +55,11 @@ class TestArticleFunc(unittest.TestCase):
         self.assertEqual(pages, 3)
         self.assertEqual(month, 4)
         self.assertEqual(note, "Tämä on huomautus")
+    
+    def test_detect_type(self):
+        input_dict = {"author": "Matti Meikäläinen", "title": "Tämä on otsikko", "journal": "Journal of Journals", "year": 2020, "volume": 1, "number": 2, "pages": 3, "month": 4, "note": "Tämä on huomautus"}
+        tulos = article_func.detect_type(input_dict)
+        self.assertEqual(tulos, "article")
 
 class TestDbFunc(unittest.TestCase):
     def setUp(self):
@@ -190,13 +195,25 @@ class TestCrawl(unittest.TestCase):
         self.assertEqual(pages, "209–214")
         self.assertEqual(year, "2012")
 
-
         title,journal,abstract,authors,published,pages,year = crawl.crawl_acm("https://dl.acm.org/doi/10.4230/LIPIcs.CCC.2023.1")
         self.assertEqual(title, "Separation of the Factorization Norm and Randomized Communication Complexity")
         self.assertEqual(journal, "Proceedings of the conference on Proceedings of the 38th Computational Complexity Conference")
         self.assertEqual(authors,["Tsun-Ming Cheung","Hamed Hatami","Kaave Hosseini","Morgan Shirley"])
 
+    def test_from_link_to_bibtex(self):
+        tulos = crawl.from_link_to_bibtex("https://dl.acm.org/doi/10.1145/2380552.2380613")
+        self.assertEqual(tulos, "@article{luukkainen:2012,\n author = {Matti Luukkainen and Arto Vihavainen and Thomas Vikberg},\n title = {Three years of design-based research to reform a software engineering curriculum},\n journal = {Proceedings of the 13th annual conference on Information technology education},\n year = {2012},\n pages = {209–214},\n}")
 
+
+    def test_get_by_doi(self):
+        title,journal,abstract,authors,published,pages,year = crawl.get_by_doi("10.1145/2380552.2380613")
+        self.assertEqual(title, "Three years of design-based research to reform a software engineering curriculum")
+        self.assertEqual(journal, "Proceedings of the 13th annual conference on Information technology education")
+        self.assertEqual(abstract, "Most of the research-oriented computer science departments provide software engineering education. Providing up-to-date software engineering education can be problematic, as practises used in modern software development companies have been developed in the industry and as such do not often reach teachers in university contexts. The danger, and often the unfortunate reality, is that institutions giving education in software engineering end up teaching the subject using outdated practices with technologies no longer in use. In this article we describe a three-year design-based research where the goal has been to design and reform a software engineering subtrack within our bachelor curriculum that would make it possible for the students to have strong up-to-date theoretical and practical skills in software engineering without a need to remove any of the existing theoretical aspects.")
+        self.assertEqual(authors, ['Matti Luukkainen', 'Arto Vihavainen', 'Thomas Vikberg'])
+        self.assertEqual(published, "11 October 2012")
+        self.assertEqual(pages, "209–214")
+        self.assertEqual(year, "2012")
 
 class TestMastersthesisFunc(unittest.TestCase):
     def setUp(self):
