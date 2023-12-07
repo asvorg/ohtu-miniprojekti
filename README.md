@@ -24,4 +24,3 @@ Komento virtuaaliympäristössä: pytest
 ## Pylint-tarkistukset
 
 Komento juurihakemistosta: pylint src
- 

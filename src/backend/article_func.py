@@ -60,6 +60,9 @@ def to_bibtex_article(author, title, journal, year, volume=0, number=0, pages=0,
         pass
     return res
 
+def process_optional_input(input_dict, keys):
+    return {key: input_dict.get(key, "") for key in keys}
+
 def from_db_form_to_bibtex(input_dict):
     '''Convert from db form to bibtex, for article, book and mastersthesis'''
 
@@ -109,40 +112,12 @@ def from_db_form_to_bibtex(input_dict):
             number = input_dict["number"]
         else:
             number = 0
-        if "series" in input_dict:
-            series = input_dict["series"]
-        else:
-            series = ""
-        if "address" in input_dict:
-            address = input_dict["address"]
-        else:
-            address = ""
-        if "edition" in input_dict:
-            edition = input_dict["edition"]
-        else:
-            edition = ""
-        if "month" in input_dict:
-            month = input_dict["month"]
-        else:
-            month = ""
-        if "note" in input_dict:
-            note = input_dict["note"]
-        else:
-            note = ""
-        if "doi" in input_dict:
-            doi = input_dict["doi"]
-        else:
-            doi = ""
-        if "issn" in input_dict:
-            issn = input_dict["issn"]
-        else:
-            issn = ""
-        if "isbn" in input_dict:
-            isbn = input_dict["isbn"]
-        else:
-            isbn = ""
+        
+        optional_keys = ["series", "address", "edition", "month", "note", "doi", "issn", "isbn"]
+        optional_values = process_optional_input(input_dict, optional_keys)
 
-        return to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
+        return to_bibtex_book(author, editor, title, publisher, year, **optional_values)
+
 
     elif type == "mastersthesis":
         author = input_dict["author"]
