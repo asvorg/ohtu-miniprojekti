@@ -193,7 +193,7 @@ class TestBookFunc(unittest.TestCase):
         isbn = 9
         author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn = book_func.read_user_input_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
         tulos = book_func.to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
-        self.assertEqual(tulos, "@book{meikäläinen:2020,\n author = {Matti Meikäläinen},\n editor = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n publisher = {Publisher Of Publishers},\n year = {2020},\n volume = {1},\n number = {2},\n series = {3},\n address = {4},\n edition = {5},\n month = {6},\n note = {Tämä on huomautus},\n doi = {7},\n issn = {8},\n isbn = {9},\n}")
+        self.assertEqual(tulos, "@book{meikäläinen:2020,\n author = {Matti Meikäläinen},\n editor = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n publisher = {Publisher Of Publishers},\n year = {2020},\n volume = {1},\n number = {2},\n series = {3},\n address = {4},\n edition = {5},\n month = {6},\n note = {Tämä on huomautus},\n doi = {7},\n issn = {8},\n isbn = {9}\n}")
 
 class TestCrawl(unittest.TestCase):
     def setUp(self):
@@ -218,7 +218,7 @@ class TestCrawl(unittest.TestCase):
 
     def test_from_link_to_bibtex(self):
         tulos = crawl.from_link_to_bibtex("https://dl.acm.org/doi/10.1145/2380552.2380613")
-        self.assertEqual(tulos, "@article{luukkainen:2012,\n author = {Matti Luukkainen and Arto Vihavainen and Thomas Vikberg},\n title = {Three years of design-based research to reform a software engineering curriculum},\n journal = {Proceedings of the 13th annual conference on Information technology education},\n year = {2012},\n pages = {209–214},\n}")
+        self.assertEqual(tulos, "@article{luukkainen:2012,\n author = {Matti Luukkainen and Arto Vihavainen and Thomas Vikberg},\n title = {Three years of design-based research to reform a software engineering curriculum},\n journal = {Proceedings of the 13th annual conference on Information technology education},\n year = {2012},\n pages = {209–214}\n}")
 
 
     def test_get_by_doi(self):
@@ -257,7 +257,7 @@ class TestMastersthesisFunc(unittest.TestCase):
             " author = {John Doe},\n"
             " title = {Thesis Title},\n"
             " school = {University},\n"
-            " year = {2022},\n"
+            " year = {2022}\n"
             "}"
         )
         assert bibtex_entry.strip() == expected_entry.strip()     

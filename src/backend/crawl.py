@@ -73,6 +73,8 @@ def acm_to_bibtex(author, title, journal, year, volume=0, number=0, pages=0, mon
                 res += f" month = {{{value}}},\n"
             elif i == 8 and value:
                 res += f" note = {{{value}}},\n"
+        res = res[:-2]
+        res += f"\n"
         res += "}"
     except NameError:
         pass

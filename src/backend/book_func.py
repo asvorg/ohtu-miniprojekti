@@ -65,6 +65,8 @@ def to_bibtex_book(author, editor, title, publisher, year, volume=0, number=0, s
                 res += f" issn = {{{value}}},\n"
             elif i == 14 and value:
                 res += f" isbn = {{{value}}},\n"
+        res = res[:-2]
+        res += f"\n"
         res += "}"
     except NameError:
         pass
