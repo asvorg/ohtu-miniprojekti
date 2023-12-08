@@ -297,13 +297,8 @@ def delete(user, cite_key):
         delete_article_by_cite_key(user, cite_key)
         return render_template("deleted.html", user=user)
 
-@app.route("/download_bibtex/")
-def download_bibtex_file():
-    if not session.get("username"):
-        return "Et ole kirjautunut."
-    
-    user = session["username"]
-
+@app.route("/download_bibtex/<user>")
+def download_bibtex_file(user):
     articles = get_article_from_db_by_user(user)
     article = []
     for a in articles:
@@ -313,6 +308,21 @@ def download_bibtex_file():
     filename = "bibtex.bib"
     file = open(filename, "w") # tiedosto src-kansioon, jos ei vielä ole
     file.write("\n\n".join(article))
+    file.close()
+
+    return send_file(filename, as_attachment=True)
+
+@app.route("/download_bibtex/<user>/tag/<tag>/")
+def download_bibtex_file_by_tag(user, tag):
+    get_references = get_articles_from_db_by_tag(user, tag)
+    references = []
+    for reference in get_references:
+        bib_res = from_db_form_to_bibtex(reference)
+        references.append(bib_res)
+
+    filename = "bibtex.bib"
+    file = open(filename, "w") # tiedosto src-kansioon, jos ei vielä ole
+    file.write("\n\n".join(references))
     file.close()
 
     return send_file(filename, as_attachment=True)
