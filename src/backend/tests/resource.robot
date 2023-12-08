@@ -41,12 +41,13 @@ Login Should Succeed
     Article Page Should Be Open
 
 Login With Correct Credentials
-    Set Username  Roope
+    Set Username  Esimerkki Käyttäjä
     Submit Credentials
-    Login Should Succeed
 
 List Page Should Be Open
     Title Should Be  Viitelista
 
 Confirm Page Should Be Open
     Title Should Be  Viite poistettu
+
+

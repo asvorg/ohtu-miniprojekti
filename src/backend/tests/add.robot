@@ -6,42 +6,38 @@ Test Setup  Go To Starting Page
 
 *** Test Cases ***
 
-Search With Correct Cite
+Add Article
     Set Username  Esimerkki Käyttäjä
     Submit Credentials
-    Set Search Cite  esimerkkikirjoittaja:2023
-    Submit Search Cite
-    Cite Search Should Succeed With Article  @article{esimerkkikirjoittaja:2023,
+    Click Link  Lisää artikkeli
+    Set Author  Esimerkkikirjoittaja
+    Set Title  Esimerkki
+    Set Year  2023
+    Set Article  Esimerkkiartikkeli
+    Submit Article
+    Adding Article Should Succeed With Article  @article{esimerkkikirjoittaja:2023,
 
-Search Book With Correct Cite
+Add Book
     Set Username  Esimerkki Käyttäjä
     Submit Credentials
-    Set Search Cite  esimerkkikirjailija:2023
-    Submit Search Cite
-    Cite Search Should Succeed With Book  @book{esimerkkikirjailija:2023,
+    Click Link  Lisää kirja
+    Set Author  Esimerkkikirjailija
+    Set Editor  Esimerkki editori
+    Set Title  Esimerkki otsikko
+    Set Publisher  Esimerkki julkaisija
+    Set Year  2023
+    Submit Article
+    Adding Book Should Succeed With Book  @book{esimerkkikirjailija:2023,
 
-Search With Correct Tag
-    Set Username  Esimerkki Käyttäjä
-    Submit Credentials
-    Set Search Tag  tagi
-    Submit Search Tag
-    Tag Search Should Succeed With Article  @article{esimerkkikirjoittaja:2023,
-
-Delete Article
+Add Tag
     Set Username  Esimerkki Käyttäjä
     Submit Credentials
     Click Link  Muokkaa tai poista viitteitä
-    Click Link  Poista
-    Set Delete  Poista
-    Delete Should Succeed With Message  Viite on poistettu.
+    CLick Link  Muokkaa
+    Set Tag  tagi
+    Submit Tag
+    Adding Tag Should Succeed
 
-Delete Book
-    Set Username  Esimerkki Käyttäjä
-    Submit Credentials
-    Click Link  Muokkaa tai poista viitteitä
-    Click Link  Poista
-    Set Delete  Poista
-    Delete Should Succeed With Message  Viite on poistettu.
 
 *** Keywords ***
 
