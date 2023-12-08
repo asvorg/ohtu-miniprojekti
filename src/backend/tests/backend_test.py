@@ -153,6 +153,32 @@ class TestDbFunc(unittest.TestCase):
         self.assertEqual(tulos["user"], "testiuser")
         db_func.delete_article_by_cite_key("testiuser", "pytest:2020")
 
+    def test_splice_book(self):
+        author = "Matti Pytest"
+        editor = "Matti Pytest"
+        title = "Tämä on otsikko"
+        publisher = "Publisher of Publishers"
+        year = 2020
+        volume = 1
+        number = 2
+        series = 3
+        address = 4
+        edition = 5
+        month = 6
+        note = "Tämä on huomautus"
+        doi = 7
+        issn = 8
+        isbn = 9
+        author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn = book_func.read_user_input_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
+        tulos = book_func.to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
+        tulos = db_func.splice_book(tulos)
+
+        self.assertEqual(tulos["author"], "Matti Pytest")
+        self.assertEqual(tulos["editor"], "Matti Pytest")
+        self.assertEqual(tulos["title"], "Tämä on otsikko")
+        self.assertEqual(tulos["publisher"], "Publisher Of Publishers")
+
+
 class TestBookFunc(unittest.TestCase):
     def setUp(self):
         pass
@@ -249,7 +275,57 @@ class TestMastersthesisFunc(unittest.TestCase):
             " year = {2022},\n"
             "}"
         )
-        assert bibtex_entry.strip() == expected_entry.strip()        
+        assert bibtex_entry.strip() == expected_entry.strip()     
+
+    def test_splice_mastersthesis(self):
+        bibtex_entry = (
+            "@mastersthesis{doe:2022,\n"
+            " author = {John Doe},\n"
+            " title = {Thesis Title},\n"
+            " school = {University},\n"
+            " year = {2022},\n"
+            "}"
+        )
+        mastersthesis_dict = db_func.splice_mastersthesis(bibtex_entry)
+        assert mastersthesis_dict["author"] == "John Doe"
+        assert mastersthesis_dict["title"] == "Thesis Title"
+        assert mastersthesis_dict["school"] == "University"
+        assert mastersthesis_dict["year"] == "2022"
+    
+    def test_get_article_from_db_by_cite_key(self):
+        author = "Matti Pytest"
+        title = "Tämä on otsikko"
+        school = "School of Schools"
+        year = 2020
+        author, title, school, year, type, address, month, note, annote = mastersthesis_func.read_user_input_mastersthesis(author, title, school, year, "", "", "", "", "")
+        mastersthesis = mastersthesis_func.to_bibtex_mastersthesis(author, title, school, year, type, address, month, note, annote)
+        db_func.add_mastersthesis_to_db("testiuser", mastersthesis)
+        tulos = db_func.get_articles_from_db_by_cite_key("testiuser", "pytest:2020")
+        self.assertEqual(tulos["author"], "Matti Pytest")
+        self.assertEqual(tulos["title"], "Tämä on otsikko")
+        self.assertEqual(tulos["school"], "School Of Schools")
+        self.assertEqual(tulos["year"], "2020")
+        self.assertEqual(tulos["cite_key"], "pytest:2020")
+        self.assertEqual(tulos["user"], "testiuser")
+        db_func.delete_mastersthesis_by_cite_key("testiuser", "pytest:2020")
+    
+    def test_get_article_from_db_by_author(self):
+        author = "Matti Pytest"
+        title = "Tämä on otsikko"
+        school = "School of Schools"
+        year = 2020
+        author, title, school, year, type, address, month, note, annote = mastersthesis_func.read_user_input_mastersthesis(author, title, school, year, "", "", "", "", "")
+        mastersthesis = mastersthesis_func.to_bibtex_mastersthesis(author, title, school, year, type, address, month, note, annote)
+        db_func.add_mastersthesis_to_db("testiuser", mastersthesis)
+        lista = db_func.get_mastersthesis_from_db_by_author("testiuser", "Matti Pytest")
+        tulos = lista[0]
+        self.assertEqual(tulos["author"], "Matti Pytest")
+        self.assertEqual(tulos["title"], "Tämä on otsikko")
+        self.assertEqual(tulos["school"], "School Of Schools")
+        self.assertEqual(tulos["year"], "2020")
+        self.assertEqual(tulos["cite_key"], "pytest:2020")
+        self.assertEqual(tulos["user"], "testiuser")
+        db_func.delete_mastersthesis_by_cite_key("testiuser", "pytest:2020")
 
     if __name__ == '__main__':
         unittest.main()
