@@ -7,15 +7,15 @@
 
 [Linkki testikattavuusraporttin](https://github.com/asvorg/ohtu-miniprojekti/blob/main/dokumentaatio/testikattavuusraportti2.png)
 
-
 Definition of done = "Vaatimus on analysoitu, suunniteltu, ohjelmoitu, testattu, testaus automatisoitu, dokumentoitu, integroitu muuhun ohjelmistoon ja viety tuotantoympäristöön."
 
 ## Käynnistysohjeet
-- Kloonaa repositorio koneellesi ja siirry sen juurikansioon
-- Asenna riippuvuudet: poetry install
-- Aktivoi virtuaaliympäristö: poetry shell
-- Siirry kansioon src
-- Käynnistä sovellus: flask run
+
+-   Kloonaa repositorio koneellesi ja siirry sen juurikansioon
+-   Asenna riippuvuudet: poetry install
+-   Aktivoi virtuaaliympäristö: poetry shell
+-   Siirry kansioon src
+-   Käynnistä sovellus: flask run
 
 ## Testit
 
