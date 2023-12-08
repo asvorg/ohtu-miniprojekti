@@ -69,12 +69,12 @@ class TestArticleFunc(unittest.TestCase):
     def test_from_db_form_to_bibtex_book(self):
         input_dict = {"author": "Matti Meikäläinen", "editor": "Matti Meikäläinen", "title": "Tämä on otsikko", "publisher": "Publisher of Publishers", "year": 2020, "volume": 1, "number": 2, "series": 3, "address": 4, "edition": 5, "month": 6, "note": "Tämä on huomautus", "doi": 7, "issn": 8, "isbn": 9}
         tulos = article_func.from_db_form_to_bibtex(input_dict)
-        self.assertEqual(tulos, "@book{meikäläinen:2020,\n author = {Matti Meikäläinen},\n editor = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n publisher = {Publisher Of Publishers},\n year = {2020},\n volume = {1},\n number = {2},\n series = {3},\n address = {4},\n edition = {5},\n month = {6},\n note = {Tämä on huomautus},\n doi = {7},\n issn = {8},\n isbn = {9},\n}")
+        self.assertEqual(tulos, "@book{meikäläinen:2020,\n author = {Matti Meikäläinen},\n editor = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n publisher = {Publisher Of Publishers},\n year = {2020},\n volume = {1},\n number = {2},\n series = {3},\n address = {4},\n edition = {5},\n month = {6},\n note = {Tämä on huomautus},\n doi = {7},\n issn = {8},\n isbn = {9}\n}")
 
     def test_from_db_form_to_bibtex_masterthesis(self):
         input_dict = {"author": "Matti Meikäläinen", "title": "Tämä on otsikko", "school": "University", "year": 2020, "type": "", "address": "", "month": "", "note": "", "annote": ""}
         tulos = article_func.from_db_form_to_bibtex(input_dict)
-        self.assertEqual(tulos, "@mastersthesis{meikäläinen:2020,\n author = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n school = {University},\n year = {2020},\n}")
+        self.assertEqual(tulos, "@mastersthesis{meikäläinen:2020,\n author = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n school = {University},\n year = {2020}\n}")
 
 class TestDbFunc(unittest.TestCase):
     def setUp(self):
@@ -268,7 +268,7 @@ class TestMastersthesisFunc(unittest.TestCase):
             " author = {John Doe},\n"
             " title = {Thesis Title},\n"
             " school = {University},\n"
-            " year = {2022},\n"
+            " year = {2022}\n"
             "}"
         )
         mastersthesis_dict = db_func.splice_mastersthesis(bibtex_entry)
