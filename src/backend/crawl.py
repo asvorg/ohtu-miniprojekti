@@ -33,6 +33,9 @@ def crawl_acm(url):
     pages = pages.strip()
     year = published.split(" ")[-1]
 
+    if type(authors) == list:
+        authors = ", ".join(authors)
+
     return title, journal, abstract, authors, published, pages, year
 
 def get_by_doi(doi):

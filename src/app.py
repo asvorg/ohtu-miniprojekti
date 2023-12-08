@@ -135,9 +135,9 @@ def result_acm(user):
         user = session.get("username")
         add_link = request.form["Linkki"]
 
-        acm_link = crawl_acm(add_link)
+        #acm_link = crawl_acm(add_link)
 
-        bibtex_acm_link = from_link_to_bibtex(acm_link)
+        bibtex_acm_link = from_link_to_bibtex(add_link)
 
         return render_template("testi.html", bibtex_acm_link=bibtex_acm_link, user=user)
 
