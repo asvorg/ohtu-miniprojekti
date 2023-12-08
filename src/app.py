@@ -297,13 +297,8 @@ def delete(user, cite_key):
         delete_article_by_cite_key(user, cite_key)
         return render_template("deleted.html", user=user)
 
-@app.route("/download_bibtex/")
-def download_bibtex_file():
-    if not session.get("username"):
-        return "Et ole kirjautunut."
-    
-    user = session["username"]
-
+@app.route("/download_bibtex/<user>")
+def download_bibtex_file(user):
     articles = get_article_from_db_by_user(user)
     article = []
     for a in articles:
