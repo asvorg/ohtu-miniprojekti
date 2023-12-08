@@ -9,6 +9,7 @@ Test Setup  Go To Starting Page
 Add Article
     Set Username  Esimerkki Käyttäjä
     Submit Credentials
+    Click Link  Lisää viite
     Click Link  Lisää artikkeli
     Set Author  Esimerkkikirjoittaja
     Set Title  Esimerkki
@@ -20,6 +21,7 @@ Add Article
 Add Book
     Set Username  Esimerkki Käyttäjä
     Submit Credentials
+    Click Link  Lisää viite
     Click Link  Lisää kirja
     Set Author  Esimerkkikirjailija
     Set Editor  Esimerkki editori
