@@ -21,6 +21,7 @@
     
     {% if tag %}
         <h2 class="card-title">Viitteet tagilla: '{{ tag }}'</h2>
+        <p><a href="/download_bibtex/{{ user }}/tag/{{ tag }}">Lataa bibtex</a></p>
     {% else %}
         <h2 class="card-title">Viitteet hakusanalla: '{{ cite_key }}'</h2>
     {% endif %}

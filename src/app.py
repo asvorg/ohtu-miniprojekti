@@ -311,4 +311,19 @@ def download_bibtex_file(user):
     file.close()
 
     return send_file(filename, as_attachment=True)
+
+@app.route("/download_bibtex/<user>/tag/<tag>/")
+def download_bibtex_file_by_tag(user, tag):
+    get_references = get_articles_from_db_by_tag(user, tag)
+    references = []
+    for reference in get_references:
+        bib_res = from_db_form_to_bibtex(reference)
+        references.append(bib_res)
+
+    filename = "bibtex.bib"
+    file = open(filename, "w") # tiedosto src-kansioon, jos ei vielä ole
+    file.write("\n\n".join(references))
+    file.close()
+
+    return send_file(filename, as_attachment=True)
  
