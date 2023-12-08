@@ -33,7 +33,7 @@ class TestArticleFunc(unittest.TestCase):
         note = "Tämä on huomautus"
         author, title, journal, year, volume, number, pages, month, note = article_func.read_user_input_article(author, title, journal, year, volume, number, pages, month, note)
         tulos = article_func.to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
-        self.assertEqual(tulos, "@article{meikäläinen:2020,\n author = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n journal = {Journal Of Journals},\n year = {2020},\n volume = {1},\n number = {2},\n pages = {3},\n month = {4},\n note = {Tämä on huomautus},\n}")
+        self.assertEqual(tulos, "@article{meikäläinen:2020,\n author = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n journal = {Journal Of Journals},\n year = {2020},\n volume = {1},\n number = {2},\n pages = {3},\n month = {4},\n note = {Tämä on huomautus}\n}")
 
     def test_read_user_input_article(self):
         author = "Matti Meikäläinen"
@@ -64,7 +64,7 @@ class TestArticleFunc(unittest.TestCase):
     def test_from_db_to_bibtex(self):
         input_dict = {"author": "Matti Meikäläinen", "title": "Tämä on otsikko", "journal": "Journal of Journals", "year": 2020, "volume": 1, "number": 2, "pages": 3, "month": 4, "note": "Tämä on huomautus"}
         tulos = article_func.from_db_form_to_bibtex(input_dict)
-        self.assertEqual(tulos, "@article{meikäläinen:2020,\n author = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n journal = {Journal Of Journals},\n year = {2020},\n volume = {1},\n number = {2},\n pages = {3},\n month = {4},\n note = {Tämä on huomautus},\n}")
+        self.assertEqual(tulos, "@article{meikäläinen:2020,\n author = {Matti Meikäläinen},\n title = {Tämä on otsikko},\n journal = {Journal Of Journals},\n year = {2020},\n volume = {1},\n number = {2},\n pages = {3},\n month = {4},\n note = {Tämä on huomautus}\n}")
 
 class TestDbFunc(unittest.TestCase):
     def setUp(self):
