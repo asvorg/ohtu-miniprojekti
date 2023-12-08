@@ -1,74 +1,150 @@
 <!DOCTYPE html>
 <html lang="fi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Artikkelit</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<title>Artikkelit</title>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		/>
+	</head>
+	<body>
+		<style>
+			body {
+				background-color: #d1d1e0;
+			}
+		</style>
 
-    <style>
-        body {
-            background-color: #d1d1e0;
-        }
+		<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+			<button
+				class="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbar"
+				aria-controls="#navbar"
+				aria-expanded="false"
+				aria-label="Avaa navigaatio"
+			>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbar">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a href="/result/{{ user }}" class="nav-link"
+							>Viitteet</a
+						>
+					</li>
+					<li class="nav-item dropdown">
+						<a
+							class="nav-link dropdown-toggle"
+							id="dropdown01"
+							href="#"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
+							>Lisää viite</a
+						>
+						<div class="dropdown-menu" aria-labelledby="dropdown01">
+							<a
+								href="/add_article/{{ user }}"
+								class="dropdown-item"
+								>Lisää artikkeli</a
+							>
+							<a href="/add_book/{{ user }}" class="dropdown-item"
+								>Lisää kirja</a
+							>
+							<a
+								href="/add_mastersthesis/{{ user }}"
+								class="dropdown-item"
+								>Lisää gradu</a
+							>
+							<a href="/add_acm/{{ user }}" class="dropdown-item"
+								>Lisää linkki</a
+							>
+						</div>
+					</li>
 
-        
-    </style>
+					<li class="nav-item">
+						<a href="/list/{{ user }}" class="nav-link"
+							>Muokkaa tai poista viitteitä</a
+						>
+					</li>
+					<li class="nav-item">
+						<a href="/" class="nav-link">Vaihda käyttäjää</a>
+					</li>
+					<li class="nav-item">
+						<a href="/download_bibtex/{{ user }}" class="nav-link"
+							>Lataa bibtex</a
+						>
+					</li>
+				</ul>
+				<form
+					action="/search/{{ user }}/"
+					method="post"
+					class="form-inline mr-lg-4 my-s-4"
+				>
+					<input
+						type="text"
+						name="Avain"
+						class="form-control mr-2"
+						id="citeKey"
+						placeholder="Etsi viitteitä avaimella"
+					/>
+					<button type="submit" class="btn btn-primary">Etsi</button>
+				</form>
 
-<div class="container mt-4">
-    <h1>Tervetuloa viitteiden tallennussovellusovellukseen!</h1>
+				<form
+					action="/search/{{ user }}/tag/"
+					method="post"
+					class="form-inline mb-s-4"
+				>
+					<input
+						type="text"
+						name="Tagi"
+						class="form-control mr-2"
+						id="tag"
+						placeholder="Etsi viitteitä tagilla"
+					/>
+					<button type="submit" class="btn btn-primary" id="2">
+						Etsi
+					</button>
+				</form>
+			</div>
+		</nav>
 
-<div class="container mt-4">
-    <form action="/search/{{ user }}/" method="post" class="mb-4 d-flex justify-content-end">
-        <div class="form-group ml-auto">
-            <label for="citeKey">Etsi viitteitä käyttäen Avainta:</label>
-            <input type="text" name="Avain" class="form-control" id="citeKey" placeholder="Avain">
-        </div>
-        <button type="submit" class="btn btn-primary ml-2">Etsi</button>
-    </form>
+		<main role="main">
+			<div class="jumbotron mt-5">
+				<div class="container">
+					<h1 class="display-4">
+						Tervetuloa viitteiden tallennussovellusovellukseen!
+					</h1>
+				</div>
+			</div>
+			<div class="container mt-4">
+				{% if error_message %}
+				<div class="alert alert-danger" role="alert">
+					{{ error_message }}
+				</div>
+				{% endif %}
 
-    <form action="/search/{{ user }}/tag/" method="post" class="mb-4 d-flex justify-content-end">
-        <div class="form-group ml-auto">
-            <label for="tag">Hae tagilla:</label>
-            <input type="text" name="Tagi" class="form-control" id="tag" placeholder="Tagi">
-        </div>
-        <button type="submit" class="btn btn-primary ml-2" id="2">Etsi</button>
-    </form>
-    
+				<h2 class="card-title">Käyttäjän {{ user }} viitteet:</h2>
+				{% for article in articles %}
+				<div class="card mb-5">
+					<div class="card-body">
+						<br />
+						<pre>{{ article }}</pre>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</main>
 
-    <a href="/result/{{ user }}" class="btn btn-primary mt-3">Viitteet</a>
-    <a href="/add_article/{{ user }}" class="btn btn-primary mt-3">Lisää artikkeli</a>
-    <a href="/add_book/{{ user }}" class="btn btn-primary mt-3">Lisää kirja</a>
-    <a href="/add_mastersthesis/{{ user }}" class="btn btn-primary mt-3">Lisää gradu</a>
-    <a href="/add_acm/{{ user }}" class="btn btn-primary mt-3">Lisää linkki</a>
-    <a href="/list/{{ user }}" class="btn btn-primary mt-3">Muokkaa tai poista viitteitä</a>
-    <a href="/" class="btn btn-primary mt-3">Vaihda käyttäjää</a><br>
-    <a href="/download_bibtex/{{ user }}" style="float: right;">Lataa bibtex</a>
-    
-
-    {% if error_message %}
-    <div class="alert alert-danger" role="alert">
-        {{ error_message }}
-    </div>
-    {% endif %}
-
-    
-    <h2 class="card-title">Käyttäjän {{ user }} viitteet:</h2>
-    {% for article in articles %}
-        <div class="card mb-5">
-            <div class="card-body">
-                <br>
-                <pre>{{ article }}</pre>
-            </div>
-        </div>
-    {% endfor %}
-
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-</body>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	</body>
 </html>
