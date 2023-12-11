@@ -128,7 +128,6 @@ def add_acm(user):
     return render_template("acm.html", user=user)
 
 
-# AAPO TÄÄLLLÄÄ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 @app.route("/result_acm/<user>/", methods=["POST"])
 def result_acm(user):
     try:
@@ -138,13 +137,11 @@ def result_acm(user):
         bibtex_acm_link = from_link_to_bibtex(add_link)
 
         add_article_to_db(user, bibtex_acm_link)
-
-        #return render_template("testi.html", user=user, bibtex_acm_link=bibtex_acm_link)
         
         return redirect(url_for("result_by_user", user=user))
     
     except ValueError as e:
-        return render_template("testi.html", e=str(e))
+        return render_template("acm.html", e=str(e))
 
 @app.route("/search/<user>/", methods=["POST"])
 def search_result_by_cite_key(user):
