@@ -23,158 +23,81 @@ def read_user_input_article(author, title, journal, year, volume=0, number=0, pa
 
 def generate_cite_key(author, year):
     '''Generate a cite key for a paper'''
-    if type(author) == list:
+    if isinstance(author, list):
         author = author[0]
     author = author.lower()
     return author.split(" ")[-1] + ":" + str(year)
 
 
 def to_bibtex_article(author, title, journal, year, volume=0, number=0, pages=0, month=0, note=""):
-    '''Convert a paper's information to bibtex format'''
+    '''Convert a paper's information to BibTeX format'''
+
     cite_key = generate_cite_key(author, year)
-    res = "@article{" + cite_key + ",\n"
+    res = f"@article{{{cite_key},\n"
     input_str = read_user_input_article(author, title, journal, year, volume, number, pages, month, note)
-    #add to bibtext, handle empty fields with match case
+
     try:
         for i, value in enumerate(input_str):
-            if i == 0 and value:
-                res += f" author = {{{value}}},\n"
-            elif i == 1 and value:
-                res += f" title = {{{value}}},\n"
-            elif i == 2 and value:
-                res += f" journal = {{{value}}},\n"
-            elif i == 3 and value:
-                res += f" year = {{{value}}},\n"
-            elif i == 4 and value:
-                res += f" volume = {{{value}}},\n"
-            elif i == 5 and value:
-                res += f" number = {{{value}}},\n"
-            elif i == 6 and value:
-                res += f" pages = {{{value}}},\n"
-            elif i == 7 and value:
-                res += f" month = {{{value}}},\n"
-            elif i == 8 and value:
-                res += f" note = {{{value}}},\n"
+            if value:
+                field_names = ["author", "title", "journal", "year", "volume", "number", "pages", "month", "note"]
+                res += f" {field_names[i]} = {{{value}}},\n"
         res = res[:-2]
-        res += f"\n"
-        res += "}"
+        res += f"\n}}"
     except NameError:
         pass
+
     return res
 
+
 def from_db_form_to_bibtex(input_dict):
-    '''Convert from db form to bibtex, for article, book and mastersthesis'''
+    '''Convert from db form to BibTeX, for article, book, and mastersthesis'''
 
     type = detect_type(input_dict)
 
     if type == "article":
-        author = input_dict["author"]
-        title = input_dict["title"]
-        journal = input_dict["journal"]
-        year = input_dict["year"]
-
-        if "volume" in input_dict:
-            volume = input_dict["volume"]
-        else:
-            volume = 0
-        if "number" in input_dict:
-            number = input_dict["number"]
-        else:
-            number = 0
-        if "pages" in input_dict:
-            pages = input_dict["pages"]
-        else:
-            pages = 0
-        if "month" in input_dict:
-            month = input_dict["month"]
-        else:
-            month = ""
-        if "note" in input_dict:
-            note = input_dict["note"]
-        else:
-            note = ""
+        author = input_dict.get("author", "")
+        title = input_dict.get("title", "")
+        journal = input_dict.get("journal", "")
+        year = input_dict.get("year", "")
+        volume = input_dict.get("volume", 0)
+        number = input_dict.get("number", 0)
+        pages = input_dict.get("pages", 0)
+        month = input_dict.get("month", "")
+        note = input_dict.get("note", "")
 
         return to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
 
-    elif type == "book":
-        author = input_dict["author"]
-        editor = input_dict["editor"]
-        title = input_dict["title"]
-        publisher = input_dict["publisher"]
-        year = input_dict["year"]
-
-        if "volume" in input_dict:
-            volume = input_dict["volume"]
-        else:
-            volume = 0
-        if "number" in input_dict:
-            number = input_dict["number"]
-        else:
-            number = 0
-        if "series" in input_dict:
-            series = input_dict["series"]
-        else:
-            series = ""
-        if "address" in input_dict:
-            address = input_dict["address"]
-        else:
-            address = ""
-        if "edition" in input_dict:
-            edition = input_dict["edition"]
-        else:
-            edition = ""
-        if "month" in input_dict:
-            month = input_dict["month"]
-        else:
-            month = ""
-        if "note" in input_dict:
-            note = input_dict["note"]
-        else:
-            note = ""
-        if "doi" in input_dict:
-            doi = input_dict["doi"]
-        else:
-            doi = ""
-        if "issn" in input_dict:
-            issn = input_dict["issn"]
-        else:
-            issn = ""
-        if "isbn" in input_dict:
-            isbn = input_dict["isbn"]
-        else:
-            isbn = ""
+    if type == "book":
+        author = input_dict.get("author", "")
+        editor = input_dict.get("editor", "")
+        title = input_dict.get("title", "")
+        publisher = input_dict.get("publisher", "")
+        year = input_dict.get("year", "")
+        volume = input_dict.get("volume", 0)
+        number = input_dict.get("number", 0)
+        series = input_dict.get("series", "")
+        address = input_dict.get("address", "")
+        edition = input_dict.get("edition", "")
+        month = input_dict.get("month", "")
+        note = input_dict.get("note", "")
+        doi = input_dict.get("doi", "")
+        issn = input_dict.get("issn", "")
+        isbn = input_dict.get("isbn", "")
 
         return to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
 
-    elif type == "mastersthesis":
-        author = input_dict["author"]
-        title = input_dict["title"]
-        school = input_dict["school"]
-        year = input_dict["year"]
-
-        if "type" in input_dict:
-            type = input_dict["type"]
-        else:
-            type = ""
-        if "address" in input_dict:
-            address = input_dict["address"]
-        else:
-            address = ""
-        if "month" in input_dict:
-            month = input_dict["month"]
-        else:
-            month = ""
-        if "note" in input_dict:
-            note = input_dict["note"]
-        else:
-            note = ""
-        if "annote" in input_dict:
-            annote = input_dict["annote"]
-        else:
-            annote = ""
+    if type == "mastersthesis":
+        author = input_dict.get("author", "")
+        title = input_dict.get("title", "")
+        school = input_dict.get("school", "")
+        year = input_dict.get("year", "")
+        type = input_dict.get("type", "")
+        address = input_dict.get("address", "")
+        month = input_dict.get("month", "")
+        note = input_dict.get("note", "")
+        annote = input_dict.get("annote", "")
 
         return to_bibtex_mastersthesis(author, title, school, year, type, address, month, note, annote)
-
 
 
 def detect_type(input_dict):
