@@ -10,7 +10,7 @@ def read_user_input_article(author, title, journal, year, volume=0, number=0, pa
     year = int(year)
     volume = int(volume)
     number = int(number)
-    pages = int(pages)
+    pages = pages
     if year < 0 or year > datetime.datetime.now().year:
         raise ValueError("Invalid year")
     author = author.title()
