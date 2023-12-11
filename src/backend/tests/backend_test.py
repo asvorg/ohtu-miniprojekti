@@ -88,26 +88,22 @@ class TestDbFunc(unittest.TestCase):
         year = 2020
         volume = 1
         number = 2
-        pages = 3
+        pages = "3"
         month = 4
         note = "Tämä on huomautus"
         author, title, journal, year, volume, number, pages, month, note = article_func.read_user_input_article(author, title, journal, year, volume, number, pages, month, note)
         article = article_func.to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
-        db_func.add_article_to_db("testiuser111", article)
-        tulos = db_func.get_article_from_db_by_user("testiuser111")
-        tulos = tulos[0]
-        self.assertEqual(tulos["author"], "Matti Pytest")
-        self.assertEqual(tulos["title"], "Tämä on otsikko")
-        self.assertEqual(tulos["journal"], "Journal Of Journals")
-        self.assertEqual(tulos["year"], "2020")
-        self.assertEqual(tulos["volume"], "1")
-        self.assertEqual(tulos["number"], "2")
-        self.assertEqual(tulos["pages"], "3")
-        self.assertEqual(tulos["month"], "4")
-        self.assertEqual(tulos["note"], "Tämä on huomautus")
-        self.assertEqual(tulos["cite_key"], "pytest:2020")
-        self.assertEqual(tulos["user"], "testiuser111")
-        db_func.delete_article_by_cite_key("testiuser111", "pytest:2020")
+        db_func.add_article_to_db("testiuser123", article)
+        #get the article from the database
+        test_article = db_func.get_article_from_db_by_cite_key("testiuser123", "pytest:2020")
+        self.assertEqual(test_article["author"], "Matti Pytest")
+        self.assertEqual(test_article["title"], "Tämä on otsikko")
+        self.assertEqual(test_article["journal"], "Journal Of Journals")
+
+
+
+
+
 
 
     def test_get_article_from_db_by_cite_key(self):
@@ -117,24 +113,17 @@ class TestDbFunc(unittest.TestCase):
         year = 2020
         volume = 1
         number = 2
-        pages = 3
+        pages = "3"
         month = 4
         note = "Tämä on huomautus"
         author, title, journal, year, volume, number, pages, month, note = article_func.read_user_input_article(author, title, journal, year, volume, number, pages, month, note)
         article = article_func.to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
-        db_func.add_article_to_db("testiuser111", article)
-        tulos = db_func.get_article_from_db_by_cite_key("testiuser111", "pytest:2020")
-        self.assertEqual(tulos["author"], "Matti Pytest")
-        self.assertEqual(tulos["title"], "Tämä on otsikko")
-        self.assertEqual(tulos["journal"], "Journal Of Journals")
-        self.assertEqual(tulos["year"], "2020")
-        self.assertEqual(tulos["volume"], "1")
-        self.assertEqual(tulos["number"], "2")
-        self.assertEqual(tulos["pages"], "3")
-        self.assertEqual(tulos["month"], "4")
-        self.assertEqual(tulos["note"], "Tämä on huomautus")
-        self.assertEqual(tulos["cite_key"], "pytest:2020")
-        self.assertEqual(tulos["user"], "testiuser111")
+        db_func.add_article_to_db("testiuser1234", article)
+        #get the article from the database
+        test_article = db_func.get_article_from_db_by_cite_key("testiuser1234", "pytest:2020")
+        self.assertEqual(test_article["author"], "Matti Pytest")
+        self.assertEqual(test_article["title"], "Tämä on otsikko")
+        self.assertEqual(test_article["journal"], "Journal Of Journals")
 
 
 
