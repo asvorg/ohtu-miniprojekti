@@ -2,13 +2,11 @@
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Go To Starting Page
+Test Setup  Go To Starting Page And Sign In
 
 *** Test Cases ***
 
 Add Article
-    Set Username  Esimerkki Käyttäjä
-    Submit Credentials
     Click Link  Lisää artikkeli
     Set Author  Esimerkkikirjoittaja
     Set Title  Esimerkki
@@ -18,8 +16,6 @@ Add Article
     Adding Article Should Succeed With Article  @article{esimerkkikirjoittaja:2023,
 
 Add Book
-    Set Username  Esimerkki Käyttäjä
-    Submit Credentials
     Click Link  Lisää kirja
     Set Author  Esimerkkikirjailija
     Set Editor  Esimerkki editori
@@ -29,9 +25,16 @@ Add Book
     Submit Article
     Adding Book Should Succeed With Book  @book{esimerkkikirjailija:2023,
 
+Add Mastersthesis
+    Click Link  Lisää gradu
+    Set Author  Esimerkkigraduilija
+    Set Title  Esimerkki otsikko
+    Set School  Esimerkki yliopisto
+    Set Year  2023
+    Submit Article
+    Adding Mastersthesis Should Succeed With Mastersthesis  @mastersthesis{esimerkkigraduilija:2023,
+
 Add Tag
-    Set Username  Esimerkki Käyttäjä
-    Submit Credentials
     Click Link  Muokkaa tai poista viitteitä
     CLick Link  Muokkaa
     Set Tag  tagi
@@ -40,6 +43,11 @@ Add Tag
 
 
 *** Keywords ***
+
+Go To Starting Page And Sign In
+    Go To Starting Page
+    Set Username  Esimerkki Käyttäjä
+    Submit Credentials
 
 Set Author
     [Arguments]  ${author}
@@ -57,6 +65,9 @@ Set Publisher
     [Arguments]  ${publisher}
     Input Text  Julkaisija  ${publisher}
 
+Set School
+    [Arguments]  ${school}
+    Input Text  Koulu  ${school}
 
 Set Year
     [Arguments]  ${year}
@@ -130,6 +141,11 @@ Adding Book Should Succeed With Book
     [Arguments]  ${book}
     Article Page Should Be Open
     Page Should Contain  ${book}
+
+ Adding Mastersthesis Should Succeed With Mastersthesis
+    [Arguments]  ${mastersthesis}
+    Article Page Should Be Open
+    Page Should Contain  ${mastersthesis}
 
 Adding Tag Should Succeed
     List Page Should Be Open

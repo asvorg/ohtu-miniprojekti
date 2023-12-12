@@ -2,48 +2,62 @@
 Resource  resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Go To Starting Page
+Test Setup  Go To Starting Page And Sign In
 
 *** Test Cases ***
 
 Search With Correct Cite
-    Set Username  Esimerkki Käyttäjä
-    Submit Credentials
     Set Search Cite  esimerkkikirjoittaja:2023
     Submit Search Cite
     Cite Search Should Succeed With Article  @article{esimerkkikirjoittaja:2023,
 
 Search Book With Correct Cite
-    Set Username  Esimerkki Käyttäjä
-    Submit Credentials
     Set Search Cite  esimerkkikirjailija:2023
     Submit Search Cite
     Cite Search Should Succeed With Book  @book{esimerkkikirjailija:2023,
 
+Search Mastersthesis With Correct Cite
+    Set Search Cite  esimerkkigraduilija:2023
+    Submit Search Cite
+    Cite Search Should Succeed With Mastersthesis  @mastersthesis{esimerkkigraduilija:2023,
+
 Search With Correct Tag
-    Set Username  Esimerkki Käyttäjä
-    Submit Credentials
     Set Search Tag  tagi
     Submit Search Tag
-    Tag Search Should Succeed With Article  @article{esimerkkikirjoittaja:2023,
+    Tag Search Should Succeed With Article  @article{luukkainen:2012,
+
+Delete Acm Crawl
+    Click Link  Muokkaa tai poista viitteitä
+    Click Link  Poista
+    Set Delete  Poista
+    Delete Should Succeed With Message  Viite on poistettu.
 
 Delete Article
-    Set Username  Esimerkki Käyttäjä
-    Submit Credentials
     Click Link  Muokkaa tai poista viitteitä
     Click Link  Poista
     Set Delete  Poista
     Delete Should Succeed With Message  Viite on poistettu.
 
 Delete Book
-    Set Username  Esimerkki Käyttäjä
-    Submit Credentials
     Click Link  Muokkaa tai poista viitteitä
     Click Link  Poista
     Set Delete  Poista
     Delete Should Succeed With Message  Viite on poistettu.
 
+Delete Mastersthesis
+    Click Link  Muokkaa tai poista viitteitä
+    Click Link  Poista
+    Set Delete  Poista
+    Delete Should Succeed With Message  Viite on poistettu.
+
+
+
 *** Keywords ***
+
+Go To Starting Page And Sign In
+    Go To Starting Page
+    Set Username  Esimerkki Käyttäjä
+    Submit Credentials
 
 Set Author
     [Arguments]  ${author}
@@ -114,6 +128,11 @@ Cite Search Should Succeed With Book
     [Arguments]  ${book}
     Result Page Should Be Open
     Page Should Contain  ${book}
+
+Cite Search Should Succeed With Mastersthesis
+    [Arguments]  ${mastersthesis}
+    Result Page Should Be Open
+    Page Should Contain  ${mastersthesis}
 
 Tag Search Should Succeed With Article
     [Arguments]  ${article}
