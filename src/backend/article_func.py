@@ -26,7 +26,10 @@ def generate_cite_key(author, year):
     if type(author) == list:
         author = author[0]
     author = author.lower()
-    return author.split(" ")[-1] + ":" + str(year)
+    if len(author.split()) > 1:
+        return author.split(" ")[1] + ":" + str(year)
+    else:
+        return author.split(" ")[0] + ":" + str(year)
 
 
 def to_bibtex_article(author, title, journal, year, volume=0, number=0, pages=0, month=0, note=""):
@@ -199,3 +202,5 @@ def detect_type(input_dict):
 #note = "Tämä on huomautus"
 
 #author, title, journal, year, volume, number, pages, month, note = read_user_input_article(author, title, journal, year, volume, number, pages)
+
+generate_cite_key("Kääriäinen and Luukkainen", 2022)
