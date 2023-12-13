@@ -75,7 +75,7 @@ def result_book(user):
 
         volume = int(request.form["Vuosikerta"]) if request.form["Vuosikerta"] else 0
         number = int(request.form["Numero"]) if request.form["Numero"] else 0
-        pages = int(request.form["Sivumäärä"]) if request.form["Sivumäärä"] else 0
+        edition = int(request.form["Painos"]) if request.form["Painos"] else 0
         month = request.form["Kuukausi"]
         series = request.form["Sarja"]
         address = request.form["Osoite"]
@@ -84,7 +84,7 @@ def result_book(user):
         issn = request.form["Issn"]
         isbn = request.form["Isbn"]
 
-        bibtex_book = to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, pages, month, note, doi, issn, isbn)
+        bibtex_book = to_bibtex_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
 
         add_book_to_db(user, bibtex_book)
 
@@ -236,7 +236,7 @@ def edit_book(user, cite_key):
         year = int(request.form["Julkaisuvuosi"])
         volume = int(request.form["Vuosikerta"]) if request.form["Vuosikerta"] else 0
         number = int(request.form["Numero"]) if request.form["Numero"] else 0
-        #pages = int(request.form["Sivumäärä"]) if request.form["Sivumäärä"] else 0 # pages ei tallennu tietokantaan!?
+        edition = int(request.form["Painos"]) if request.form["Painos"] else 0
         month = request.form["Kuukausi"]
         series = request.form["Sarja"]
         address = request.form["Osoite"]
@@ -244,7 +244,7 @@ def edit_book(user, cite_key):
         doi = request.form["Doi"]
         issn = request.form["Issn"]
         isbn = request.form["Isbn"]
-        edition = "" # halutaanko edition myös lomakkeelle?!
+        
         tags = request.form["Tagit"]
         if len(tags) > 0:
             tags = tags.replace(" ", "").split(",")
