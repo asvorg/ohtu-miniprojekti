@@ -5,7 +5,7 @@
 
 [Linkki Backlogiin](https://docs.google.com/spreadsheets/d/16oLOVjyAvzNTiq1DqT4437QIkMCs-a8WFKWrO-61xKg/edit?usp=sharing)
 
-[Linkki testikattavuusraporttin](https://github.com/asvorg/ohtu-miniprojekti/blob/main/dokumentaatio/testikattavuusraportti4.png)
+[Linkki testikattavuusraporttin](https://app.codecov.io/gh/asvorg/ohtu-miniprojekti/tree/main/src%2Fbackend)
 
 [Linkki CI-palveluun](https://github.com/asvorg/ohtu-miniprojekti/actions)
 
