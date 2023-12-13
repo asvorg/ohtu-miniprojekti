@@ -5,8 +5,9 @@
 
 [Linkki Backlogiin](https://docs.google.com/spreadsheets/d/16oLOVjyAvzNTiq1DqT4437QIkMCs-a8WFKWrO-61xKg/edit?usp=sharing)
 
-[Linkki testikattavuusraporttin](https://github.com/asvorg/ohtu-miniprojekti/blob/main/dokumentaatio/testikattavuusraportti2.png)
+[Linkki testikattavuusraporttin](https://github.com/asvorg/ohtu-miniprojekti/blob/main/dokumentaatio/testikattavuusraportti4.png)
 
+[Linkki CI-palveluun](https://github.com/asvorg/ohtu-miniprojekti/actions)
 
 Definition of done = "Vaatimus on analysoitu, suunniteltu, ohjelmoitu, testattu, testaus automatisoitu, dokumentoitu, integroitu muuhun ohjelmistoon ja viety tuotantoympäristöön."
 
@@ -18,10 +19,29 @@ Definition of done = "Vaatimus on analysoitu, suunniteltu, ohjelmoitu, testattu,
 - Käynnistä sovellus: flask run
 
 ## Testit
+Komento virtuaaliympäristössä:
+```
+ pytest
+```
 
-Komento virtuaaliympäristössä: pytest
 
 ## Pylint-tarkistukset
+Komento juurihakemistosta:
+```
+pylint src
+```
+## Coverage
+Yksikkötestit saa ajettua komennolla juurihakemistossa:
 
-Komento juurihakemistosta: pylint src
+```bash
+poetry run coverage run --branch -m pytest src
+```
+Testikattavuusraportin saa:
 
+```bash
+poetry run coverage html
+```
+Komentoriville testikattavuusraportin saa:
+
+```bash
+poetry run coverage report -m
