@@ -7,6 +7,7 @@
 
 [Linkki testikattavuusraporttin](https://github.com/asvorg/ohtu-miniprojekti/blob/main/dokumentaatio/testikattavuusraportti4.png)
 
+[Linkki CI-palveluun](https://github.com/asvorg/ohtu-miniprojekti/actions)
 
 Definition of done = "Vaatimus on analysoitu, suunniteltu, ohjelmoitu, testattu, testaus automatisoitu, dokumentoitu, integroitu muuhun ohjelmistoon ja viety tuotantoympäristöön."
 
