@@ -1,7 +1,9 @@
 ![GHA workflow badge](https://github.com/asvorg/ohtu-miniprojekti/workflows/CI/badge.svg)
 [![codecov](https://codecov.io/gh/asvorg/ohtu-miniprojekti/graph/badge.svg?token=TDI48PGLLQ)](https://codecov.io/gh/asvorg/ohtu-miniprojekti)
 
-# ohtu-miniprojekti
+# Viitteiden tallennussovellus
+
+Tällä sovelluksella voit tallentaa erilaisia viitteitä bibtex-muodossa, kuten artikkeli-, kirja-, gradu- tai acm-linkkimuodossa. Viitteitä pystyy tarkastelemaan, muokkaamaan tai poistamaan
 
 [Linkki Backlogiin](https://docs.google.com/spreadsheets/d/16oLOVjyAvzNTiq1DqT4437QIkMCs-a8WFKWrO-61xKg/edit?usp=sharing)
 
