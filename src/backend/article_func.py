@@ -10,7 +10,6 @@ def read_user_input_article(author, title, journal, year, volume=0, number=0, pa
     year = int(year)
     volume = int(volume)
     number = int(number)
-    pages = pages
     if year < 0 or year > datetime.datetime.now().year:
         raise ValueError("Invalid year")
     author = author.title()
@@ -28,8 +27,7 @@ def generate_cite_key(author, year):
     author = author.lower()
     if len(author.split()) > 1:
         return author.split(" ")[1] + ":" + str(year)
-    else:
-        return author.split(" ")[0] + ":" + str(year)
+    return author.split(" ")[0] + ":" + str(year)
 
 
 def to_bibtex_article(author, title, journal, year, volume=0, number=0, pages=0, month=0, note=""):
@@ -45,7 +43,7 @@ def to_bibtex_article(author, title, journal, year, volume=0, number=0, pages=0,
                 field_names = ["author", "title", "journal", "year", "volume", "number", "pages", "month", "note"]
                 res += f" {field_names[i]} = {{{value}}},\n"
         res = res[:-2]
-        res += f"\n}}"
+        res += "\n}}"
     except NameError:
         pass
 

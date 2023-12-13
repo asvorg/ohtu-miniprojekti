@@ -137,9 +137,9 @@ def result_acm(user):
         bibtex_acm_link = from_link_to_bibtex(add_link)
 
         add_article_to_db(user, bibtex_acm_link)
-        
+
         return redirect(url_for("result_by_user", user=user))
-    
+
     except ValueError as e:
         return render_template("acm.html", e=str(e))
 
@@ -170,11 +170,11 @@ def search_result_by_tag(user):
         return render_template("result.html", user=user, error_message=str(e))
 
 @app.route("/list/")
-def list_without_user():
+def ref_list_without_user():
     return "Kirjoita käyttäjän nimi osoitteen loppuun: .../list/<käyttäjän nimi>"
 
 @app.route("/list/<user>/")
-def list(user):
+def ref_list(user):
     cites = get_article_from_db_by_user(user)
     cite_types = {}
     for cite in cites:
@@ -182,7 +182,7 @@ def list(user):
     return render_template("list.html", cites=cites, user=user, cite_types=cite_types)
 
 @app.route("/list/<user>/tag/<tag>/")
-def list_by_tag(user, tag):
+def ref_list_by_tag(user, tag):
     cites = get_articles_from_db_by_tag(user, tag=tag)
     cite_types = {}
     for cite in cites:
@@ -244,7 +244,7 @@ def edit_book(user, cite_key):
         doi = request.form["Doi"]
         issn = request.form["Issn"]
         isbn = request.form["Isbn"]
-        
+
         tags = request.form["Tagit"]
         if len(tags) > 0:
             tags = tags.replace(" ", "").split(",")

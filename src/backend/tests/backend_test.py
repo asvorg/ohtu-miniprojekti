@@ -55,12 +55,12 @@ class TestArticleFunc(unittest.TestCase):
         self.assertEqual(pages, 3)
         self.assertEqual(month, 4)
         self.assertEqual(note, "Tämä on huomautus")
-    
+
     def test_detect_type(self):
         input_dict = {"author": "Matti Meikäläinen", "title": "Tämä on otsikko", "journal": "Journal of Journals", "year": 2020, "volume": 1, "number": 2, "pages": 3, "month": 4, "note": "Tämä on huomautus"}
         tulos = article_func.detect_type(input_dict)
         self.assertEqual(tulos, "article")
-    
+
     def test_from_db_to_bibtex(self):
         input_dict = {"author": "Matti Meikäläinen", "title": "Tämä on otsikko", "journal": "Journal of Journals", "year": 2020, "volume": 1, "number": 2, "pages": 3, "month": 4, "note": "Tämä on huomautus"}
         tulos = article_func.from_db_form_to_bibtex(input_dict)
@@ -249,7 +249,7 @@ class TestMastersthesisFunc(unittest.TestCase):
             " year = {2022}\n"
             "}"
         )
-        assert bibtex_entry.strip() == expected_entry.strip()     
+        assert bibtex_entry.strip() == expected_entry.strip()
 
     def test_splice_mastersthesis(self):
         bibtex_entry = (
@@ -265,7 +265,7 @@ class TestMastersthesisFunc(unittest.TestCase):
         assert mastersthesis_dict["title"] == "Thesis Title"
         assert mastersthesis_dict["school"] == "University"
         assert mastersthesis_dict["year"] == "2022"
-    
-    
+
+
     if __name__ == '__main__':
         unittest.main()

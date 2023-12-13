@@ -53,7 +53,7 @@ def to_bibtex_mastersthesis(author, title, school, year, type, address, month, n
             elif i == 8 and value:
                 res += f" annote = {{{value}}},\n"
         res = res[:-2]
-        res += f"\n"
+        res += "\n"
         res += "}"
     except NameError:
         pass
