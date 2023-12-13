@@ -18,9 +18,29 @@ Definition of done = "Vaatimus on analysoitu, suunniteltu, ohjelmoitu, testattu,
 - Käynnistä sovellus: flask run
 
 ## Testit
+Komento virtuaaliympäristössä:
+```
+ pytest
+```
 
-Komento virtuaaliympäristössä: pytest
 
 ## Pylint-tarkistukset
+Komento juurihakemistosta:
+```
+pylint src
+```
+## Coverage
+Yksikkötestit saa ajettua komennolla:
 
-Komento juurihakemistosta: pylint src
+```bash
+ poetry run coverage run --branch -m pytest src
+```
+Testikattavuusraportin saa:
+
+```bash
+poetry run coverage html
+```
+Komentoriville testikattavuusraportin saa:
+
+```bash
+poetry run coverage report -m
