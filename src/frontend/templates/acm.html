@@ -16,6 +16,8 @@
     </style>
 
 <div class="container mt-5">
+    <p><a href="/result/{{ user }}" class="btn btn-primary">Takaisin</a></p>
+    
     <form action="/result_acm/{{ user }}" method="POST">
     
         {% if error_message %}

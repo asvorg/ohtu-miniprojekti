@@ -17,13 +17,7 @@
     </style>
 
 <div class="container mt-5">
-    <a href="/result/{{ user }}" class="btn btn-primary mt-3">Viitteet</a>
-    <a href="/add_article/{{ user }}" class="btn btn-primary mt-3">Lisää artikkeli</a>
-    <a href="/add_book/{{ user }}" class="btn btn-primary mt-3">Lisää kirja</a>
-    <a href="/add_mastersthesis/{{ user }}" class="btn btn-primary mt-3">Lisää gradu</a>
-    <a href="/add_acm/{{ user }}" class="btn btn-primary mt-3">Lisää linkki</a>
-    <a href="/list/{{ user }}" class="btn btn-primary mt-3">Muokkaa tai poista viitteitä</a>
-    <a href="/" class="btn btn-primary mt-3">Vaihda käyttäjää</a><br>
+    <p><a href="/result/{{ user }}" class="btn btn-primary">Takaisin</a></p>
 
     <h2>Muokkaa tai poista viitteitä</h2>
     <p>Käyttäjä: <b>{{ user }}</b><p>
@@ -42,11 +36,10 @@
                 Title
             </th>
             <td>
-
             </td>
-            <td>
+            <th>
                 Tagit
-            </td>
+            </th>
         </tr>
         {% for cite in cites %}
         <tr{% if not loop.last %} style="border-bottom: 1px dotted gray;"{% endif %}>
@@ -73,9 +66,9 @@
         </tr>
         {% endfor %}
     </table>
+    {% if tag %}<br><a href="/list/{{user}}">Poista tagirajaus</a>{% endif %}
     {% endif %}
     <hr>
-    <p><a href="/result/{{user}}" class="btn btn-primary">Takaisin</a></p>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -187,7 +187,7 @@ def list_by_tag(user, tag):
     cite_types = {}
     for cite in cites:
         cite_types[cite["cite_key"]] = detect_type(cite)
-    return render_template("list.html", cites=cites, user=user, cite_types=cite_types)
+    return render_template("list.html", cites=cites, user=user, cite_types=cite_types, tag=tag)
 
 @app.route("/edit/<user>/<cite_key>/", methods=["GET", "POST"])
 def edit(user, cite_key):
