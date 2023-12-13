@@ -86,14 +86,3 @@ def from_link_to_bibtex(link):
 
     title, journal, abstract, authors, published, pages, year = crawl_acm(link)
     return acm_to_bibtex(authors, title, journal, year, pages=pages)
-
-
-#title,journal,abstract,authors,published,pages,year = crawl_acm("https://dl.acm.org/doi/10.1145/2380552.2380613")
-#print(acm_to_bibtex(authors, title, journal, year, pages=pages))
-
-
-#get references as a list
-#references = text.split("<li class=\"references__item\">")
-#split refnces by line
-#for i in range(len(references)):
-#    references[i] = references[i].split("\n")

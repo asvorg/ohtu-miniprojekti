@@ -112,18 +112,3 @@ def detect_type(input_dict):
     if "school" in input_dict:
         return "mastersthesis"
     return "misc"
-
-
-#author = "Matti Meikäläinen"
-#title = "Tämä on otsikko"
-#journal = "Journal of Journals"
-#year = 2020
-#volume = 1
-#number = 2
-#pages = 3
-#month = 4
-#note = "Tämä on huomautus"
-
-#author, title, journal, year, volume, number, pages, month, note = read_user_input_article(author, title, journal, year, volume, number, pages)
-
-generate_cite_key("Kääriäinen and Luukkainen", 2022)

@@ -150,36 +150,3 @@ def add_mastersthesis_to_db(user, mastersthesis, tags=None):
         mastersthesis_dict["tags"] = tags
 
     collection.insert_one(mastersthesis_dict)
-
-
-#author = "Matti Meikäläinen"
-#title = "Tämä on otsikko2"
-#journal = "Journal of Journals"
-#year = 2020
-#volume = 1
-#number = 2
-#pages = 3
-#month = 4
-#note = "Tämä on huomautus"
-#author, title, journal, year, volume, number, pages, month, note = read_user_input_article(author, title, journal, year, volume, number, pages)
-#article = to_bibtex_article(author, title, journal, year, volume, number, pages, month, note)
-#add_article_to_db("testiuser", article)
-
-author = "Matti Meikäläinen"
-editor = "Matti Meikäläinen"
-title = "Tämä on otsikko"
-publisher = "TÄSSÄ BOOK"
-year = 2020
-volume = 1
-number = 2
-series = 3
-address = 4
-edition = 5
-month = 6
-note = "Tämä on huomautus"
-doi = 7
-issn = 8
-isbn = 9
-author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn = read_user_input_book(author, editor, title, publisher, year, volume, number, series, address, edition, month, note, doi, issn, isbn)
-
-get_article_from_db_by_user("Roope")
