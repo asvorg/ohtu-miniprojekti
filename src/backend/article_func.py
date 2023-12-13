@@ -43,7 +43,7 @@ def to_bibtex_article(author, title, journal, year, volume=0, number=0, pages=0,
                 field_names = ["author", "title", "journal", "year", "volume", "number", "pages", "month", "note"]
                 res += f" {field_names[i]} = {{{value}}},\n"
         res = res[:-2]
-        res += "\n}}"
+        res += f"\n}}"
     except NameError:
         pass
 
