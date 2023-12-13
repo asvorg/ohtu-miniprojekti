@@ -49,7 +49,7 @@
             </td>
         </tr>
         {% for cite in cites %}
-        <tr>
+        <tr{% if not loop.last %} style="border-bottom: 1px dotted gray;"{% endif %}>
             <td>
                 {{ cite_types[cite.cite_key] }}
             </td>
