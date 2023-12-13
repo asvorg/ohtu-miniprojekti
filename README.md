@@ -33,7 +33,7 @@ pylint src
 Yksikkötestit saa ajettua komennolla juurihakemistossa:
 
 ```bash
- poetry run coverage run --branch -m pytest src
+poetry run coverage run --branch -m pytest src
 ```
 Testikattavuusraportin saa:
 
