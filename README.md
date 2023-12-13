@@ -30,7 +30,7 @@ Komento juurihakemistosta:
 pylint src
 ```
 ## Coverage
-Yksikkötestit saa ajettua komennolla:
+Yksikkötestit saa ajettua komennolla juurihakemistossa:
 
 ```bash
  poetry run coverage run --branch -m pytest src
