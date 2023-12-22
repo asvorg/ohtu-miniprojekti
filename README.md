@@ -11,6 +11,8 @@ Tällä sovelluksella voit tallentaa erilaisia viitteitä bibtex-muodossa, kuten
 
 [Linkki CI-palveluun](https://github.com/asvorg/ohtu-miniprojekti/actions)
 
+[Linkki Projektin raporttiin](https://helsinkifi-my.sharepoint.com/:w:/r/personal/ainkeri_ad_helsinki_fi/_layouts/15/guestaccess.aspx?email=kaariainenroope%40gmail.com&e=4%3AqeTV8v&fromShare=true&at=9&share=ER9f0cREP7BDoqqXmrq44REB7a-XLA8UQuDgjpooTF7yKg)
+
 Definition of done = "Vaatimus on analysoitu, suunniteltu, ohjelmoitu, testattu, testaus automatisoitu, dokumentoitu, integroitu muuhun ohjelmistoon ja viety tuotantoympäristöön."
 
 ## Käynnistysohjeet
