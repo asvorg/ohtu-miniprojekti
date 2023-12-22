@@ -22,4 +22,12 @@ def delete_all_from_db():
     client.close()
 
 
-delete_all_from_db()
+def delete_test_files():
+    '''Delete test files'''
+    collection, db, client, uri = connect_to_db()
+    #delete author matti pytest
+    result = collection.delete_many({"author": "Matti Pytest"})
+    print(f"{result.deleted_count} document(s) deleted")
+    client.close()
+
+delete_test_files()
